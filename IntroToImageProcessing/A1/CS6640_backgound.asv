@@ -39,11 +39,8 @@ redMode = mode(reds,3);
 greenMode = mode(greens,3);
 blueMode = mode(blues,3);
 
-%Now we reconstruct the three colors into the final background image
-im = [];
-im(:,:,1) = redMode;
-im(:,:,2) = greenMode;
-im(:,:,3) = blueMode;
-im = uint8(im); %Make sure we convert back to int8 because mode likely converted to double
+im =
+
+
 
 end
