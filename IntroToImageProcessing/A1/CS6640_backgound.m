@@ -27,17 +27,17 @@ reds = zeros(size(frames{1},1),size(frames{1},2),length(frames));
 greens = reds;
 blues = reds;
 for frameInd = 1:length(frames)%For each frame
-    curFrame = frames{frameInd};
-    reds(:,:,frameInd) = curFrame(:,:,1);
-    greens(:,:,frameInd) = curFrame(:,:,2);
-    blues(:,:,frameInd) = curFrame(:,:,3);
+    curFrame = frames{frameInd};%Save that frame
+    reds(:,:,frameInd) = curFrame(:,:,1);%Get the red slice for that frame
+    greens(:,:,frameInd) = curFrame(:,:,2);%and the green
+    blues(:,:,frameInd) = curFrame(:,:,3);%and the blue
 end
 
 %Now that we have the RGBs we will extract the mode for each pixle for each
 %color value
-redMode = mode(reds,3);
-greenMode = mode(greens,3);
-blueMode = mode(blues,3);
+redMode = mode(reds,3);%Get the red mode
+greenMode = mode(greens,3);%Get the green mode
+blueMode = mode(blues,3);%Blue mode
 
 %Now we reconstruct the three colors into the final background image
 im = [];
