@@ -1,5 +1,5 @@
 //Assignment 1, problem 2 Reading in standard input and converting it from celsius to fahrenheit
-//Arhiteture from problem used as a base for this problem
+//Arhiteture from problem 1 used as a base for this problem
 //Author: Jake Bergquist
 
 
@@ -33,7 +33,7 @@ int main() {
 		std::cin >> inFahr;//Get the next input
 		//Convert to celsius as int and as float
 		//To convert C = (F - 32)/1.8
-		intAns = (((inFahr - intOffset) * 10) / intConvFactor) / 10;
+		intAns = (((inFahr - intOffset) * 10) / intConvFactor);
 		floatAns = (inFahr - floatOffset) / floatConvFactor; 
 
 		std::cout << "Case " << caseCounter << ":\n";//Print the case
