@@ -4,20 +4,28 @@
 
 
 //Included needed libraries
-#include <iostream>;
-#include <string>;
+#include <iostream>
+#include <string>
 
+//Initilize the counter for how many cases we have gone through so far
 std::int64_t caseCounter = 0;
+//Initilize the string that will carry the input
+std::string givenInput;
+//Initilize the carrier for the first line max cases
+std::int64_t maxCases;
 
 //main function body
 int main() {
-	//Initilize the string that will carry the input
-	std::string givenInput;
-	
 
-	std::cin >> givenInput;
-	std::cout << "Case " << caseCounter << ":\n";
-	std::cout << "Echo: " << givenInput<<"\n";
 
+	//Grab the first line which should be a number that tells us max cases
+	std::cin >> maxCases;
+
+	//For each case
+	for (;caseCounter < maxCases; caseCounter = caseCounter+1) {
+		std::cin >> givenInput;//Get the next input
+		std::cout << "Case " << caseCounter << ":\n";//Print the case
+		std::cout << "Echo: " << givenInput << "\n";//Echo the input
+	}
 	return 0; //Successful execution
 }

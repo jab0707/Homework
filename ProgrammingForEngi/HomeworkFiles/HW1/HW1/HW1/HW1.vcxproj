@@ -21,6 +21,10 @@
   <ItemGroup>
     <ClCompile Include="testing_cases.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="output.txt" />
+    <Text Include="test.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{9815b810-1f42-4ca6-b940-07d5eecbcb65}</ProjectGuid>
