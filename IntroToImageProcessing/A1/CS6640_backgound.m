@@ -1,9 +1,9 @@
 function im = CS6640_backgound(video)
 % CS6640_background - extract background image from video sequence
 % On input:
-% video (video data structure): video sequence of k MxNx3 images
+%   video (video data structure): video sequence of k MxNx3 images
 % On output:
-% im (MxN array): image
+%   im (MxN array): image
 % Call:
 %   im = CS4640_background(v);
 % Author:

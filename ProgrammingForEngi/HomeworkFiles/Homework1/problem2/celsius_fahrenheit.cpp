@@ -9,7 +9,7 @@
 
 //Initilize the counter for how many cases we have gone through so far
 std::int64_t caseCounter = 0;
-//Initilize the string that will carry the input
+//Initilize the int that will carry the input
 std::int64_t inFahr;
 //Initilize the carrier for the first line max cases
 std::int64_t maxCases;
