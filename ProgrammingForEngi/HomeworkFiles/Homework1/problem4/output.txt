@@ -1,12 +1,14 @@
 Case 0:
-200000 won't overflow a float, float = 200000
+25 won't overflow a float, float = 25
 Case 1:
-100 won't overflow a float, float = 100
+5.5 won't overflow a float, float = 5.5
 Case 2:
--124.05 won't overflow a float, float = -124.05
+1e+50 will overflow a float
 Case 3:
-1e+39 will overflow a float
-Case 4:
--1e+40 will overflow a float
-Case 5:
 -1e+20 won't overflow a float, float = -1e+20
+Case 4:
+200 won't overflow a float, float = 200
+Case 5:
+1.23457 won't overflow a float, float = 1.23457
+Case 6:
+2.34435e+08 won't overflow a float, float = 2.34435e+08

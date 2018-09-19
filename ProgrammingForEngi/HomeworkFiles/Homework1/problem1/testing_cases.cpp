@@ -18,17 +18,23 @@ std::int64_t maxCases;
 int main() {
 
 
-	//Grab the first line which should be a number that tells us max cases
+	//Grab the first input which should be a number that tells us max cases
 	std::cin >> maxCases;
 
 	//For each case
 	for (;caseCounter < maxCases; caseCounter = caseCounter+1) {
-		std::cin >> givenInput;//Get the next input
-		std::cout << "Case " << caseCounter << ":\n";//Print the case
-		std::cout << "Echo: " << givenInput;//Echo the input
-		if (caseCounter + 1 < maxCases) {
-			std::cout << "\n";//For printing the newline we only want to do so for all but the last time
-			//This way we do not end up with an extra space at the end
+		if(!(std::cin >> givenInput))//Get the next input. If there is no next input send an error message and return 1
+		{
+			std::cout << "Error: " << maxCases << " cases expected, but only " << caseCounter << " cases given!\nStopping execution.";
+			return 1;//Unsucessful execution
+		}
+		else {//If we got an input continue on
+			std::cout << "Case " << caseCounter << ":\n";//Print the case
+			std::cout << "Echo: " << givenInput;//Echo the input
+			if (caseCounter + 1 < maxCases) {
+				std::cout << "\n";//For printing the newline we only want to do so for all but the last time
+				//This way we do not end up with an extra space at the end
+			}
 		}
 	}
 	return 0; //Successful execution

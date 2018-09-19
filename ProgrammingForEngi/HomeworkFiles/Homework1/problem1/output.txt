@@ -22,3 +22,7 @@ Case 10:
 Echo: -12e
 Case 11:
 Echo: *2as
+Case 12:
+Echo: 1.1.1
+Error: 14 cases expected, but only 13 cases given!
+Stopping execution.

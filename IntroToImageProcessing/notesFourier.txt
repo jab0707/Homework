@@ -1,0 +1,59 @@
+Image Processing 9/17/18 Notes 
+
+Why go to the freq domain?
+	f(t) conv h(t) <==> F(u)H(u) %convolution in the spatial domain is the same as multiplication in the frequency (Fourier) domain
+	Good for large images where convolution is cumbersome
+
+Fourier Equations
+	Fourier was working on heat flow and developed equations that he realized could apply to any function
+	
+	For any function: 
+	f(t) = a0 + a1cos(wt) + b1sin(wt) + a2cos(2wt) + b2(sin2wt) + a3cos(3wt) + b3sin(3wt)....
+	where w = 2pi/T, T = period
+
+	We get a random function we want to decompose into weighted sums of periodic functions, how do?
+
+		a0 = 1/T int(0 to T)(f(t)dt)
+
+		how to get any of the others? Rely ont he fact that the other coeffs are harmonics. If you want a7, multiply each side by cos(7wt). All of the othe coeffs will
+		cancel out (go to zero when integrated as seen in a0 (because Tri, check cosAcosB = 1/2(cos(A+B)) + 1/2(cos(A-B))) except the a7 coeff
+
+		ex. Average(f(t)*cos(7wt)) = a7/2. 
+		a7 = 2/T int(0 to T)(f(t)*cos(7wt)dt)
+		b7 = 2/T int(0 to T)(f(t)*sin(7wt)dt)
+
+		1) f(t) = a0 + sum(n = 1 to inf) (an*cos(nwt)) + sum(n = 1 to inf) (bn*sin(nwt))
+		2) int(0 to T)(sin(nwt)cos(mwt)dt = 0 for all m != n
+		3) int(0 to T)(sin(nwt)cos(mwt)dt = T/2 for all m = n
+		4) a0 = 1/T int(0 to T)(f(t)dt)
+		   an = 2/T int(0 to T)(f(t)*cos(nwt)dt)
+		   bn = 2/T int(0 to T)(f(t)*sin(nwt)dt)
+		
+
+ex: 
+image in 1d:
+im = [1,0,1,0]
+
+makes a square wave signal if you treat x as t
+
+T = 2
+not continuous so need to split it up to be continuous
+a0 = 1/2 int(0 to 1)(f(t)dt) + int(1 to 2)(f(t)dt) = 1/2
+
+an = 2/2 int(0 to 1)(f(t)*cos(nwt)dt) + int(1 to 2)(f(t)*cos(nwt)dt) = 1/n*pi * sin(n*pi*t)eval(0 to 1) = sin(n*pi) - sin(0) = 0
+bn = 2/2 int(0 to 1)(f(t)*sin(nwt)dt) + int(1 to 2)(f(t)*sin(nwt)dt) = -i/n*pi * cos(n*pi*t)eval(0 to 1) = -1/(n*pi)(cos(n*pi) - cos(0)) = (1 - cos(n*pi))/(n*pi) %On even numbers this will be 0
+
+f(t) = (1/2) + sum(n = 1 to inf)(2/(n*pi) * sin(n*pi*t)/n)
+
+Eulers Formula
+	e^(i*w) = cos(w) + i*sin(w)
+F(u) = F(f(t)) = int(-inf to inf)(f(t)*exp(-i*2*pi*u*t)dt)
+f(t) = F-1(F(u)) = int(-inf to inf)(F(u)*exp(i*2*pi*u*t)du)
+t = seconds, u = hertz (i/seconds)
+
+f(t) conv h(t) = int(-inf to inf( f(tau)h(t-tau)dtau)
+
+F(f(t) conv h(t) = int(-inf to inf)(int(-inf to inf)(f(tau)h(t-tau)dtau)*exp(-i*pi*2)dt)
+
+
+

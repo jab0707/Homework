@@ -23,7 +23,7 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="preventng_overflow.cpp">
+    <ClCompile Include="preventing_overflow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

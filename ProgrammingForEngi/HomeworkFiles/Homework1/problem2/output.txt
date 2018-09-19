@@ -25,3 +25,5 @@ Case 7:
 Case 8:
 10000F = 5537C
 10000F = 5537.78C
+Error: 10 cases expected, but only 9 cases given!
+Stopping execution.
