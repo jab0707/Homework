@@ -23,15 +23,15 @@ int main() {
 	//Initilize the counter for how many cases we have gone through so far
 	std::int64_t caseCounter = 0;
 	//Initilize the carrier for the first line max cases and other variables
-	std::int64_t maxCases;
-	inputInfo currentInput;
+	std::int64_t maxCases = 0;
+
 
 	//Grab the first input which should be a number that tells us max cases
 	std::cin >> maxCases;
 
 	//For each case
 	for (;caseCounter < maxCases; caseCounter = caseCounter + 1) {
-		currentInput = checkInput(4); 
+		inputInfo currentInput = checkInput(4); 
 
 		if (currentInput.validInput == false)//If there is no next valid input send an error message and return 1
 		{

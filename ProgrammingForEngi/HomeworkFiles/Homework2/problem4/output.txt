@@ -1,0 +1,14 @@
+Case 0:
+root at x = -5.39065 with error 7.24956e-14 after 5 iterations
+Case 1:
+root at x = -5.39065 with error 2.08036e-09 after 5 iterations
+Case 2:
+root at x = -5.39065 with error 5.60193e-15 after 6 iterations
+Case 3:
+root at x = 1.52641 with error 9.20928e-07 after 6 iterations
+Case 4:
+root at x = -5.39065 with error 5.69420e-13 after 7 iterations
+Case 5:
+root at x = 1.52641 with error 7.74228e-04 after 5 iterations
+Case 6:
+root at x = 1.52641 with error 1.01828e-15 after 61 iterations

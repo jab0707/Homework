@@ -1,0 +1,9 @@
+Case 0:
+Min: 1
+Max: 4
+Case 1:
+Min: -1
+Max: 33
+Case 2:
+Min: -100
+Max: 2

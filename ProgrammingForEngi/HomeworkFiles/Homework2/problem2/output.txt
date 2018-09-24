@@ -1,24 +1,30 @@
 Case 0:
-Echo: apple
+1 rings were sold
+Bill's program outputs 0.25
+The exact profit is    0.25
 Case 1:
-Echo: two
+100 rings were sold
+Bill's program outputs 49525.00
+The exact profit is    49525.00
 Case 2:
-Echo: three
+4000 rings were sold
+Bill's program outputs 79981000.00
+The exact profit is    79981000.00
 Case 3:
-Echo: in
+200000 rings were sold
+Bill's program outputs 199999050000.00
+The exact profit is    199999050000.00
 Case 4:
-Echo: the
+30000000 rings were sold
+Bill's program outputs 4499999855305422.00
+The exact profit is    4499999857500000.00
 Case 5:
-Echo: s0k33
+0 rings were sold
+Bill's program outputs 0.00
+The exact profit is    0.00
 Case 6:
-Echo: 123,f4,
+29999999 rings were sold
+Bill's program outputs 4499999555305432.00
+The exact profit is    4499999557500010.00
 Case 7:
-Echo: 'a's
-Case 8:
-Echo: 3
-Case 9:
-Echo: ~=-
-Case 10:
-Echo: -12e
-Case 11:
-Echo: *2as
+19999999 rings were sold
