@@ -1,5 +1,6 @@
+%%  
 %This function was used to generate all figures for this assignment
-
+%
 warning("This function will clear the work space and close all figures")
 fprintf("\nPress any key to continue\n");
 pause;
@@ -7,7 +8,7 @@ clear
 close all
 
 %Load up the video
-vidObj = VideoReader('video/video.avi');
+vidObj = VideoReader('video.avi');
 vidObj.CurrentTime = 0;
 numFrames = vidObj.Framerate * vidObj.Duration;%Extract the number of frames in out video
 frames = cell(numFrames,1);%Initilize empty cell array to hold all of our frames
@@ -29,10 +30,6 @@ imshow(gIm);
 title('Figure 1.1: Frame 3 in grayscale');
 figNum = figNum+1;
 
-%Now we do our first anaysis with the FFT textures.
-T = CS6640_FFT_texture(gIm);
-groups1 = kmeans(T,5);%Lets try 5 textures first
-groups1Mask = mask(gIm,groups1);
 
 %For our groups the mask function uses these colors. We need a figure to
 %identify them.
@@ -51,17 +48,35 @@ for i = 1:length(vals)
     b = bar(labels(i),vals(i),"FaceColor",cmap(i,:),"BarWidth",1);
 end
 set(gca,'YTickLabel',[]);
-title('Figure1.1, Group Coloring');
+title('Figure 2.1, Group Coloring');
 hold off;
 figNum = figNum+1;
+
+
+%Now we do our first anaysis with the FFT textures.
+T = CS6640_FFT_texture(gIm);
+groups1 = kmeans(T,5);%Lets try 5 textures first
+groups1Mask = mask(gIm,groups1);
 
 figure(figNum);clf();
 imshow(groups1Mask);
 title('Figure 2: 5 groups, FFT texture');
 figNum = figNum+1;
 
+%Lets look at just a group from that. Because k means will nto assign group
+%indicies the same every time we need a stop here to change the values to
+%hilight the correct one we want
+%%
+groups1_1 =(groups1 == 5).*groups1;%change the group here
+groups1_1Mask = mask(gIm,groups1_1);
 
-groups2 = kmeans(T,3);%Lets try 3 textures first
+figure(figNum);clf();
+imshow(groups1_1Mask);
+title('Figure 2.2: 5 groups, group 5 hilighted, FFT texture');%Change the title
+figNum = figNum+1;
+%%
+
+groups2 = kmeans(T,3);%Lets try 3 textures next
 groups2Mask = mask(gIm,groups2);
 
 figure(figNum);clf();
@@ -69,7 +84,7 @@ imshow(groups2Mask);
 title('Figure 3: 3 groups, FFT texture');
 figNum = figNum+1;
 
-groups3 = kmeans(T,7);%Lets try 7 textures first
+groups3 = kmeans(T,7);%Lets try 7 textures next
 groups3Mask = mask(gIm,groups3);
 
 figure(figNum);clf();
@@ -99,16 +114,18 @@ imshow(rings2Mask);
 title('Figure 6: 7 groups, radial FFT');
 figNum = figNum+1;
 
-%Lets look just at groups 3 and 4 from that one
+%Lets look just at groups 2 grroups from that one again we need to pick
+%them on demand as k means does it differently every run
+%%
 rings2_1 = and(rings2 > 2,rings2 < 5).*rings2;
 
 rings2_1Mask = mask(gIm,rings2_1);
 
 figure(figNum);clf();
 imshow(rings2_1Mask);
-title('Figure 7: 7 groups, g3 and g4 shown, radial FFT');
+title('Figure 7: 7 groups, g3 and g4 shown, radial FFT');%Don't forget to change the title
 figNum = figNum+1;
-
+%%
 
 %------------------------------------------------------------------------
 %Now angular
@@ -122,9 +139,9 @@ angle1Mask = mask(gIm,angle1);
 
 figure(figNum);clf();
 imshow(angle1Mask);
-title('Figure 9: 5 groups, angular FFT, L = 5');
+title('Figure 8: 5 groups, angular FFT, L = 5');
 figNum = figNum+1;
-
+%%
 %Now change L, must have break point enabled here
 angleT_L10 = CS6640_FFT_angular(gIm);%This with L = 9, must go change;
 %To change L I went and changed it on line 15, L must be odd
@@ -135,9 +152,9 @@ angle2Mask = mask(gIm,angle2);
 
 figure(figNum);clf();
 imshow(angle2Mask);
-title('Figure 10: 5 groups, angular FFT, L = 9');
+title('Figure 9: 5 groups, angular FFT, L = 9');
 figNum = figNum+1;
-
+%%
 %-----------------------------------------------------------------------
 %Curve finding
 %Load O and H
@@ -155,7 +172,7 @@ subplot(212);
 scatter([1:length(OShape1)],OShape1);
 title('O shape:');
 subplot(211);
-title('Figure 11: Shape vectors. H Shape:');
+title('Figure 10: Shape vectors. H Shape:');
 hold off
 figNum = figNum+1;
 
@@ -172,6 +189,24 @@ subplot(212);
 scatter([1:length(OShape2)],OShape2);
 title('O shape:');
 subplot(211);
+title('Figure 11: Shape vectors. H Shape:');
+hold off
+figNum = figNum+1;
+
+HShape3 = CS6640_FFT_shape(H,5);
+OShape3 = CS6640_FFT_shape(O,5);
+
+
+
+figure(figNum);clf();
+hold on;
+subplot(211);
+scatter([1:length(HShape3)],HShape3)
+subplot(212);
+scatter([1:length(OShape3)],OShape3);
+title('O shape:');
+subplot(211);
 title('Figure 12: Shape vectors. H Shape:');
 hold off
 figNum = figNum+1;
+
