@@ -12,7 +12,7 @@ function T = CS6640_FFT_angular(im)
 %   UU
 %   Fall 2018
 %
-L = 9;
+L = 11;
 [q1,q2,q3,q4,q5,q6,q7,q8] = calculate_quadrant_indicies(L);
 
 
