@@ -6,10 +6,6 @@
 //Included needed libraries
 #include <iostream>
 #include <string>
-#include <iomanip>
-#include <vector>
-#include <numeric>
-#include <cmath>
 
 //Initilize globals
 struct inputInfo {
@@ -66,11 +62,11 @@ int main() {
 }
 
 calcResults calcMinMax(std::int64_t numOfNums, std::int64_t nums[256]) {
-	//
+	//Calculate the min and max
 
-	std::int64_t min = nums[0];
+	std::int64_t min = nums[0];//Initilize the assume first is min and max
 	std::int64_t max = nums[0];
-
+	//check each other number against the current min and max, then reevaluate 
 	for (std::int64_t currNum = 0;currNum < numOfNums;currNum = currNum + 1) {
 		if (min > nums[currNum]) {
 			min = nums[currNum];
@@ -83,22 +79,23 @@ calcResults calcMinMax(std::int64_t numOfNums, std::int64_t nums[256]) {
 }
 
 inputInfo checkInput() {
-	//
+	//Checks the input and returns an input info structure
+
 	std::string currentInput;
-	inputInfo returnInfo = { true, 0,{0},"" };
-	if (!(std::cin >> currentInput)) {
+	inputInfo returnInfo = { true, 0,{0},"" };//Initilize the structure
+	if (!(std::cin >> currentInput)) {//If we have no input, that is a problem
 		return { false,0,{0},"Number of numbers not given." };
 	}
 	size_t test = currentInput.find_first_not_of("0123456789");//This will return npos if it finds nothing not in the given items
 	if (!(test == std::string::npos)) {//If the input contains anything other than numbers we don't want that
 		return { false,0,{0},"Improper input! Please input an unsigned Integer for number of numbers." };
 	}
-	std::int64_t numOfNums = stoi(currentInput);
-	if (numOfNums == 0) {
+	std::int64_t numOfNums = stoi(currentInput);//Not convert the input to an int if it contans only digits
+	if (numOfNums == 0) {//If it is 0 then we cannot take it
 		return { false,0,{0},"Cannot take min or max of 0 inputs." };
 	}
 
-
+	//Now for each required input, look for it, then make sure it is an int
 	for (std::int64_t currNum = 0;currNum < numOfNums; currNum = currNum + 1) {
 		if (!(std::cin >> currentInput)) {
 			return { false,0,{0},"Number of numbers not given." };

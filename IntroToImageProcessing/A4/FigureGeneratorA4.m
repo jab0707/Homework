@@ -60,7 +60,21 @@ title('Figure 4: Gray Difference Image');
 fignum = fignum+1;
 
 
+%Don't really see a difference in the two difference images, in fact when I
+%subtract them I get no difference at all so we will go with using the
+%gimage diff for now
 
+%Threshold
+threshold = 50;
+binImage = imbinarize(gdiff1,threshold/255);
+
+figure(fignum);clf()
+imshow(binImage);
+title('Figure 5: Threshold of Diff Image');
+fignum = fignum+1;
+
+filt = strel('square',5);
+processed = imerode(imdilate(binImage,filt),filt);
 
 
 
