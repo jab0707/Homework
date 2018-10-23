@@ -57,8 +57,5 @@ void encrypt(std::string &phrase) {
 		phrase[idx] = (char)((int)phrase[idx] + 13);
 
 	}
-	bool f = false;
-	if (false == false) {
-		std::cout << "Apple";
-	}
+	
 }

@@ -1,0 +1,160 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage {color}
+\usepackage{pdfpages}
+\usepackage{float}
+\usepackage{changebar}
+\usepackage{enumitem,amssymb}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[margin=1.2in]{geometry}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage[super]{cite}
+\usepackage{subcaption}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage[sort, numbers]{natbib}
+
+%%%%%%%%%%%%Defining the margins %%%%%%%%%%%%%%%%%%%%%
+\textheight 9.in
+\textwidth 6.5in
+\topmargin -.5in
+\oddsidemargin 0in
+\setlength{\parskip}{\smallskipamount}
+
+%%%%%%%%%%%%%%Specific Commands %%%%%%%%%%%%%%%%%%
+\newcommand{\eg}{{\em e.g.,}}
+\newcommand{\ie}{{\em i.e.,}}
+\newcommand{\etc}{{\em etc.,}}
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\degrees}{{$^{\circ}$}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% Setting to control figure placement
+% These determine the rules used to place floating objects like figures 
+% They are only guides, but read the manual to see the effect of each.
+\renewcommand{\topfraction}{.9}
+\renewcommand{\bottomfraction}{.9}
+\renewcommand{\textfraction}{.1}
+\renewcommand{\familydefault}{\sfdefault} %setting the san serif font
+
+%%%%%%%%%%%%%%%%%%%%%%%% Line spacing
+% Use the following command for ``double'' spacing
+%\setlength{\baselineskip}{1.2\baselineskip}
+% and this one for an acceptable NIH spacing of 6lpi based on 11pt
+%\setlength{\baselineskip}{.9\baselineskip}
+% The baselineskip does not appear to work when we include a maketitle
+% command in the main file.  Something there must set the line spacing
+% If we use this next command, then things seem to work.
+\renewcommand{\baselinestretch}{.9}
+
+\setcounter{secnumdepth}{0} %make no numbers but have a table of contents
+
+
+\begin{document}
+
+\title{Title}
+\author{Brian Zenger, u0291777}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+
+\section{Methods}
+
+\section{Results}
+
+
+
+
+\section{Discussion} 
+
+
+%%%%%%%%%%%%%%%%%% Correct Bibliography Style
+\bibliography{/Users/Brian/GoogleDrive/Papers/library.bib}
+\bibliographystyle{IEEEtran}
+
+
+\end{document}
+
+
+%%%%%%%%%%%%%%%% Table Example %%%%%%%%%%%%%%%%%%%%%%
+\rowcolors{2}{gray!25}{white}
+\begin{table}[H]
+	\centering
+	\caption{Simulated measurements for conduction velocity and maximal upstroke velocity}
+	\label{tab:results}
+\begin{tabular}{ccc}
+	\hline \hline
+	Experiment  & Conduction Velocity & Maximal Upstroke Velocity\\ 
+	Number & (cm/ms)& (mV/ms) \\
+	\hline
+	 1 & 16.6389 &  69.8933 \\ 
+	 2 &  18.9606&  73.9121 \\ 
+
+	 3 &  24.7062&  83.871 \\ 
+
+	  4&  45.2948&  109.1537\\ 
+
+	  5&  52.6004&  116.8785\\ 
+
+	  6&  77.6482&  131.6630\\ 
+
+	  7&  2.0641&  0.0222\\ 
+
+	  8&  44.0706&  109.3527\\ 
+
+	  9&  45.2948&  109.1675\\ 
+
+	  10&  2.1013&  -0.0024\\ 
+
+	  11&  2.0896&  -0.0024\\ 
+
+	  12&  60.3930&  179.3235\\ 
+	  13&  38.8214&  86.8933 \\ 
+
+	  14&  31.9728&  60.6956\\ 
+
+	  15&  27.6375&  48.7076\\ 
+	  16&  23.2945&  35.4873\\ 
+	  17&  20.3827&  28.0958\\ 
+	\hline 
+	\hline
+\end{tabular} 
+\end{table}
+
+%%%%%%%%%%%%%%%%% Figure Example %%%%%%%%%%%%%%%%%%%
+	\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{../Simulation/Experiment_11.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{../Simulation/Experiment_9.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{../Simulation/Experiment_4.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{stimulation.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\caption{Changes in Stimulation Current. (a) Output figure from experiment 11. (b) Output figure from experiment 9. (c) Output figure from experiment 4. (d) A summary figure showing the changes in conduction velocity and max dV/dt as the stimulation current varies. Note that once you exceed a certain threshold there is relatively no change to the conduction velocity or max dV/dt. }
+	\label{fig:stimulation}
+\end{figure}
+
+
+
+
