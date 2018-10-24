@@ -77,11 +77,33 @@ Mat3 read_mat() {
 	return m;
 }
 
-void print(Vec3 v);
+void print(Vec3 v) {
+	//Prints the vecor
+	std::cout << "( " << v.x << ", " << v.y << ", " << v.z << " )";
 
-void print(Mat3 m);
-Vec3 add(Vec3 u, Vec3 v);
-double dot(Vec3 u, Vec3 v);
+}
+void print(Mat3 m) {
+	//prints the matrix
+	std::cout << "[ ";
+	for (std::uint8_t idx = 0;idx < 7;idx = idx + 1) {
+		std::cout << m.m[idx] << ", ";
+
+	}
+	std::cout << m.m[8] << " ]";
+}
+Vec3 add(Vec3 u, Vec3 v) {
+	//Compute vector addition
+	Vec3 result;
+	result.x = u.x + v.x;
+	result.y = u.y + v.y;
+	result.z = u.z + v.z;
+	return result;
+}
+double dot(Vec3 u, Vec3 v) {
+	//Compute dot product
+
+
+}
 double length(Vec3 u);
 Mat3 transpose(Mat3 m);
 Vec3 row(Mat3 m, int i);
