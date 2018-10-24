@@ -12,6 +12,7 @@ function M = CS6640_MM(vidObj)
 %   Fall 2018
 %   U of U
 
+%Load frames
 vidObj.CurrentTime = 0;
 framenum = vidObj.Duration*vidObj.FrameRate;
 frames = cell(framenum,1);
@@ -19,8 +20,10 @@ for idx = 1:framenum
     frames{idx} = readFrame(vidObj);
 end
 vidObj.CurrentTime = 0; 
+%Get Background
 bckGrnd = CS6640_backgound(vidObj);
 
+%For each frame
 for idx = 1:length(frames)
     fr.original = frames{idx};
     fr.bckSub.raw = rgb2gray(uint8(abs(bckGrnd - frames{idx})));

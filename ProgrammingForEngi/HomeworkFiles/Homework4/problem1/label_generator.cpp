@@ -14,19 +14,21 @@ private:
 	int start_l;
 	int current_l;
 public:
+	//Constructor
 	LabelGenerator(const std::string &prefix, int start) :
 		start_l(start),
 		current_l(start),
 		l_prefix(prefix)
 	{
 	}
+	//default constructor default label L starting at 0.
 	LabelGenerator() :
 		l_prefix("L"),
 		start_l(0),
 		current_l(0)
 	{
-
 	}
+
 
 	std::string next_label() {
 		std::string fullLabel = l_prefix + std::to_string(current_l);

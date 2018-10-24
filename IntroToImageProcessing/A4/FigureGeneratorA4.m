@@ -76,22 +76,50 @@ fignum = fignum+1;
 
 %I generated the next few figures by adding stops to the MM function and
 %plotting intermediate steps in the process
-
+%%
 M = CS6640_MM(vid1);
 %One figure was for plotting the processed images
 %one was for plotting the resulting outlined segmentation
+%fignum = fignum +2;
 
 figure(fignum);clf();
-imshow(M.cdata(1));
+imshow(M(1).cdata);
 title("Figure 8: Outlined moving things frame 1");
 fignum = fignum+1;
 
 
 figure(fignum);clf();
-imshow(M.cdata(2));
-title("Figure 8: Outlined moving things frame 2");
-fignum = fignum+2;
+imshow(M(2).cdata);
+title("Figure 9: Outlined moving things frame 2");
+fignum = fignum+1;
 
 
+%Look there is a moving person
+figure(fignum);clf();
+imshow(M(12).cdata);
+title("Figure 10: Outlined moving things frame 12");
+fignum = fignum+1;
 
 
+dat = CS6640_object_data(M,vid1);
+[objs(1),objs(2),objs(3)] = dat([1,2,12]).num_objects;
+names = {'Frame1','Frame2','Frame12'};
+table(names',objs','VariableNames',{'Frame','NumObjects'})
+
+
+%Looking at frame 12
+[areas(1),areas(2),areas(3),areas(4),areas(5)] = dat(12).objects(1:5).num_pixels;
+[rmed(1),rmed(2),rmed(3),rmed(4),rmed(5)] = dat(12).objects(1:5).red_median;
+[bmed(1),bmed(2),bmed(3),bmed(4),bmed(5)] = dat(12).objects(1:5).blue_median;
+[gmed(1),gmed(2),gmed(3),gmed(4),gmed(5)] = dat(12).objects(1:5).green_median;
+[cmean(1),cmean(2),cmean(3),cmean(4),cmean(5)] = dat(12).objects(1:5).col_mean;
+[rmean(1),rmean(2),rmean(3),rmean(4),rmean(5)] = dat(12).objects(1:5).row_mean;
+
+names = {'Obj1','Obj2','Obj3','Obj4','Obj5'};
+table(names',areas',rmed',gmed',bmed',cmean',rmean','VariableNames',...
+    {'Object','NumPixels','redMedian','greenMedian','blueMedian',...
+    'columnMean','rowMean'})
+
+
+%Watch the Movie
+figure(fignum);movie(M)
