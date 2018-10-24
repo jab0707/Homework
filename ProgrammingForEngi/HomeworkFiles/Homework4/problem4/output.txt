@@ -1,24 +1,16 @@
 Case 0:
-Echo: apple
+( 3, 5, 7 )
 Case 1:
-Echo: two
+5
 Case 2:
-Echo: three
+6
 Case 3:
-Echo: in
+[ 1, 4, 7, 2, 5, 8, 3, 6, 9 ]
 Case 4:
-Echo: the
+( 6, 15, 24 )
 Case 5:
-Echo: s0k33
+[ 30, 24, 18, 84, 69, 54, 138, 114, 90 ]
 Case 6:
-Echo: 123,f4,
+( 8, 7, 3 )
 Case 7:
-Echo: 'a's
-Case 8:
-Echo: 3
-Case 9:
-Echo: ~=-
-Case 10:
-Echo: -12e
-Case 11:
-Echo: *2as
+( 2, 3, 5 )
