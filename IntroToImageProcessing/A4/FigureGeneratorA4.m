@@ -81,6 +81,16 @@ M = CS6640_MM(vid1);
 %One figure was for plotting the processed images
 %one was for plotting the resulting outlined segmentation
 
+figure(fignum);clf();
+imshow(M.cdata(1));
+title("Figure 8: Outlined moving things frame 1");
+fignum = fignum+1;
+
+
+figure(fignum);clf();
+imshow(M.cdata(2));
+title("Figure 8: Outlined moving things frame 2");
+fignum = fignum+2;
 
 
 
