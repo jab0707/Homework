@@ -52,9 +52,15 @@ int main() {
 
 
 void encrypt(std::string &phrase) {
-
-	for (int idx = 0; idx < phrase.length();idx = idx + 1) {
-		phrase[idx] = (char)((int)phrase[idx] + 13);
+	int asciiVal;
+	for (int idx = 0; idx < phrase.length();idx = idx + 1) {//for each character
+		asciiVal = (int(phrase[idx]));//Grab the ascii value to check to see when it will 'overflow' past our letter range
+		if ((asciiVal > 77 && asciiVal < 97) || (asciiVal > 109)) {//if it would go out of range go backwards instead
+			asciiVal = asciiVal - 13;
+		} else {//else go forward
+			asciiVal = asciiVal + 13;
+		}
+		phrase[idx] = (char)(asciiVal);//Change the current character accordingly
 
 	}
 	

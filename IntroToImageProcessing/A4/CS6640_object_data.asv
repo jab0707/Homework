@@ -35,7 +35,7 @@ for idx = 1:framenum
 end
 vidObj.CurrentTime = 0; 
 bckGrnd = CS6640_backgound(vidObj);
-
+[sz1,sz2] = size(rgb2gray(frames{1}));
 for idx = 1:length(frames)
     fr.original = frames{idx};
     fr.bckSub.raw = rgb2gray(uint8(abs(bckGrnd - frames{idx})));
@@ -59,9 +59,32 @@ for idx = 1:length(frames)
     
     frameStructs(idx) = fr;
     
+    cc = bwconncomp(fr.movingThings);
+    stats = regionprops(cc,'centroid','boundingbox','area');
+    od.num_objects = cc.NumObjects;
+    
+    for obj = 1:cc.NumObjects
+        ob.objects(obj).num_pixels = stats(obj).Area;
+        ob.objects(obj).row_mean = floor(stats(obj).Centroid(1));
+        ob.objects(obj).col_mean = floor(stats(obj).Centroid(2));
+        ob.objects(obj).ul_row = floor(stats(obj).BoundingBox(2));
+        ob.objects(obj).ul_col = floor(stats(obj).BoundingBox());
+        ob.objects(obj).lr_row = floor(stats(obj).BoundingBox(2));
+        ob.objects(obj).lr_col = floor(stats(obj).BoundingBox(2));
+    end
+    %   objects(p).row_mean (float): row mean
+%       objects(p).col_mean (float): column mean
+%       objects(p).ul_row (int): upper left row for bounding box
+%       objects(p).ul_col (int): upper left col for bounding box
+%       objects(p).lr_row (int): lower right row for bounding box
+%       objects(p).lr_col (int): lower right col for bounding box
+%       objects(p).num_pixels (int): number of pixels
+%       objects(p).red_median (int): median red value for object
+%       objects(p).green_median (int): median green value for object
+%       objects(p).blue_median (int): median blue value for object
+    
 end
-[sz1,sz2,sz3] = size(frames{1});
-movieFrames = uint8(zeros(sz1,sz2,sz3,framenum));
+
 
 
 

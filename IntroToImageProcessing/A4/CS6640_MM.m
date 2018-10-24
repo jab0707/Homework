@@ -55,8 +55,6 @@ for idx = 1:framenum
     outLine = inv.*frameStructs(idx).movingThings;
     frame = mask(frameStructs(idx).original,outLine(:));
     movieFrames(:,:,:,idx) = frame;
-    imshow(frame)
-    waitforbuttonpress();
 end
 M = immovie(uint8(movieFrames));
 

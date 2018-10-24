@@ -35,7 +35,7 @@ for idx = 1:framenum
 end
 vidObj.CurrentTime = 0; 
 bckGrnd = CS6640_backgound(vidObj);
-
+[sz1,sz2] = size(rgb2gray(frames{1}));
 for idx = 1:length(frames)
     fr.original = frames{idx};
     fr.bckSub.raw = rgb2gray(uint8(abs(bckGrnd - frames{idx})));
@@ -59,7 +59,28 @@ for idx = 1:length(frames)
     
     frameStructs(idx) = fr;
     
+    cc = bwconncomp(fr.movingThings);
+    stats = regionprops(cc,'centroid','boundingbox','area');
+    ob.num_objects = cc.NumObjects;
     
+    for obj = 1:cc.NumObjects
+        ob.objects(obj).num_pixels = stats(obj).Area;
+        ob.objects(obj).row_mean = floor(stats(obj).Centroid(1));
+        ob.objects(obj).col_mean = floor(stats(obj).Centroid(2));
+        ob.objects(obj).ul_row = floor(stats(obj).BoundingBox(2));
+        ob.objects(obj).ul_col = floor(stats(obj).BoundingBox(1));
+        ob.objects(obj).lr_row = floor(stats(obj).BoundingBox(2)+stats(obj).BoundingBox(4));
+        ob.objects(obj).lr_col = floor(stats(obj).BoundingBox(1)+stats(obj).BoundingBox(3));
+        [rs,cs] = ind2sub([sz1,sz2],cc.PixelIdxList{obj});
+        reds = fr.original(rs,cs,1);
+        ob.objects(obj).red_median = median(reds(:));
+        greens = fr.original(rs,cs,2);
+        ob.objects(obj).green_median = median(greens(:));
+        blues = fr.original(rs,cs,2);
+        ob.objects(obj).blue_median = median(blues(:));
+    end
+   
+    object_data(idx)=ob;
     
 end
 

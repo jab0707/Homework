@@ -78,10 +78,7 @@ fignum = fignum+1;
 %plotting intermediate steps in the process
 
 M = CS6640_MM(vid1);
-%One figure was for plotting the processed images
-%one was for plotting the resulting outlined segmentation
-
-
+%One figure was for plotting 
 
 
 
