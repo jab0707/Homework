@@ -83,16 +83,27 @@ During this section we explored the relationship between the voltage at the memb
 For the first investigation we loaded the fibroblast CellML model described in \cite{Sachse2008} and configured it to be a purely capacitive system. To do so we set all of the ionic and background conductances to zero. Specifically those parameters were the background conductance (Gb) the potassium conductance (Gkir) and the potassium shaker conductance (Pshkr). Next we set the stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. The simulation was then ran for 6 seconds and the membrane voltage was plotted as a function of time. The system we have made here is a capacitor-current source system. 
 
 \subsection{1.2}
-For the next section we took our purely capacitive cell from 1.1 and added a background (Gb) conductance of \ensuremath{1\times{}10^-3\mu S}. We also changed the reversal potential (Eb) to -84 mV. We then ran the same stimulation protocol as before with stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. After 6 seconds of simulation we plotted membrane voltage, and membrane currents as a function of time. The system we created here is a resistor-capacitor system with a current source.
+For the next section we took our purely capacitive cell from 1.1 and added a background (Gb) conductance of \ensuremath{1\times{}10^{-3}\mu S}. We also changed the reversal potential (Eb) to -84 mV. We then ran the same stimulation protocol as before with stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. After 6 seconds of simulation we plotted membrane voltage, and membrane currents as a function of time. The system we created here is a resistor-capacitor system with a current source.
 
 \subsection{2: Markovian Models of Ion Channels}
-During these next sections we manipulated the parameters of the potassium shaker channel Markov model
+During these next sections we manipulated the parameters of the potassium shaker channel Markov model present in the fibroblast model.
+
+\subsection{2.1}
+First we adjusted the base fibroblast model to be capacitive and only have the potassium shaker current (Pshkr). The potassium (Gkir) conductance was set to 0, the background (Gb) conductance was set to zero, and the potassium shaker conductance was set to the default value of \ensuremath{5.4 \times{}10^{-9}\mu S}. The reversal potential was set to -85 mV and the stimulus was set to begin at 0.1 seconds with a duration of 1 second, and a frequency of 1 Hz. The amplitude of the stimulation was adjusted to cause a membrane voltage peak of +50 mV during the simulation. This value was found to be 0.55 nA. The simulation was run for 0.5 seconds, and the membrane voltage, as well as the Markovian states of all of the Pshkr ion channel model were plotted.
+
+\subsection{2.2}
+We then took the model generated in 2.1 and modified it to delay the peak of the Pshkr O Markovian state by roughly 20 mS while maintaining a peak above 40\%. To do so we modified the values of the Markovian rate constants that dictated the transitions between the states. Specifically by lower the rate constants that dictated the transition between all of the closed states, as well as the closed to open states we could slow the progression through the states thereby delaying the opening peak. However, in order to make sure that the opening still had a significant peak value we needed to make sure to closed to open rate was sufficiently high to allow a quick state change once the model had reached that open to close transition, thereby allowing for a high peak for the open state.
+
+\section{Results}
+
+\subsection{1.1}
+
+\subsection{1.2}
 
 \subsection{2.1}
 
 \subsection{2.2}
 
-\section{Results}
 
 
 \section{Discussion} 
