@@ -79,34 +79,90 @@ During this lab assignment we were required to simulate and manipulate membrane 
 During this section we explored the relationship between the voltage at the membrane out our cardiac fibroblast and different stimulation protocols. Additionally we investigated the effects of ion currents on these membrane voltages.
 
 \subsection{1.1}
-
+\par{}
 For the first investigation we loaded the fibroblast CellML model described in \cite{Sachse2008} and configured it to be a purely capacitive system. To do so we set all of the ionic and background conductances to zero. Specifically those parameters were the background conductance (Gb) the potassium conductance (Gkir) and the potassium shaker conductance (Pshkr). Next we set the stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. The simulation was then ran for 6 seconds and the membrane voltage was plotted as a function of time. The system we have made here is a capacitor-current source system. 
 
 \subsection{1.2}
+\par{}
 For the next section we took our purely capacitive cell from 1.1 and added a background (Gb) conductance of \ensuremath{1\times{}10^{-3}\mu S}. We also changed the reversal potential (Eb) to -84 mV. We then ran the same stimulation protocol as before with stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. After 6 seconds of simulation we plotted membrane voltage, and membrane currents as a function of time. The system we created here is a resistor-capacitor system with a current source.
 
 \subsection{2: Markovian Models of Ion Channels}
+\par{}
 During these next sections we manipulated the parameters of the potassium shaker channel Markov model present in the fibroblast model.
 
 \subsection{2.1}
+\par{}
 First we adjusted the base fibroblast model to be capacitive and only have the potassium shaker current (Pshkr). The potassium (Gkir) conductance was set to 0, the background (Gb) conductance was set to zero, and the potassium shaker conductance was set to the default value of \ensuremath{5.4 \times{}10^{-9}\mu S}. The reversal potential was set to -85 mV and the stimulus was set to begin at 0.1 seconds with a duration of 1 second, and a frequency of 1 Hz. The amplitude of the stimulation was adjusted to cause a membrane voltage peak of +50 mV during the simulation. This value was found to be 0.55 nA. The simulation was run for 0.5 seconds, and the membrane voltage, as well as the Markovian states of all of the Pshkr ion channel model were plotted.
 
 \subsection{2.2}
+\par{}
 We then took the model generated in 2.1 and modified it to delay the peak of the Pshkr O Markovian state by roughly 20 mS while maintaining a peak above 40\%. To do so we modified the values of the Markovian rate constants that dictated the transitions between the states. Specifically by lower the rate constants that dictated the transition between all of the closed states, as well as the closed to open states we could slow the progression through the states thereby delaying the opening peak. However, in order to make sure that the opening still had a significant peak value we needed to make sure to closed to open rate was sufficiently high to allow a quick state change once the model had reached that open to close transition, thereby allowing for a high peak for the open state.
 
-\section{Results}
+\section{Results and Discussion}
+
+
+
 
 \subsection{1.1}
+\par{}
+In figure \ref{fig:exp1.1} we see the results of the purely capacitive fibroblast with periodic stimulation. On the left in the figure we see the parameters used for this simulation and on the right we see the membrane voltage plotted as a function of time. As a result of setting all conductances to zero, thereby inhibiting any ionic or other current flow, we see that the membrane does not repolarize back to the starting or resting potentials as we might expect from a typical cell model. This demonstrates the necessity of some sort of conductance to be present in order for typical membrane repolarization to occur after a stimulus. Over the course of this simulation the membrane voltage steps incrementally from roughly -58 mV, (Which was set as the initial membrane potential) to roughly 200 mV in steps of roughly 50 mV. 
+
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{exp1.png}
+	
+	\caption{A screen capture of the parameters and output from Jsim for the first section. All conductances have been set to 0 \ensuremath{\mu} S and the stimulation protocol has been set according tot he methods. As can be seen the voltage incrementally steps from roughly -58 mV to roughly 200 mV. }
+	\label{fig:exp1.1}
+\end{figure}
+\par{}
+During this simulation we see that the membrane voltage (Vm) increases stepwise with each stimulus of injected current. This is because there are no ion channels present to allow for the current injected to flow across the membrane. By creating this purely capacitive system we are essentially only charging the capacitor with each stimulus, but not allowing any path for the accumulated charge to flow. Thus the membrane (or capacitor) voltage simply increases a fixed amount with each stimulation. Thus we can see from this experiment that the absence of any ion conductances, and therefor the absence of any functional ion channels in this membrane blocks the ability of the membrane to repolarize. The system we have created can be thought of schematically as described in figure \ref{fig:exp1.cmodel} wherein our current source charges a capacitor in short bursts but does not afford any path of discharge from the capacitor. In other words, when the current source is turned on (during our stimulu, according to the protocol) the capacitor charges. When the current source is off the capacitor does not charge, but because there is no path for the capacitor to discharged it sayes at the charge voltage from the previous stimulus. Now when the current source turns on it can charge the capacitor further.
+
+
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .5\textwidth]{Capacitive.png}
+	
+	\caption{A circuit model of the simulation from 1.1. A current source provides energy to charge the capacitor C at a regular interval, but there is not path for the capacitor to discharge, thus the capacitor voltage will only increase with each successive injection of current from the current source. }
+	\label{fig:exp1.cmodel}
+\end{figure}	
+
 
 \subsection{1.2}
+\par{}
+In figure \ref{fig:exp1.2} we see the input and output for 1.2. By taking the previously capacitive model from 1.1 and adding a background conductance of \ensuremath{1\times{}10^{-3}\mu S} we now see that the membrane voltage does not simply accumulate. Instead the membrane voltage jumps during the stimulation, but due to the background conductance, a current is allowed to pass through the membrane, allowing the membrane potential to repolarize back to the resting potential. The depolarization begins at 0.1 seconds (the onset of the first stimulus) and the repolarization completes by about 0.103 seconds. The peak voltage is roughly -74 mV, after which it returns to -84 mV.
+
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{exp2.png}
+	\caption{This figure shows the screen capture of the Jsim parameters and plotted membrane voltage for 1.2. Note that the Gkir and Pshkr conductances are set to 0 \ensuremath{\mu S}, the reversal potential (Eb) is set to -84 mV, and the background conductance (Gb) is set to \ensuremath{1\times{}10^{-3}\mu S}}.
+	\label{fig:exp1.2}
+\end{figure}
+
+\par{}
+The addition of the background current prevents the star stepping voltage we saw in 1.1. This is becuase we have given the voltage generated by the stimulus a path to discharge and repolarize via the background conductance. Thus our capcitor in our circuit model now has a method of discharge. This can be through of as adding a resistor in parallel with the capacitor, as seen in figure \ref{fig:exp1.rc}. The current source charges the capacitor when it is on (additionally while the current source is on, during stimulus, some current flows through the resistor, additionally the voltage on the capacitor during each stimulus is partly deterined by the resitance of the resistor, which is why we see a lesser voltage jump as compared to that seen in figure \ref{fig:exp1.1}). When the current source is off we now have a capacitor charged to some voltage in parallel with a resistor. This provides a path of discharge for the capacitor through the resistor. The rate of discharge can be seen in the sloped discharge in figure \ref{fig:exp1.2} and can be calculated via equation \ref{eq:rc}. The value of that resistor is 1/Gb $\omega$, thus in this case 1 K$\Omega$.
+
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RC.png}
+	\caption{}.
+	\label{fig:exp1.rc}
+\end{figure}
+
+\begin{equation} 
+V(t) = V_0 e^{t/RC} 
+\label{eq:rc}
+\end{equation}
 
 \subsection{2.1}
 
 \subsection{2.2}
 
 
-
-\section{Discussion} 
+\section{Conclusions}
 
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style

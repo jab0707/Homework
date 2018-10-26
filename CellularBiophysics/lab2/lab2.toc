@@ -6,5 +6,9 @@
 \contentsline {subsection}{2: Markovian Models of Ion Channels}{4}
 \contentsline {subsection}{2.1}{4}
 \contentsline {subsection}{2.2}{4}
-\contentsline {section}{Results}{4}
-\contentsline {section}{Discussion}{4}
+\contentsline {section}{Results and Discussion}{4}
+\contentsline {subsection}{1.1}{4}
+\contentsline {subsection}{1.2}{6}
+\contentsline {subsection}{2.1}{8}
+\contentsline {subsection}{2.2}{8}
+\contentsline {section}{Conclusions}{8}
