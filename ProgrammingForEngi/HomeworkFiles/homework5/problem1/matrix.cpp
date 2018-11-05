@@ -38,8 +38,6 @@ public:
 
 	~Matrix() {
 		delete[] x; 
-		delete &c;
-		delete &r;
 	}
 	Matrix operator=(const Matrix &assignX) {
 		c = assignX.c;
@@ -86,23 +84,25 @@ public:
 			for (int cIdx = 0;cIdx < m.c;cIdx = cIdx + 1) {
 				os << m.x[(rIdx*m.c) + cIdx];
 				if (cIdx + 1 < m.c) {
-					os << " "
+					os << " ";
 				}
 			}
-			if (rIdx + 1 > m.r) {
+			if (rIdx + 1 < m.r) {
 				os << "\n";
 			}
 		}
 		return os;
 	}
 	friend std::istream& operator>> (std::istream& is, Matrix& m) {
-		for (xInd = 0;xInd < m.r*m.c;xInd = xInd + 1) {
+		for (int xInd = 0;xInd < m.r*m.c;xInd = xInd + 1) {
 			is >> m.x[xInd];
 		}
 		return is; 
 	}
 };
 
+void handleAdd();
+void handleMultiply();
 
 //main function body
 int main() {
@@ -110,16 +110,71 @@ int main() {
 
 	//Grab the first line which should be a number that tells us max cases
 	std::cin >> maxCases;
-
+	std::string command;
 	//For each case
 	for (std::uint64_t caseCounter = 0;caseCounter < maxCases; caseCounter = caseCounter+1) {
-		
+		const std::string keys[2] = { "add","multiply"};
 		std::cout << "Case " << caseCounter << ":\n";//Print the case
-		
+		std::cin >> command;
+		if (command.compare(keys[0]) == 0) {
+			handleAdd();
+		}
+		else if (command.compare(keys[1]) == 0) {
+			handleMultiply();
+		}
+
 		if (caseCounter + 1 < maxCases) {
 			std::cout << "\n";//For printing the newline we only want to do so for all but the last time
 			//This way we do not end up with an extra space at the end
 		}
+		
 	}
 	return 0; //Successful execution
+}
+
+
+void handleAdd() {
+	int m1;
+	int n1;
+	int m2;
+	int n2;
+
+	std::cin >> m1;
+	std::cin >> n1;
+
+	Matrix mat1(m1, n1);
+	std::cin >> mat1;
+	
+	std::cin >> m2;
+	std::cin >> n2;
+
+	Matrix mat2(m2, n2);
+	std::cin >> mat2;
+
+	Matrix ans = (mat1 + mat2);
+
+	std::cout << ans;
+}
+
+void handleMultiply() {
+	int m1;
+	int n1;
+	int m2;
+	int n2;
+
+	std::cin >> m1;
+	std::cin >> n1;
+
+	Matrix mat1(m1, n1);
+	std::cin >> mat1;
+
+	std::cin >> m2;
+	std::cin >> n2;
+
+	Matrix mat2(m2, n2);
+	std::cin >> mat2;
+
+	Matrix ans = (mat1 * mat2);
+
+	std::cout << ans;
 }
