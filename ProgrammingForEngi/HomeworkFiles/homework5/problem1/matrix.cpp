@@ -47,59 +47,63 @@ public:
 			x[ind] = assignX.x[ind];
 		}
 	}
-	Matrix operator*(Matrix m2) {
-		Matrix ans(this->r,m2.c);
-		double multAns = 0;
-		int ansIdx = 0;
-		for (int rIdx = 0;rIdx < this->r;rIdx = rIdx + 1) {
-			for (int m2Col = 0;m2Col < m2.c;m2Col = m2Col + 1) {
-				multAns = 0;
-				for (int cIdx = 0;cIdx < this->c;cIdx = cIdx + 1) {
-					multAns = multAns + (this->x[rIdx*this->c + cIdx] * m2.x[cIdx*m2.c + m2Col]);
-				}
-				ans.x[ansIdx] = multAns;
-				ansIdx = ansIdx + 1;
-			}
-		}
-		return ans;
-	}
-
-	Matrix operator+(Matrix m2) {
-		Matrix ans(this->r, this->c);
-		for (int ansIdx = 0;ansIdx < this->r *this->c;ansIdx = ansIdx + 1) {
-			ans.x[ansIdx] = this->x[ansIdx] + m2.x[ansIdx];
-
-		}
-		return ans;
-	}
 
 	double operator[](int idx) {
 		return this->x[idx];
 	}
 	double operator()(int rIdx, int cIdx) {
-		return this->x[(rIdx*this->r) + cIdx];
+		return (*this)[(rIdx*this->r) + cIdx];
 	}
-	friend std::ostream& operator<<(std::ostream& os, const Matrix& m){
-		for (int rIdx = 0;rIdx < m.r;rIdx = rIdx + 1) {
-			for (int cIdx = 0;cIdx < m.c;cIdx = cIdx + 1) {
-				os << m.x[(rIdx*m.c) + cIdx];
-				if (cIdx + 1 < m.c) {
-					os << " ";
-				}
-			}
-			if (rIdx + 1 < m.r) {
-				os << "\n";
-			}
-		}
-		return os;
-	}
-	friend std::istream& operator>> (std::istream& is, Matrix& m) {
-		for (int xInd = 0;xInd < m.r*m.c;xInd = xInd + 1) {
-			is >> m.x[xInd];
-		}
-		return is; 
-	}
+
 };
+
+Matrix operator+(Matrix m1, Matrix m2) {
+	Matrix ans(m1.r, m1.c);
+	for (int ansIdx = 0;ansIdx < m1.r *m1.c;ansIdx = ansIdx + 1) {
+		ans.x[ansIdx] = m1[ansIdx] + m2[ansIdx];
+
+	}
+	return ans;
+}
+
+Matrix operator*(Matrix m1,Matrix m2) {
+	Matrix ans(m1.r, m2.c);
+	double multAns = 0;
+	int ansIdx = 0;
+	for (int rIdx = 0;rIdx < m1.r;rIdx = rIdx + 1) {
+		for (int m2Col = 0;m2Col < m2.c;m2Col = m2Col + 1) {
+			multAns = 0;
+			for (int cIdx = 0;cIdx < m1.c;cIdx = cIdx + 1) {
+				multAns = multAns + (m1.x[rIdx*m1.c + cIdx] * m2.x[cIdx*m2.c + m2Col]);
+			}
+			ans.x[ansIdx] = multAns;
+			ansIdx = ansIdx + 1;
+		}
+	}
+	return ans;
+}
+
+std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+	for (int rIdx = 0;rIdx < m.r;rIdx = rIdx + 1) {
+		for (int cIdx = 0;cIdx < m.c;cIdx = cIdx + 1) {
+			os << m.x[(rIdx*m.c) + cIdx];
+			if (cIdx + 1 < m.c) {
+				os << " ";
+			}
+		}
+		if (rIdx + 1 < m.r) {
+			os << "\n";
+		}
+	}
+	return os;
+}
+
+std::istream& operator>> (std::istream& is, Matrix& m) {
+	for (int xInd = 0;xInd < m.r*m.c;xInd = xInd + 1) {
+		is >> m.x[xInd];
+	}
+	return is;
+}
 
 void handleAdd();
 void handleMultiply();
@@ -152,6 +156,7 @@ void handleAdd() {
 	std::cin >> mat2;
 
 	Matrix ans = (mat1 + mat2);
+
 
 	std::cout << ans;
 }
