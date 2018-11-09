@@ -5,5 +5,5 @@
 \contentsline {section}{Results and Discussion}{3}
 \contentsline {subsection}{Potassium Conductance}{3}
 \contentsline {subsection}{Calcium conductance}{6}
-\contentsline {section}{Conclusion}{6}
-\contentsline {section}{Appendix}{6}
+\contentsline {section}{Conclusion}{7}
+\contentsline {section}{Appendix}{7}

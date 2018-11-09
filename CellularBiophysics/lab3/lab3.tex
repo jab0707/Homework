@@ -85,7 +85,7 @@ V(AP90) = Vb + 0.1*(Vb-Vp)
 \subsection{2: Modeling of Calcium Transients}
 \par{}
 The purpose of this section was to investigate changes in calcium conductance and their effects on time to peak and calcium recovery. Fist the model was run at baseline with default parameters. Next the calcium conductance (gCal) was adjusted to 200\%, 50\%, and 0\% of the default value (0.35, 0.0875, 0
-L/(faradsSeconds) respectively). The simulation was run again for each of these conductances and the membrane voltage and intracellular calcium concentrations were plotted. The time to peak was calculated in matlab by subtracting the time of the onset of the action potential (the first time point where the potential deviated from the rest value) from the time at which the action potential reached its peak. A time constant was found for the intracellular calcium recovery by curing curve fitting. Only the section of the curve after the peak was considered.
+L/(faradsSeconds) respectively). The simulation was run again for each of these conductances and the membrane voltage and intracellular calcium concentrations were plotted. The time to peak was calculated in matlab by subtracting the time of the onset of the action potential (the first time point where the potential deviated from the rest value) from the time at which the action potential reached its peak. A time constant was found for the intracellular calcium recovery by curing curve fitting. Only the section of the curve after the peak was considered for exponential decay model.
 
 \section{Results and Discussion}
 \subsection{Potassium Conductance}
@@ -102,7 +102,7 @@ In \ref{fig:original} we see the the JSim input and output for the default model
 \end{figure}
 \par{}
 
-In \ref{fig:exp1} we see the result of altering the hERG potassium conductance (g\_Kr) on the membrane voltage. In particular we notice the change in the plateau and downslope of the action potential. Given the model, this makes sense. As hERG potassium conductance increases, the length of the action potential decreases. This is because hERG potassium is one of the main components driving repolarization of the membrane during an action potential. At lower hERG conductances, potassium cannot readily flow through the membrane and thus it cannot repolarize as quickly. At much higher hERG conductances potassium can easily flow out of the cell to cause rapid repolarization. This is seen in \ref{fig:exp1} as each increase in the hERG conductance results in a decreased time to the initiation of repolarization.
+In Figure \ref{fig:exp1} we see the result of altering the hERG potassium conductance (g\_Kr) on the membrane voltage. In particular we notice the change in the plateau and downslope of the action potential. Given the model, this makes sense. As hERG potassium conductance increases, the length of the action potential decreases. This is because hERG potassium is one of the main components driving repolarization of the membrane during an action potential. At lower hERG conductances, potassium cannot readily flow through the membrane and thus it cannot repolarize as quickly. At much higher hERG conductances potassium can easily flow out of the cell to cause rapid repolarization. This is seen in Figure \ref{fig:exp1} as each increase in the hERG conductance results in a decreased time to the initiation of repolarization.
 
 \begin{figure}[H]
 	\centering
@@ -135,7 +135,7 @@ In \ref{fig:exp1} we see the result of altering the hERG potassium conductance (
 	\label{fig:exp1}
 \end{figure}
 \par{}
-To quantify this we calculated the APD90 time. This is the time it takes for the membrane to repolarize by 90\%, or reach a voltage that is 10\% of the peak voltage. The time of the beginning of the action potential (50 ms for our simulations) is then subtracted from these times to give us the APD90 time. These times are displayed in \ref{tab:potassium}. As can be seen, as conductance increases, ADP90 time decreases, as expected. Again this falls in line with our model as hERG contributes to repolarization. A lesser hERG conductance will result in a delayed reploarization, and therefore a higher APD90.
+To quantify this we calculated the APD90 time. This is the time it takes for the membrane to repolarize by 90\%, or reach a voltage that is 10\% of the peak voltage. The time of the beginning of the action potential (50 ms for our simulations) is then subtracted from these times to give us the APD90 time. These times are displayed in Table \ref{tab:potassium}. As can be seen, as conductance increases, ADP90 time decreases, as expected. Again this falls in line with our model as hERG contributes to repolarization. A lesser hERG conductance will result in a delayed reploarization, and therefore a higher APD90.
 
 \rowcolors{2}{gray!25}{white}
 \begin{table}[H]
@@ -163,6 +163,91 @@ To quantify this we calculated the APD90 time. This is the time it takes for the
 These simulations can easily represent different physiological states for the hERG channel. In the case of lesser conductance, this could represent the effects of hERG blocker drugs or a mutated hERG channel that is less conductive to potassium. The increase hERG conductance tests can represent the effects of hERG activating drugs or activating mutations. In either case, the power of this simulation is that it allows for the exploration of these different situations. For example, suppose we have developed a drug that we want for treatment of a disease, but we learn through chemical analysis that it may affect the hERG conductance. We have three forms of the drug that change the hERG conductance by different amounts. By testing them in such a simulation as this we could investigate the effects of this drug on the cardiac action potential. Changes in the action potential such as those we see by varying the hERG conductance can have sever effects on cardiac health. Changes in repolarization time can lead to long or short QT syndrome, which are extensions or reductions iin the length of the qt segment of the ECG cause by longer or shorter repolarization/APD90 respectivly. Conditions such as these cna often cause lead to arrhythmia and even sudden cardiac death. 
 
 \subsection{Calcium conductance}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/0gcaledit.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/50gcaledit.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/originaleditCa.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/200gcaledit.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\caption{Intracellular calcium concentration for each G\_Cal conductance. A: Conductance set to zero B. Conductance set to 50\% normal conductance, C: Conductance set to 100\% conductance, D: Conductance set to 200\% conductance. The time constant appears to be reduced with each conductance increase. Units on the graph are in concentration (millimolar) on the y axis and time (milliseconds) on the x axis}
+	\label{fig:exp1}
+\end{figure}
+
+\rowcolors{2}{gray!25}{white}
+\begin{table}[H]
+	\centering
+	\caption{Calculated APD90, Time to Peak (TTP), and Time constants for calcium transients resulting from the shown changes in the calcium channel conductance (g\_Cal)}
+	\label{tab:calcium}
+	\begin{tabular}{ccccc}
+		\hline \hline
+		Calcium Conductance & APD90  & Time To Peak  & Time Constant & R-squared\\ 
+		L/(faradsSeconds) & (milliseconds) & (milliseconds)& (milliseconds)& \\
+		\hline
+		0\% Conductance & 74& 5.95&240 &0.858 \\ 
+		50\% Conductance &222 &7.55 &204 &0.946 \\ 
+		
+		100\% Conductance & 278 &8.05 & 202& 0.977\\ 
+		
+		200\% Conductance& 344 & 8.70& 213& 0.995\\ 
+		
+		
+		\hline 
+		\hline
+	\end{tabular} 
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/3.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/2.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\vskip\baselineskip
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/1.png}
+		\caption{}
+		\label{fig:left}
+	\end{subfigure}
+	\begin{subfigure}{0.45\textwidth}
+		\centering
+		\includegraphics[width = \textwidth]{figs/4.png}
+		\caption{}
+		\label{fig:right}
+	\end{subfigure}
+	\caption{Summary figure of the intracellular calcium Decay with overlay concentration based on changes to the calcium conductance. A. Zero Conductance B. 50\% normal conductance, C. 100\% conductance, D. 200\% conductance. Units on the graph are in concentration (millimolar) on the y axis and time (milliseconds) on the x axis}
+	\label{fig:overlays}
+\end{figure}
 
 
 \section{Conclusion}
