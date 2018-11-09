@@ -1,0 +1,9 @@
+\contentsline {section}{Introduction}{2}
+\contentsline {section}{Methods}{2}
+\contentsline {subsection}{1:Modeling of Repolarization}{2}
+\contentsline {subsection}{2: Modeling of Calcium Transients}{3}
+\contentsline {section}{Results and Discussion}{3}
+\contentsline {subsection}{Potassium Conductance}{3}
+\contentsline {subsection}{Calcium conductance}{6}
+\contentsline {section}{Conclusion}{6}
+\contentsline {section}{Appendix}{6}
