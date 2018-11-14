@@ -16,7 +16,6 @@ function im_seg = CS6640_ac(M,vidObj)
 %
 
 framenum = vidObj.Duration*vidObj.FrameRate;
-vidObj.CurrentTime = 0; 
 frames = cell(framenum,1);
 for fr = 1:framenum
     frames{fr} = rgb2gray(readFrame(vidObj));
@@ -28,8 +27,8 @@ for fr = 1:framenum
     mask = M(fr).cdata;
     mask = rgb2gray(mask);
     mask = imbinarize(mask);
-    currFr = (frames{fr});
-    im_seg(:,:,fr) = activecontour(currFr,mask,'edge');
+    currFr = rgb2gray(frames{fr});
+    im_seg(:,:,fr) = activecontour(currFr,mask);
     
 end
 
