@@ -17,5 +17,5 @@ for inputInd in range(numInputs):
             currMin = num
 
     print('Case {}:'.format(inputInd))
-    print('Min: {}\nMaxMax: {}'.format(currMin,currMax))
+    print('Min: {}\nMax: {}'.format(currMin,currMax))
     
