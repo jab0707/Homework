@@ -1,0 +1,108 @@
+Version 2002-08-30 Temperature sensitivity changed:(Behavior unchanged at 27 C)
+
+Ingemar Jacobson contributed this model with the comment
+"...  Following
+compilation the model can be launched from the startatrial1.hoc file -
+you then just need to start the simulation - I suggest with the
+variable time step ticked. I had some problems with the intracellular
+Ca2+-dynamics and for = clarity I had to split it into several files -
+now it works reasonably well also for CVODE.  Having defined the model
+files of the various cardiac currents it is an easy task to convert
+the atrial model to more or less any other cardiac cell type. 
+Hopefully this will be of some use for cardiac electrophysiogists. 
+..."
+and also
+"...
+ Perhaps some of the model files can serve as templates for neuronal
+channels- the molecular correlate for the cardiac Ito is Kv4.3, for IKur
+it is Kv1.5; for IKr - it is HERG, all these being potassium channels
+you will find in the CNS.
+ ..."
+
+Questions about the model should be directed to the original authors.
+Questions about the computer implementation should be directed to
+Dr. Jacobson. Questions about the database presentation should be
+directed to Michael Hines. Following is a slightly expanded copy of
+the "about" screen that pops up when the model is executed.
+Running the model via the mosinit.hoc file (executed automatically by the
+autolaunch process) will generate the heart action potential
+shown in the ap.gif file.
+
+-------------
+
+The Virtual Human Atrial Cell is assembled for NEURON  by
+	Ingemar Jacobson
+	AstraZeneca R & D, Mölndal Sweden 
+	emailaddress ingemar.jacobson@astrazeneca.com
+
+The model is based on the paper by
+
+Marc Courtemanche, Rafael J. Ramirez, and Stanley Nattel.
+Ionic mechanisms underlying human atrial action potential properties
+insights from a mathematical model 
+Am J Physiol Heart Circ Physiol 1998 275: H301-H321.
+
+and conductance values are adjusted to give appropriate current
+densities.  Pumps, exchangers and an additional electroneutral ion
+accumulation mechanism are sat so that ion concentrations are stable at
+a pacing rate of 1 Hz. 
+
+The kinetics of IKur is modified to fit data of
+ Feng et al Am J Physiol 1998 275(Heart Circ Physiol 44):H1717-H1725.
+
+The possibility to include a nonspecific cation-current with kinetics
+similar to IKur is also given in the IKur mechanism For the
+intracellular Ca dynamics to work the mechanisms Cadynam, ca_jsr,
+Ca_jsracc and ca_nsracc have to be inserted.  For simulation of
+intracellular Na+-ion and K+-ion changes the mechanisms Na_acc and K_acc
+have to be inserted.  The model is free to use provided acknowledgement
+is given to the developers of NEURON
+
+nseg = 1
+L=100 um
+diam=16 um
+cm = 2 uF/cm^2
+Vi - intracellular volume 13668um^3
+
+SR -sarcoplasmatic reticulum, 
+JSR - junctional SR - SR release compartment
+Vrel - SR release compartment volume  96.48um^3
+cri - calcium ion conc. in JSR
+icr - calcium release current from JSR
+krel - Max. release rate for icr 30mse-1
+
+NSR - network SR - SR uptake compartment
+Vup - SR uptake compartment volume  1109.52um^3
+cui - calcium ion conc. in NSR
+cupmax - Max. Ca2+ conc. in uptake compartment 15mM
+Iupmax - Max. uptake Ca2+ current (Iup) by NSR 0.005 mM/ms
+Kup - [Ca2+]i half-saturation constant for Iup 0.00092mM
+Trpn - Total troponin conc. in myoplasm  0.07mM
+Kmtrpn - [Ca2+]i half-saturation constant for troponin 0.0005mM
+Cmdn - Total calmodulin conc. in myoplasma 0.05 mM 
+Kmcmdn - [Ca2+]i half-saturation constant for calmodulin 0.00238mM
+Csqn - Total calsequesterin conc. in SR release compartment 10mM
+Kmcsqn - [Ca2+]JSR (cri) half-saturation constant for calsequesterin 0.8mM 
+IpCamax - Max. Ca2+ pump current (IpCa) 0.00055mA/cm2
+gCaL - Max ICaL conductance 0.248mS/cm2
+gK1 - Max. IK1 conductance 0.1567mS/cm2
+gKr - Max. IKr conductance 0.0588mS/cm2
+gKs - Max. IKs conductance 0.258mS/cm2
+gKur - Max. IKur conductance 0.13195mS/cm2
+gnonspec - Max nonspecific Ication conductance 0 mS/cm2
+gnabar - Max INa conductance 15.6 mS/cm2
+gbNa - Max. Ibackground (Na) conductance 1.34e-3mS/cm2
+gbCa - Max. Ibackground (Ca2+)conductance 2.26e-3mS/cm2
+gto - Max. Ito conductance 0.33 mS/cm2
+Kneutral - electroneutral K+ - accumulation 3e-5mA/cm2
+ImaxNax - Max Ca2+/Na+ exchange current (INaCa) 3.5mA/cm2 
+KnNacx - [Na+]o half-saturation constant for INaCa 87.5 mM
+KcNacx - [Ca2+]o half-saturation constant for INaCa 1.38 mM
+Naneutral - electroneutral Na+ - accumulation 3.5e-5 mA/cm2
+INaKmax - Max. Na+/K+-pump current (INaK) 0.00219 mA/cm2
+Kmnai - [Na+]i half-saturation constant for InaK 10mM
+Kmko - [K+]o half-saturation constant for InaK 1.5mM
+Tauct - scaling factor activation 
+Tauinactf - scaling factor fast inactivation 
+Tauinacts - scaling factor slow inactivation 
+

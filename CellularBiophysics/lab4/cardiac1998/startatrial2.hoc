@@ -1,0 +1,17 @@
+load_file("nrngui.hoc")
+create soma
+access soma
+
+
+celsius = 37
+tstop = 50000
+{diam=16  L=100 nseg=1} 
+
+load_file("atrialnew.ses")
+cai = 1.02e-4
+cao = 1.8  
+nai = 11
+nao = 140
+ko = 5.4 
+  
+load_file("aboutatrial.hoc")

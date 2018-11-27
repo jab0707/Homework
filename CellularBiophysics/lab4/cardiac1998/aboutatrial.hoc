@@ -1,0 +1,112 @@
+objectvar b
+b = new VBox()
+b.intercept(1)
+
+
+xpanel("",1)
+xlabel("The Virtual Human Atrial Cell is assembled for NEURON  by I Jacobson")
+xlabel("AstraZeneca R & D, Mölndal Sweden ")
+xlabel ("emailaddress ingemar.jacobson@astrazeneca.com")
+xlabel("The model is based on the paper by Courtemanche et al")
+xlabel(" Am J Physiol 1998 275(Heart Circ Physiol 44):H301-H321 and conductance values ") 
+xlabel(" are adjusted to give appropriate current densities. Pumps, exchangers and an additional")
+xlabel("electroneutral ion accumulation mechanism are sat") 
+xlabel(" so that ion concentrations are stable at a pacing rate of 1 Hz.")
+xlabel("The kinetics of IKur is modified to fit data of Feng etal Am J Physiol 1998 275(Heart Circ Physiol 44):H1717-H1725.")
+xlabel("The possibility to include a nonspecific cation-current with kinetics similar to IKur is also given in the IKur mechanism")
+xlabel("For the intracellular Ca dynamics to work the mechanisms Cadynam, ca_jsr, Ca_jsracc")
+xlabel("and ca_nsracc have to be inserted. For simulation of intracellular Na+-ion and K+-ion changes") 
+xlabel("the mechanisms Na_acc and K_acc have to be inserted.")
+xlabel("The model is free to use provided acknowledgement is given to the developers of NEURON")
+xlabel("nseg = 1")
+
+xlabel("L=100 um")
+
+xlabel("diam=16 um", 0, 0 )
+
+xlabel("2 uF/cm^2", 1,"", 0, 0 )
+xlabel("Vi - intracellular volume 13668um^3", 1,"", 0, 0 )
+
+xlabel("SR -sarcoplasmatic reticulum, ", 1,"", 0, 0 )
+xlabel("JSR - junctional SR - SR release compartment", 1,"", 0, 0 )
+xlabel("Vrel - SR release compartment volume  96.48um^3", 1,"", 0, 0 )
+xlabel("cri - calcium ion conc. in JSR", 1,"", 0, 0 )
+xlabel("icr - calcium release current from JSR", 1,"", 0, 0 )
+xlabel("krel - Max. release rate for icr 30mse-1", 1,"", 0, 0 )
+
+xlabel("NSR - network SR - SR uptake compartment", 1,"", 0, 0 )
+xlabel("Vup - SR uptake compartment volume  1109.52um^3", 1,"", 0, 0 )
+xlabel("cui - calcium ion conc. in NSR", 1,"", 0, 0 )
+xlabel("cupmax - Max. Ca2+ conc. in uptake compartment 15mM", 1,"", 0, 0 )
+xlabel("Iupmax - Max. uptake Ca2+ current (Iup) by NSR 0.005 mM/ms", 1,"", 0, 0 )
+xlabel("Kup - [Ca2+]i half-saturation constant for Iup 0.00092mM", 1,"", 0, 0 )
+
+
+
+xlabel("Trpn - Total troponin conc. in myoplasm  0.07mM", 1,"", 0, 0 )
+
+xlabel("Kmtrpn - [Ca2+]i half-saturation constant for troponin 0.0005mM", 1,"", 0, 0 )
+
+xlabel("Cmdn - Total calmodulin conc. in myoplasma 0.05 mM ", 1,"", 0, 0 )
+
+xlabel("Kmcmdn - [Ca2+]i half-saturation constant for calmodulin 0.00238mM", 1,"", 0, 0 )
+
+xlabel("Csqn - Total calsequesterin conc. in SR release compartment 10mM", 1,"", 0, 0 )
+
+xlabel("Kmcsqn - [Ca2+]JSR (cri) half-saturation constant for calsequesterin 0.8mM ", 1,"", 0, 0 )
+
+xlabel("IpCamax - Max. Ca2+ pump current (IpCa) 0.00055mA/cm2", 1,"", 0, 0 )
+
+xlabel("gCaL - Max ICaL conductance 0.248mS/cm2", 1,"", 0, 0 )
+
+xlabel("gK1 - Max. IK1 conductance 0.1567mS/cm2", 1,"", 0, 0 )
+
+xlabel("gKr - Max. IKr conductance 0.0588mS/cm2", 1,"", 0, 0 )
+
+xlabel("gKs - Max. IKs conductance 0.258mS/cm2", 1,"", 0, 0 )
+
+xlabel("gKur - Max. IKur conductance 0.13195mS/cm2", 1,"", 0, 0 )
+
+xlabel("gnonspec - Max nonspecific Ication conductance 0 mS/cm2", 1,"", 0, 0 )
+
+xlabel("gnabar - Max INa conductance 15.6 mS/cm2", 1,"", 0, 0 )
+
+xlabel("gbNa - Max. Ibackground (Na) conductance 1.34e-3mS/cm2", 1,"", 0, 0 )
+
+xlabel("gbCa - Max. Ibackground (Ca2+)conductance 2.26e-3mS/cm2", 1,"", 0, 0 )
+
+xlabel("gto - Max. Ito conductance 0.33 mS/cm2", 1,"", 0, 0 )
+
+xlabel("Kneutral - electroneutral K+ - accumulation 3e-5mA/cm2", 1,"", 0, 0 )
+
+xlabel("ImaxNax - Max Ca2+/Na+ exchange current (INaCa) 3.5mA/cm2 ", 1,"", 0, 0 )
+
+xlabel("KnNacx - [Na+]o half-saturation constant for INaCa 87.5 mM", 1,"", 0, 0 )
+
+xlabel("KcNacx - [Ca2+]o half-saturation constant for INaCa 1.38 mM", 1,"", 0, 0 )
+
+xlabel("Naneutral - electroneutral Na+ - accumulation 3.5e-5 mA/cm2", 1,"", 0, 0 )
+
+xlabel("INaKmax - Max. Na+/K+-pump current (INaK) 0.00219 mA/cm2", 1,"", 0, 0 )
+
+xlabel("Kmnai - [Na+]i half-saturation constant for InaK 10mM", 1,"", 0, 0 )
+
+xlabel("Kmko - [K+]o half-saturation constant for InaK 1.5mM", 1,"", 0, 0 )
+xlabel("Tauct - scaling factor activation ", 1,"", 0, 0 )
+xlabel("Tauinactf - scaling factor fast inactivation ", 1,"", 0, 0 )
+xlabel("Tauinacts - scaling factor slow inactivation ", 1,"", 0, 0 )
+xlabel("")
+xpanel()
+
+
+
+b.intercept(0)
+b.map("name",200, 300, 400, 500)
+xpanel("About model")
+xbutton("Info ", "p()")
+xpanel()
+
+proc p() {  
+           print b.dialog("")
+}
+

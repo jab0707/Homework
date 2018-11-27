@@ -1,0 +1,373 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[5]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin PointProcessManager
+{
+load_file("pointman.hoc")
+}
+{
+soma ocbox_ = new PointProcessManager(0)
+}
+{object_push(ocbox_)}
+{
+mt.select("NIClamp") i = mt.selected()
+ms[i] = new MechanismStandard("NIClamp")
+ms[i].set("del", 100, 0)
+ms[i].set("dur", 1, 0)
+ms[i].set("amp", 3, 0)
+ms[i].set("del1", 1000, 0)
+ms[i].set("n", 100, 0)
+mt.select("NIClamp") i = mt.selected() maction(i)
+hoc_ac_ = 0.5
+sec.sec move() d1.flip_to(0)
+}
+{object_pop() doNotify()}
+{
+ocbox_ = ocbox_.v1
+ocbox_.map("PointProcessManager", 790, 6, 215.111, 308.444)
+}
+objref ocbox_
+//End PointProcessManager
+
+
+//Begin Insert/Remove Mechanisms
+{
+load_file("inserter.hoc", "Inserter")
+}
+{
+soma ocbox_ = new Inserter(0)
+}
+{object_push(ocbox_)}
+{
+mt.select("Cadynam") i = mt.selected()
+ms[i] = new MechanismStandard("Cadynam")
+ms[i].set("Vi_Cadynam", 1.3668e-08, 0)
+ms[i].set("Vup_Cadynam", 1.1095e-09, 0)
+ms[i].set("Vrel_Cadynam", 9.648e-11, 0)
+ms[i].set("Trpn_Cadynam", 0.07, 0)
+ms[i].set("Kmtrpn_Cadynam", 0.0005, 0)
+ms[i].set("Cmdn_Cadynam", 0.05, 0)
+ms[i].set("Kmcmdn_Cadynam", 0.00238, 0)
+ms[i].set("cupmax_Cadynam", 15, 0)
+ms[i].set("Kup_Cadynam", 0.00092, 0)
+mstate[i]= 1
+maction(i)
+mt.select("Ca_jsr") i = mt.selected()
+ms[i] = new MechanismStandard("Ca_jsr")
+ms[i].set("krel_Ca_jsr", 30, 0)
+ms[i].set("Vrel_Ca_jsr", 9.648e-11, 0)
+ms[i].set("Csqn_Ca_jsr", 10, 0)
+ms[i].set("Kmcsqn_Ca_jsr", 0.8, 0)
+mstate[i]= 1
+maction(i)
+mt.select("ca_jsracc") i = mt.selected()
+ms[i] = new MechanismStandard("ca_jsracc")
+ms[i].set("Csqn_ca_jsracc", 10, 0)
+ms[i].set("Kmcsqn_ca_jsracc", 0.8, 0)
+ms[i].set("Iupmax_ca_jsracc", 0.005, 0)
+ms[i].set("Kup_ca_jsracc", 0.00092, 0)
+mstate[i]= 1
+maction(i)
+mt.select("ca_nsracc") i = mt.selected()
+ms[i] = new MechanismStandard("ca_nsracc")
+ms[i].set("Vrel_ca_nsracc", 9.648e-11, 0)
+ms[i].set("Vup_ca_nsracc", 1.1095e-09, 0)
+ms[i].set("Kup_ca_nsracc", 0.00092, 0)
+ms[i].set("Iupmax_ca_nsracc", 0.005, 0)
+ms[i].set("cupmax_ca_nsracc", 15, 0)
+mstate[i]= 1
+maction(i)
+mt.select("ca_pump") i = mt.selected()
+ms[i] = new MechanismStandard("ca_pump")
+ms[i].set("IpCamax_ca_pump", 0.00055, 0)
+mstate[i]= 1
+maction(i)
+mt.select("ICaL") i = mt.selected()
+ms[i] = new MechanismStandard("ICaL")
+ms[i].set("gCaL_ICaL", 0.000248, 0)
+mstate[i]= 1
+maction(i)
+mt.select("IK1") i = mt.selected()
+ms[i] = new MechanismStandard("IK1")
+ms[i].set("gK1_IK1", 0.0001567, 0)
+mstate[i]= 1
+maction(i)
+mt.select("IKr") i = mt.selected()
+ms[i] = new MechanismStandard("IKr")
+ms[i].set("gKr_IKr", 5.88e-05, 0)
+ms[i].set("Tauact_IKr", 1, 0)
+mstate[i]= 1
+maction(i)
+mt.select("IKs") i = mt.selected()
+ms[i] = new MechanismStandard("IKs")
+ms[i].set("gKs_IKs", 0.000258, 0)
+mstate[i]= 1
+maction(i)
+mt.select("IKur") i = mt.selected()
+ms[i] = new MechanismStandard("IKur")
+ms[i].set("gKur_IKur", 0.00013195, 0)
+ms[i].set("Tauact_IKur", 1, 0)
+ms[i].set("Tauinactf_IKur", 0.727, 0)
+ms[i].set("Tauinacts_IKur", 0.8094, 0)
+ms[i].set("gnonspec_IKur", 0, 0)
+mstate[i]= 1
+maction(i)
+mt.select("INaf") i = mt.selected()
+ms[i] = new MechanismStandard("INaf")
+ms[i].set("gnabar_INaf", 0.0156, 0)
+ms[i].set("Tauact_INaf", 1, 0)
+ms[i].set("Tauinactf_INaf", 1, 0)
+ms[i].set("Tauinacts_INaf", 1, 0)
+mstate[i]= 1
+maction(i)
+mt.select("ibackg") i = mt.selected()
+ms[i] = new MechanismStandard("ibackg")
+ms[i].set("gbNa_ibackg", 1.348e-06, 0)
+ms[i].set("gbCa_ibackg", 2.26e-06, 0)
+mstate[i]= 1
+maction(i)
+mt.select("Ito") i = mt.selected()
+ms[i] = new MechanismStandard("Ito")
+ms[i].set("gto_Ito", 0.00033, 0)
+ms[i].set("Tauact_Ito", 1, 0)
+ms[i].set("Tauinact_Ito", 1, 0)
+mstate[i]= 1
+maction(i)
+mt.select("K_acc") i = mt.selected()
+ms[i] = new MechanismStandard("K_acc")
+ms[i].set("Vi_K_acc", 1.3668e-08, 0)
+ms[i].set("Kneutral_K_acc", 3e-05, 0)
+mstate[i]= 1
+maction(i)
+mt.select("NaCaex") i = mt.selected()
+ms[i] = new MechanismStandard("NaCaex")
+ms[i].set("ImaxNax_NaCaex", 3.5, 0)
+ms[i].set("KnNacx_NaCaex", 87.5, 0)
+ms[i].set("KcNacx_NaCaex", 1.38, 0)
+mstate[i]= 1
+maction(i)
+mt.select("Na_acc") i = mt.selected()
+ms[i] = new MechanismStandard("Na_acc")
+ms[i].set("Naneutral_Na_acc", 3e-05, 0)
+ms[i].set("Vi_Na_acc", 1.3668e-08, 0)
+mstate[i]= 1
+maction(i)
+mt.select("NaKpump") i = mt.selected()
+ms[i] = new MechanismStandard("NaKpump")
+ms[i].set("INaKmax_NaKpump", 0.0021866, 0)
+ms[i].set("Kmnai_NaKpump", 10, 0)
+ms[i].set("Kmko_NaKpump", 1.5, 0)
+mstate[i]= 1
+maction(i)
+}
+{object_pop() doNotify()}
+{
+ocbox_ = ocbox_.v1
+ocbox_.map("Insert/Remove Mechanisms", 818, 51, 112, 391.111)
+}
+objref ocbox_
+//End Insert/Remove Mechanisms
+
+{
+xpanel("ca_ion (Globals)", 0)
+cai0_ca_ion = 0.0001
+xvalue("cai0_ca_ion","cai0_ca_ion", 1,"", 0, 0 )
+cao0_ca_ion = 1.8
+xvalue("cao0_ca_ion","cao0_ca_ion", 1,"", 0, 0 )
+xpanel(785,385)
+}
+{
+xpanel("k_ion (Globals)", 0)
+ki0_k_ion = 141.59
+xvalue("ki0_k_ion","ki0_k_ion", 1,"", 0, 0 )
+ko0_k_ion = 5.4
+xvalue("ko0_k_ion","ko0_k_ion", 1,"", 0, 0 )
+xpanel(785,411)
+}
+{
+xpanel("cr_ion (Globals)", 0)
+cri0_cr_ion = 0.9
+xvalue("cri0_cr_ion","cri0_cr_ion", 1,"", 0, 0 )
+cro0_cr_ion = 1
+xvalue("cro0_cr_ion","cro0_cr_ion", 1,"", 0, 0 )
+xpanel(786,341)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(40000,41000,-80,40)
+scene_vector_[3] = save_window_
+{save_window_.view(40000, -80, 1000, 120, 355, 262, 300.444, 215.156)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addexpr("v(.5)", 1, 1, 0.8, 0.9, 2)
+}
+{
+save_window_ = new Graph(0)
+save_window_.size(0,50000,-80,40)
+scene_vector_[4] = save_window_
+{save_window_.view(0, -80, 50000, 120, 353, 0, 300.444, 216.933)}
+graphList[0].append(save_window_)
+save_window_.save_name("graphList[0].")
+save_window_.addexpr("v(.5)", 1, 1, 0.8, 0.9, 2)
+}
+{
+xpanel("cu_ion (Globals)", 0)
+cui0_cu_ion = 1.5
+xvalue("cui0_cu_ion","cui0_cu_ion", 1,"", 0, 0 )
+cuo0_cu_ion = 1
+xvalue("cuo0_cu_ion","cuo0_cu_ion", 1,"", 0, 0 )
+xpanel(784,368)
+}
+{
+xpanel("na_ion (Globals)", 0)
+nai0_na_ion = 8.86
+xvalue("nai0_na_ion","nai0_na_ion", 1,"", 0, 0 )
+nao0_na_ion = 140
+xvalue("nao0_na_ion","nao0_na_ion", 1,"", 0, 0 )
+xpanel(787,438)
+}
+{
+xpanel("soma(0 - 1) (Parameters)", 0)
+xlabel("soma(0 - 1) (Parameters)")
+xlabel("nseg = 1")
+soma.L = 100
+xvalue("L","soma.L", 1,"define_shape()", 0, 0 )
+soma.diam = 16
+xvalue("diam","soma.diam", 1,"", 0, 0 )
+soma.cm = 2
+xvalue("cm","soma.cm", 1,"", 0, 0 )
+soma.Vi_Cadynam = 1.3668e-08
+xvalue("Vi_Cadynam","soma.Vi_Cadynam", 1,"", 0, 0 )
+soma.Vup_Cadynam = 1.1095e-09
+xvalue("Vup_Cadynam","soma.Vup_Cadynam", 1,"", 0, 0 )
+soma.Vrel_Cadynam = 9.648e-11
+xvalue("Vrel_Cadynam","soma.Vrel_Cadynam", 1,"", 0, 0 )
+soma.Trpn_Cadynam = 0.07
+xvalue("Trpn_Cadynam","soma.Trpn_Cadynam", 1,"", 0, 0 )
+soma.Kmtrpn_Cadynam = 0.0005
+xvalue("Kmtrpn_Cadynam","soma.Kmtrpn_Cadynam", 1,"", 0, 0 )
+soma.Cmdn_Cadynam = 0.05
+xvalue("Cmdn_Cadynam","soma.Cmdn_Cadynam", 1,"", 0, 0 )
+soma.Kmcmdn_Cadynam = 0.00238
+xvalue("Kmcmdn_Cadynam","soma.Kmcmdn_Cadynam", 1,"", 0, 0 )
+soma.cupmax_Cadynam = 15
+xvalue("cupmax_Cadynam","soma.cupmax_Cadynam", 1,"", 0, 0 )
+soma.Kup_Cadynam = 0.00092
+xvalue("Kup_Cadynam","soma.Kup_Cadynam", 1,"", 0, 0 )
+soma.krel_Ca_jsr = 30
+xvalue("krel_Ca_jsr","soma.krel_Ca_jsr", 1,"", 0, 0 )
+soma.Vrel_Ca_jsr = 9.648e-11
+xvalue("Vrel_Ca_jsr","soma.Vrel_Ca_jsr", 1,"", 0, 0 )
+soma.Csqn_Ca_jsr = 10
+xvalue("Csqn_Ca_jsr","soma.Csqn_Ca_jsr", 1,"", 0, 0 )
+soma.Kmcsqn_Ca_jsr = 0.8
+xvalue("Kmcsqn_Ca_jsr","soma.Kmcsqn_Ca_jsr", 1,"", 0, 0 )
+soma.Csqn_ca_jsracc = 10
+xvalue("Csqn_ca_jsracc","soma.Csqn_ca_jsracc", 1,"", 0, 0 )
+soma.Kmcsqn_ca_jsracc = 0.8
+xvalue("Kmcsqn_ca_jsracc","soma.Kmcsqn_ca_jsracc", 1,"", 0, 0 )
+soma.Iupmax_ca_jsracc = 0.005
+xvalue("Iupmax_ca_jsracc","soma.Iupmax_ca_jsracc", 1,"", 0, 0 )
+soma.Kup_ca_jsracc = 0.00092
+xvalue("Kup_ca_jsracc","soma.Kup_ca_jsracc", 1,"", 0, 0 )
+soma.Vrel_ca_nsracc = 9.648e-11
+xvalue("Vrel_ca_nsracc","soma.Vrel_ca_nsracc", 1,"", 0, 0 )
+soma.Vup_ca_nsracc = 1.1095e-09
+xvalue("Vup_ca_nsracc","soma.Vup_ca_nsracc", 1,"", 0, 0 )
+soma.Kup_ca_nsracc = 0.00092
+xvalue("Kup_ca_nsracc","soma.Kup_ca_nsracc", 1,"", 0, 0 )
+soma.Iupmax_ca_nsracc = 0.005
+xvalue("Iupmax_ca_nsracc","soma.Iupmax_ca_nsracc", 1,"", 0, 0 )
+soma.cupmax_ca_nsracc = 15
+xvalue("cupmax_ca_nsracc","soma.cupmax_ca_nsracc", 1,"", 0, 0 )
+soma.IpCamax_ca_pump = 0.00055
+xvalue("IpCamax_ca_pump","soma.IpCamax_ca_pump", 1,"", 0, 0 )
+soma.gCaL_ICaL = 0.000248
+xvalue("gCaL_ICaL","soma.gCaL_ICaL", 1,"", 0, 0 )
+soma.gK1_IK1 = 0.0001567
+xvalue("gK1_IK1","soma.gK1_IK1", 1,"", 0, 0 )
+soma.gKr_IKr = 5.88e-05
+xvalue("gKr_IKr","soma.gKr_IKr", 1,"", 0, 0 )
+soma.Tauact_IKr = 1
+xvalue("Tauact_IKr","soma.Tauact_IKr", 1,"", 0, 0 )
+soma.gKs_IKs = 0.000258
+xvalue("gKs_IKs","soma.gKs_IKs", 1,"", 0, 0 )
+soma.gKur_IKur = 0.00013195
+xvalue("gKur_IKur","soma.gKur_IKur", 1,"", 0, 0 )
+soma.Tauact_IKur = 1
+xvalue("Tauact_IKur","soma.Tauact_IKur", 1,"", 0, 0 )
+soma.Tauinactf_IKur = 0.727
+xvalue("Tauinactf_IKur","soma.Tauinactf_IKur", 1,"", 0, 0 )
+soma.Tauinacts_IKur = 0.8094
+xvalue("Tauinacts_IKur","soma.Tauinacts_IKur", 1,"", 0, 0 )
+soma.gnonspec_IKur = 0
+xvalue("gnonspec_IKur","soma.gnonspec_IKur", 1,"", 0, 0 )
+soma.gnabar_INaf = 0.0156
+xvalue("gnabar_INaf","soma.gnabar_INaf", 1,"", 0, 0 )
+soma.Tauact_INaf = 1
+xvalue("Tauact_INaf","soma.Tauact_INaf", 1,"", 0, 0 )
+soma.Tauinactf_INaf = 1
+xvalue("Tauinactf_INaf","soma.Tauinactf_INaf", 1,"", 0, 0 )
+soma.Tauinacts_INaf = 1
+xvalue("Tauinacts_INaf","soma.Tauinacts_INaf", 1,"", 0, 0 )
+soma.gbNa_ibackg = 1.348e-06
+xvalue("gbNa_ibackg","soma.gbNa_ibackg", 1,"", 0, 0 )
+soma.gbCa_ibackg = 2.26e-06
+xvalue("gbCa_ibackg","soma.gbCa_ibackg", 1,"", 0, 0 )
+soma.gto_Ito = 0.00033
+xvalue("gto_Ito","soma.gto_Ito", 1,"", 0, 0 )
+soma.Tauact_Ito = 1
+xvalue("Tauact_Ito","soma.Tauact_Ito", 1,"", 0, 0 )
+soma.Tauinact_Ito = 1
+xvalue("Tauinact_Ito","soma.Tauinact_Ito", 1,"", 0, 0 )
+soma.Vi_K_acc = 1.3668e-08
+xvalue("Vi_K_acc","soma.Vi_K_acc", 1,"", 0, 0 )
+soma.Kneutral_K_acc = 3e-05
+xvalue("Kneutral_K_acc","soma.Kneutral_K_acc", 1,"", 0, 0 )
+soma.ImaxNax_NaCaex = 3.5
+xvalue("ImaxNax_NaCaex","soma.ImaxNax_NaCaex", 1,"", 0, 0 )
+soma.KnNacx_NaCaex = 87.5
+xvalue("KnNacx_NaCaex","soma.KnNacx_NaCaex", 1,"", 0, 0 )
+soma.KcNacx_NaCaex = 1.38
+xvalue("KcNacx_NaCaex","soma.KcNacx_NaCaex", 1,"", 0, 0 )
+soma.Naneutral_Na_acc = 3e-05
+xvalue("Naneutral_Na_acc","soma.Naneutral_Na_acc", 1,"", 0, 0 )
+soma.Vi_Na_acc = 1.3668e-08
+xvalue("Vi_Na_acc","soma.Vi_Na_acc", 1,"", 0, 0 )
+soma.INaKmax_NaKpump = 0.0021866
+xvalue("INaKmax_NaKpump","soma.INaKmax_NaKpump", 1,"", 0, 0 )
+soma.Kmnai_NaKpump = 10
+xvalue("Kmnai_NaKpump","soma.Kmnai_NaKpump", 1,"", 0, 0 )
+soma.Kmko_NaKpump = 1.5
+xvalue("Kmko_NaKpump","soma.Kmko_NaKpump", 1,"", 0, 0 )
+xpanel(267,547)
+}
+{
+xpanel("RunControl", 0)
+v_init = -80
+xvalue("Init","v_init", 1,"stdinit()", 1, 1 )
+xbutton("Init & Run","run()")
+xbutton("Stop","stoprun=1")
+runStopAt = 5
+xvalue("Continue til","runStopAt", 1,"{continuerun(runStopAt) stoprun=1}", 1, 1 )
+runStopIn = 1
+xvalue("Continue for","runStopIn", 1,"{continuerun(t + runStopIn) stoprun=1}", 1, 1 )
+xbutton("Single Step","steprun()")
+t = 50022.1
+xvalue("t","t", 2 )
+tstop = 50000
+xvalue("Tstop","tstop", 1,"tstop_changed()", 0, 1 )
+dt = 45.179
+xvalue("dt","dt", 1,"setdt()", 0, 1 )
+steps_per_ms = 40
+xvalue("Points plotted/ms","steps_per_ms", 1,"setdt()", 0, 1 )
+xcheckbox("Quiet",&stdrun_quiet,"")
+realtime = 12
+xvalue("Real Time","realtime", 0,"", 0, 1 )
+xpanel(7,117)
+}
+
+objectvar scene_vector_[1]
+{doNotify()}
