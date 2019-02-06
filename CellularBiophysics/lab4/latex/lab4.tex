@@ -53,7 +53,7 @@
 
 \begin{document}
 
-\title{Lab 2, Ion Channel Simulations}
+\title{Lab 4, Neuron and Backyard Brains}
 \author{Jake Bergquist, u6010393}
 \maketitle
 \tableofcontents
@@ -61,248 +61,215 @@
 
 \section{Introduction}
 \par{}
-While a larger goal of projects such as the Pysiome Project and the Virtual Physiological Human project are to develop tissue, organ, and system models for human Physiology, smaller scale models such as ion channel models are a vital part of these projects.\cite{Fink2011} Mathematical and computational models of Ion channels provide a framework for highly controlled investigation of the properties of these channels as well as the combination of vast amounts of experimental data into a single comprehensive model.  The modeling of ion channels contributes greatly to an effort to integrate and interpret experimental data as well as provide a highly detailed way to perform precise and otherwise technically impractical hypothesis testing on such a fine scale.
+For this labratory assignment we experimented with a Neuron model of a cardiac atrial myocyte developed by Courtemanche \etal{} \cite{Courtemanche1998} Cardiac Myocytes are the cells responsible both for propagating the electrical signals through the heart as well as performing the mechanical action of pumping the blood. Atrial myocytes in particular are responsible for pumping blood from the left and right atria into the left and right ventricles respectively. While the mechanical capabilities of the atrial myocytes are relativly little compared to the ventricles, the electrical role these atrial myocytes perform is critical to the function of the heart. The electrical signal that initiates a heartbeat begins in the atria at the sino-atrial node. The atrial myocytes then propagate this electrical signal across the atria to the atrio-ventricular node where the electrical signal then goes on to activate the rest of the heart and initiate the rest of the heart beat. The signals from the atrial myocyte activations comprise the 'P' wave of the QRS complex of an electro cardiogram. Without functioning atrial myocytes the electrical signal to the atria and thus the rest of the heart would be disturbed, potentially leading to dangerous and sometimes fatal conditions such as atrial fibrillation, arrhythmias, and other cardiac diseases.
 \par{}
-While there are a vast variety of modeling techniques that range from basic current modeling with Hodgkin and Huxley to computationally intensive atomic scale molecular models, more frequently single ion channels are modeled using a Markovian chain of states model.\cite{Fink2011}\cite{Kojima2018a}
-A Markovian model is one in which the next state of the model only depends on the current state, irrespective of the previous states. In the case of ion channels, Markovian models are typically structured into different closed and open states with rate constants that determine the probability of transitioning from one state to another. Each of these different states define different properties about the ion channel in the simulation, such as its permeability to ions, thus the effect on the conductance of those ions.\cite{Fink2011} In the most simple case of a two state Markovian ion channel model there is an open state and a closed state. At any given time the model may transition from closed to open or open to closed based on two rate constants, an open to closed rate, and a closed to open rate. If the closed to open rate constant were higher, this would describe a channel has a higher probability of being in the open state as opposed to the closed state. By increasing the number of states these models can be used to describe more complex behaviors such as channels with inactive states or drug/ligand binding that modulate activity. Each of these different state transitions have add rate coefficients describing the transitions between those states and other states, and thus a complex network can be built up.
+The atrial myocyte model we used allowed for manipulation of many different parameters. The simulation is set up the stimulate at a regular interval to initiate an action potential periodically, then plot membrane voltage over the simulation. The parameters chosen for this study were the three conductances most important to the cardiac action potential, the sodium, potassium, and calcium conductances. For each conductance we tested the model at the baseline level, then at double conductance, then at half conductance. These conductances are affected in many disease states, leading to various heart diseases and malfunctions, and our manipulations resemble variations seen in disease states where conductances are increased or decreased.\cite{DaFaria2008} We utilized the backyard brains spike recorder and a custom matlab script to inject current into and record from an agar block. In addition to varying the simulation parameters of the three conductances we also varied the recording locations on the agar block. Additionally we tested the effects of multiple simulations at nearby locations in the agar.
 \par{}
-Each of the parameters that comprise the rate coefficients must be determined. Typically the values used come from direct experimental data from the channels of interest. This data includes structural information gained from crystallography, imaging data, genomic analysis, and perhaps most frequently from patch clamp electrical recordings. A patch clamp is a technique for assaying the electrical behavior of cells down to the single ion channel level. Either a specific cell expressing the channels of interest, such as a neuron or a cardiomyocyte, or a cell that has been made to express the channel of interest is isolated. A glass needle is used to either perforate or isolate a small section or patch of a cell membrane. In the case of perforation this allows access to the intracellular environment whereas in the case of isolation this allows access to the extracellular or intracellular membrane surface, depending on the preparation. In either case the concentrations of ions and other materials can be readily changed in the bath and within the needle. The voltage, injected current, or ion concentrations are then varied, and the resulting response of the ion channels can be measured via electrodes in the needle and extracellular space. Other parameters about the channels are derived from the structural information gained by crystallography and computational analysis given the amino acid sequence of the channels. These analyses are limited by the ability to isolate and crystallize the channels and the computation power and algorithms available to computer the atomic and amino acid scale interactions and models.
+The intracellular effects of these simulation manipulations were apparent in the membrane voltage plots, and the ionic current plots. Changes to the sodium conductance affected the upstroke of the membrane potential during the action potential as well as the initial phase of the sodium current. As expected, increased conductance resulted in a higher peak voltage while lower conductance resulted in a reduced peak. The peak duration however was not affected as sodium channels are time inactivated and thus the conductance does not affect the peak duration. These changes were reflected in the current plots with a higher sodium current peak. When potassium was adjusted this primarily affected the repolarization stage, where the potassium current brings the membrane voltage back towards the resting potential. Increasing potassium conductance caused an increase in potassium current which resulted in a shorter plateau phase and a more rapid repolarization. Decreasing the potassium had the opposite effect, increasing plateau time and slowing repolarization. Changing calcium should also affect the repolarization and plateau phases of the  cardiac action potential. Calcium is responsible for sustaining the plateau phase, thus reducing calcium, thereby reducing the calcium current, resulted in a decreased plateau time and more rapid repolarization. Increasing calcium conductance increased the plateau time and delayed the repolarization. These results fit our understanding of an atrial myocyte.
 \par{}
-As a result of years of work in this field on many different ion channels, vast amounts of data has been generated and funneled into constructing mathematical and computational models. The implementation of these models can often be difficult, however there are a variety of packages designed to incorporate the many different ion channel models into an centralized interface to allow for fast and robust testing of the models. Such libraries as CellML and applications like Jsim utilize these ionic models to allow researchers to perform robust simulations and tests with these models.
-\par{}
-In order to efficiently implement these various complex ion channel models, languages such as CellML have been developed. CellML is a markdown language built on top of XML as a way to standardize the development and sharing of models such as ion channel models. CellML allows researchers to easily share their models and parameters between different modeling environments, facilitating collaboration and distribution of developed models and findings. CellML itself is under active development and new improvements and tools are routinely implemented. Utilizing CellML as a standard language for writing models allows them to be easily shared and implemented in other settings. This significantly cuts down the time it takes to implement new models or test changes and additions to existing ones. Without a standard language like CellML the progress in developing and improving ion channel models would be hindered. For this lab we utilized Jsim as a simulation environment. Jsim is a java based simulation software developed by the Pysiome project for use in computational models and simulation based on experimental data.\cite{Fink2011} Jsim can read in CellML files and run the appropriate simulations, then display results in an interactive interface. Through Jsim, model parameters can be exposed for manipulation and testing, allowing for rapid and robust exploration of the model and effects of different parameters. Jsim allows for the testing of hypotheses and exploration of models in a lightweight, computationally inexpensive format that does not require significant experience or expertise with regards to developing CellML models.
-\par{}
-During this lab assignment we were required to simulate and manipulate membrane potential and ionic currents as well as a Markovian potassium channel model developed for a cardiac fibroblast.\cite{Sachse2008} Utilizing Jsim and the CellML cardiac fibroblast model developed by Dr. Frank Sachse we were able to explore the model and investigate the results from changing the different parameters such as ion conductances, stimulation protocols, and rate constants for the different Markovian states. Additionally the robust visualizations available through Jsim allowed for rapid visualization and interpretation of the model outputs and the effects of our changes and tests.
+We would predict to see these changes reflected in the extracellular recordings however the actual effects were difficult to interpret. Changes in recording location did affect the resulting signals recorded. When the recording was taken from electrodes that were adjacent to the stimulation the amplitudes were less than when the recording was from electrodes across the stimulated area. Additionally, stimulating with two different parameter sets next to each other gave a unique signal that seems different from either one individually. However the specific changes predicted by the ion conductance variations described above were not necessarily reflected. This could be the result of several factors which are explored in the results and discussion section of this report
+
 
 \section{Methods}
-\subsection{1:Electrical Modeling of Membranes}
-During this section we explored the relationship between the voltage at the membrane out our cardiac fibroblast and different stimulation protocols. Additionally we investigated the effects of ion currents on these membrane voltages.
-
-\subsection{1.1}
+\subsection{Hardware Setup}
 \par{}
-For the first investigation we loaded the fibroblast CellML model described in \cite{Sachse2008} and configured it to be a purely capacitive system. To do so we set all of the ionic and background conductances to zero. Specifically those parameters were the background conductance (Gb) the potassium conductance (Gkir) and the potassium shaker conductance (Pshkr). Next we set the stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. The simulation was then ran for 6 seconds and the membrane voltage was plotted as a function of time. The system we have made here is a capacitor-current source system. 
+The backyard brain recording device was plugged into a laptop running the spike recorder software, and the recorder was linked to the software. The headphone wires were plugged into the audio jack of the laptop which also had the custom matlab script loaded. This setup can be seen in \ref{fig:setup} where the blue agar block was our conductive medium. All recordings referencing position one were made using ground (top electrode) and position one (middle electrode). All recordings referencing position two were made using the ground (top electrode) and position two (bottom electrode). The headphone wires were placed a few millimeters into the agar block as seen in \ref{fig:setup}. By using matlab a sound file generated by the neuron model could be used to pass current into the agar according to the neuron simulation. The headphone wire positions were held constant. The bandpass filter cutoff frequencies were set to 1 hz and 50 hz, and the attenuation was set to 60 hz (these are the default parameters when the backyard brains hardware is synced to the spike recording software).
 
-\subsection{1.2}
-\par{}
-For the next section we took our purely capacitive cell from 1.1 and added a background (Gb) conductance of \ensuremath{1\times{}10^{-3}\mu S}. We also changed the reversal potential (Eb) to -84 mV. We then ran the same stimulation protocol as before with stimulation to begin at 0.1 seconds with a duration of 1 second, an amplitude of 0.2 nA and a frequency of 1 Hz. After 6 seconds of simulation we plotted membrane voltage, and membrane currents as a function of time. The system we created here is a resistor-capacitor system with a current source.
 
-\subsection{2: Markovian Models of Ion Channels}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{setup.png}
+	
+	\caption{Our hardware setup. The top electrode was connected to the ground lead of the backyard brains spike recorded while the other two electrodes were used as our variable positions. The topmost electrode is referenced as ground, the middle electrode is position 1, and the bottom electrode is position 2. The headphone wires embedded into the agar block delivered the simulation currents. These currents were generated by playing the simulation as a converted audio file via custom matlab function. }
+	\label{fig:setup}
+\end{figure}
 \par{}
-During these next sections we manipulated the parameters of the potassium shaker channel Markov model present in the fibroblast model.
 
-\subsection{2.1}
+\subsection{Simulation Parameter Setup}
 \par{}
-First we adjusted the base fibroblast model to be capacitive and only have the potassium shaker current (Pshkr). The potassium (Gkir) conductance was set to 0, the background (Gb) conductance was set to zero, and the potassium shaker conductance was set to the default value of \ensuremath{5.4 \times{}10^{-9}\mu S}. The reversal potential was set to -85 mV and the stimulus was set to begin at 0.1 seconds with a duration of 1 second, and a frequency of 1 Hz. The amplitude of the stimulation was adjusted to cause a membrane voltage peak of +50 mV during the simulation. This value was found to be 0.55 nA. The simulation was run for 0.5 seconds, and the membrane voltage, as well as the Markovian states of all of the Pshkr ion channel model were plotted.
+During this lab we varied the conductances of the three most important ions that shape the action potential of cardiac myocytes: sodium, potassium, and calcium. For each of these ions we tested an increased conductance (doubled), a decreased conductance (halved), and a baseline conductance. These values can be seen in \ref{tab:conductances}. All other parameters including the stimulation parameters were left at default values as described in Courtemanche \etal{}\cite{Courtemanche1998} For each case only one parameter was changed at a time.
 
-\subsection{2.2}
+ \rowcolors{2}{gray!25}{white}
+\begin{table}[H]
+	\centering
+	\caption{Simulation parameters used for exploration. The three main ion conductances, Sodium, Potassium, and Calcium, were adjusted to see their effects on the action potential and currents.}
+	\label{tab:conductances}
+	\begin{tabular}{cccc}
+		\hline \hline
+		Ion  & Default Conductance & Double Conductance & Half Conductance\\ 
+		\hline
+		Calcium (gCaL)& 0.248 $S/cm^2$&0.496 $S/cm^2$& 0.124 $S/cm^2$\\ 
+		Potassium (Ikr) & 5.88 $S/cm^2$ & 11.76 $S/cm^2$& 2.94 $S/cm^2$\\ 
+		Sodium (NaBar)& 0.156 $S/cm^2$ & 0.312 $S/cm^2$ & 0.078 $S/cm^2$\\ 
+		\hline 
+		\hline
+	\end{tabular} 
+\end{table}
+\subsection{Stimulation Generation and Recording}
 \par{}
-We then took the model generated in 2.1 and modified it to delay the peak of the Pshkr O Markovian state by roughly 20 mS while maintaining a peak above 40\%. To do so we modified the values of the Markovian rate constants that dictated the transitions between the states. Specifically by lower the rate constants that dictated the transition between all of the closed states, as well as the closed to open states we could slow the progression through the states thereby delaying the opening peak. However, in order to make sure that the opening still had a significant peak value we needed to make sure to closed to open rate was sufficiently high to allow a quick state change once the model had reached that open to close transition, thereby allowing for a high peak for the open state.
+For each simulation output the timescale was zoomed in onto the last action potential of the simulation, between 40,000 ms and 41,000 ms into the simulation.
+\par{}
+For each conductance change first the simulation was run in Neuron and the membrane voltage and ionic currents (for sodium, potassium, and calcium) were plotted. The current vectors were then saved out individually, and a custom matlab script was used to integrate these current signals and pass this over the headphone jack. Form most recordings the same signal was passed through the headphones. For each conductance value perturbation we measured from ground to position 1. Additionally we tested the effect of interfering signals by recording from ground to position 2 and playing a double calcium conductance signal though one wire and a half calcium conductance signal through the other. This allowed us to assess the ability to detect these different signals using the surface recording electrodes given the interference between the signals. For all of these recordings we compared our recorded signals both to the expected transmembrane potentials from our simulation as well as to the baseline recordings. Finally we recorded the baseline simulation at both recording locations to assess the effect of recording location on the signals obtained. 
 
 \section{Results and Discussion}
-
-
-
-
-\subsection{1.1}
+\subsection{1: Manipulation of parameters and their effect on cellular electrical  propagation}
 \par{}
-In figure \ref{fig:exp1.1} we see the results of the purely capacitive fibroblast with periodic stimulation. On the left in the figure we see the parameters used for this simulation and on the right we see the membrane voltage plotted as a function of time. As a result of setting all conductances to zero, thereby inhibiting any ionic or other current flow, we see that the membrane does not repolarize back to the starting or resting potentials as we might expect from a typical cell model. This demonstrates the necessity of some sort of conductance to be present in order for typical membrane repolarization to occur after a stimulus. Over the course of this simulation the membrane voltage steps incrementally from roughly -58 mV, (Which was set as the initial membrane potential) to roughly 200 mV in steps of roughly 50 mV. 
+First we must consider the simulation results of our baseline parameter set. This can be seen in \ref{fig:baseline} which shows the expected basic cardiac action potential, with a sharp upstroke, prolonged plateau and then repolarization. We will use this simulation result as a basis for comparison when we manipulate the parameters of the simulations.
+\par{}
+By design we manipulated the conductances that we expected would have a marked effect on the cardiac action potential. First considering the Sodium conductance. Sodium is responsible for the upstroke during initial depolarization of the action potential. When we double this conductance we expect to see an increase in the action potential peak during the upstroke, but no change in the upstroke/sodium current duration. This can be seen in \ref{fig:doubleNa} where the action potential peak is increased to about 45 mV as compared to the 25 mV peak seen in the baseline plot. Additionally the sodium current is nearly doubled in comparison to the baseline. This agrees with our understanding of the function of the sodium conductance in the myocardial cell. 
+
 
 \begin{figure}[H]
 	\centering
 	\centering
-	\includegraphics[width = .95\textwidth]{exp1.png}
+	\includegraphics[width = .95\textwidth]{OriginalSimulation.png}
 	
-	\caption{A screen capture of the parameters and output from Jsim for the first section. All conductances have been set to 0 \ensuremath{\mu} S and the stimulation protocol has been set according tot he methods. As can be seen the voltage incrementally steps from roughly -58 mV to roughly 200 mV. }
-	\label{fig:exp1.1}
+	\caption{This figure shows the simulation results given the default parameters. As can be seen the membrane voltage shows a typical myocardial action potential. The second plot shows the expected currents for such an action potential. }
+	\label{fig:baseline}
 \end{figure}
-\par{}
-During this simulation we see that the membrane voltage (Vm) increases stepwise with each stimulus of injected current. This is because there are no ion channels present to allow for the current injected to flow across the membrane. By creating this purely capacitive system we are essentially only charging the capacitor with each stimulus, but not allowing any path for the accumulated charge to flow. Thus the membrane (or capacitor) voltage simply increases a fixed amount with each stimulation. Thus we can see from this experiment that the absence of any ion conductances, and therefor the absence of any functional ion channels in this membrane blocks the ability of the membrane to repolarize. The system we have created can be thought of schematically as described in figure \ref{fig:exp1.cmodel} wherein our current source charges a capacitor in short bursts but does not afford any path of discharge from the capacitor. In other words, when the current source is turned on (during our stimulu, according to the protocol) the capacitor charges. When the current source is off the capacitor does not charge, but because there is no path for the capacitor to discharged it sayes at the charge voltage from the previous stimulus. Now when the current source turns on it can charge the capacitor further.
-
-
 \begin{figure}[H]
 	\centering
 	\centering
-	\includegraphics[width = .5\textwidth]{Capacitive.png}
+	\includegraphics[width = .95\textwidth]{DoubleNaSimulation.png}
 	
-	\caption{A circuit model of the simulation from 1.1. A current source provides energy to charge the capacitor C at a regular interval, but there is not path for the capacitor to discharge, thus the capacitor voltage will only increase with each successive injection of current from the current source. }
-	\label{fig:exp1.cmodel}
-\end{figure}	
-
-
-\subsection{1.2}
-\par{}
-In figure \ref{fig:exp1.2} we see the input and output for 1.2. By taking the previously capacitive model from 1.1 and adding a background conductance of \ensuremath{1\times{}10^{-3}\mu S} we now see that the membrane voltage does not simply accumulate. Instead the membrane voltage jumps during the stimulation, but due to the background conductance, a current is allowed to pass through the membrane, allowing the membrane potential to repolarize back to the resting potential. The depolarization begins at 0.1 seconds (the onset of the first stimulus) and the repolarization completes by about 0.103 seconds. The peak voltage is roughly -74 mV, after which it returns to -84 mV.
-
-\begin{figure}[H]
-	\centering
-	\centering
-	\includegraphics[width = .95\textwidth]{exp2.png}
-	\caption{This figure shows the screen capture of the Jsim parameters and plotted membrane voltage for 1.2. Note that the Gkir and Pshkr conductances are set to 0 \ensuremath{\mu S}, the reversal potential (Eb) is set to -84 mV, and the background conductance (Gb) is set to \ensuremath{1\times{}10^{-3}\mu S}}.
-	\label{fig:exp1.2}
+	\caption{This figure shows the simulation results with the baseline sodium conductance doubled according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an increased peak voltage. The second plot shows the expected currents for such an action potential with an increased sodium peak. Note the different scale as compared to the baseline. }
+	\label{fig:doubleNa}
 \end{figure}
-
-\par{}
-The addition of the background current prevents the star stepping voltage we saw in 1.1. This is becuase we have given the voltage generated by the stimulus a path to discharge and repolarize via the background conductance. Thus our capcitor in our circuit model now has a method of discharge. This can be through of as adding a resistor in parallel with the capacitor, as seen in figure \ref{fig:exp1.rc}. The current source charges the capacitor when it is on (additionally while the current source is on, during stimulus, some current flows through the resistor, additionally the voltage on the capacitor during each stimulus is partly deterined by the resitance of the resistor, which is why we see a lesser voltage jump as compared to that seen in figure \ref{fig:exp1.1}). When the current source is off we now have a capacitor charged to some voltage in parallel with a resistor. This provides a path of discharge for the capacitor through the resistor. The rate of discharge can be seen in the sloped discharge in figure \ref{fig:exp1.2} and can be calculated via equation \ref{eq:rc}. The value of that resistor is 1/Gb $\Omega$, thus in this case 1 K$\Omega$. 
-
 \begin{figure}[H]
 	\centering
 	\centering
-	\includegraphics[width = .95\textwidth]{RC.png}
-	\caption{A circuit model for the simulation in 1.2. A current source provides energy to charge the capacitor C. The resistor R allows current to flow both during stimulus and after. When the current source is not providing stimulus the capacitor discharges through the resistor. The resistor represents the background conductance through the membrane while the capacitor represents the capacitance of the cell membrane}.
-	\label{fig:exp1.rc}
-\end{figure}
-
-\begin{equation} 
-V(t) = V_0 e^{t/RC} 
-\label{eq:rc}
-\end{equation}
-
-\subsection{2.1}
-\par{}
-
-During this section we worked with the Markovian ion channel model for the time and voltage dependent outward current Ishkr, presented in \cite{Sachse2008}, and shown in figure \ref{fig:markModel}. In this model we can see that there are five closed states, labeled C0 - C4, and one open state labeled O. The rate constants between each state are shown in figure \ref{fig:markModel}. Of particular note is that the rate constants between each closed state are all derived from the same values. K\textsubscript{V} is used for all of the forward rates while K\textsubscript{-V} is used for all the reverse rates. The goal of this first section was to configure the fibroblast to be only capacitive in addition to the Ishkr current. To do so, Gb, and Kir were set to 0 \ensuremath{\mu S}. Additionally Eb was set to -84 mV and the stimulus protocol was set the same as before. We then had to adjust the stimulus amplitude to result in a peak membrane voltage of +50 mV. To do so we adjusted the amplitude to 0.55 nA as seen in figure \ref{fig:exp2.1mv}. This resulted in a membrane voltage peak of just over +50 mV. 
-
-\begin{figure}[H]
-	\centering
-	\centering
-	\includegraphics[width = .95\textwidth]{markovfig.png}
+	\includegraphics[width = .95\textwidth]{HalfNaSimulation.png}
 	
-	\caption{ This figure shows the markov model used for modeling the kshaker channel for these simulations. Figure sourced from \cite{Sachse2008}}
-	\label{fig:markModel}
+	\caption{This figure shows the simulation results with the baseline sodium conductance halved according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an decreased peak voltage. The second plot shows the expected currents for such an action potential with an decreased sodium peak. }
+	\label{fig:halfNa}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\centering
-	\includegraphics[width = .95\textwidth]{Exp3mv.png}
-	
-	\caption{ This figure shows the Jsim parameters and plotted membrane voltage as a function of time for 2.1. As can be seen the stimulus amplitude has been raised to 0.55 nA, resulting in a membrane peak above +50 mV.}
-	\label{fig:exp2.1mv}
-\end{figure}
 \par{}
-We then plotted the probability states for each of the Markvoian states, which can be seen in figure \ref{fig:exp2.1}. As expected the probabilities are such that at the beginning the C0 probability is the highest, meaning the model is likely in the C0 state before stimulus. What is interesting however is that C0, C1, C2, and C3 are all bimodal, whereas C4, and O are not. This is curious given the linear Markovian model of this ion channel (figure \ref{fig:markModel}). However if we look more closely we can see why this is the case. The model begins in C0, then as the voltage jumps the C1 probability goes up, representing a state change to C1. The same is true for C2, C3, and C4 in that order. It already is clear why the O state is not bimodal, as we only stay in this state once, however we would expect all the closed states to be bimodal as we must transition back through them to get back to the C0 state. Why then is C4 not bimodal? To explain this we must look closely at the rate constants. For the C0 to C1 transition the rate is 4K\textsubscript{V} but from C1 to C2 it is 3K\textsubscript{v}, then 2K\textsubscript{V} for C2 to C3 and K\textsubscript{V} for C3 to C0. So we see that the transitions as we go through the states from C0 to C4 are slowing down. Indeed we see that the first peak of the C1 probability is very narrow (red line in figure \ref{fig:exp2.1}) as the model passes into C1 and then to C2 almost immediately. However in the other direction the opposite is true. The rate constants going from C4 back towards C0 decrease. Thus the transition from C4 to C3 is much faster than C3 to C2 and so on. Additionally the rate constant between C4 to O is very high while the rate constant from O to C4 is lower by comparson (77 and 18 respectivly, unitless constants). Thus as the model progresses back from O through the C states the probability of staying in the C4 state is very low as both rate constants to exit that state are relatively high. Thus there is only one peak for this state. As we progress back toward C0 from C4 the other state transitions are slower in that direction, with the added factor that the rate constant to go in revers (\ie back towards C4) are also slow as previously discussed. Thus for the C3, C2, and C1 states there is another peak where the probability of being in that state is high again for a short time. The C0 state is biomodal simply because it is the resting state to which the model returns.
+Next we consider the potassium conductance. Potassium plays a role in repolarization. Potassium drives the repolarization after sodium channel activation and the combination of potassium and calcium currents dictate the plateau phase of the cardiac action potential. Increasing this conductance should result in an increased repolarization response, which should in turn cause a more rapid downslope and shorten the plateau phase. We see these expected results in \ref{fig:doubleK} as the increased potassium conductance results in an increased potassium current during the repolarization, and a decreased plateau phase. As expected these results are reversed in the half potassium conductance trials. A decreased potassium conductance is seen in diseases where repolarization is not as robust. As expected, in this trial the decreased potassium conductance resulted in a prolonged plateau and delayed repolarization to resting potential. However because there is still some potassium conductance the cell does indeed still repolarize eventually. The time to repolarization however is almost double compared to the increased potassium conductance. These results are shown in \ref{fig:halfK}.
 
 \begin{figure}[H]
 	\centering
 	\centering
-	\includegraphics[width = .95\textwidth]{exp3.png}
+	\includegraphics[width = .95\textwidth]{DoubleKSimulation.png}
 	
-	\caption{ This figure shows the markov probabilities for each state represented in the model during our described stimulation protocol. This is for the Kshaker channel only. The black line is C0Shkr, the red line is C1Shkr, the orange line is C2Shkr, the yellow line is C3Shkr, the green line is C4Shkr, the blue line is Oshkr.}
-	\label{fig:exp2.1}
+	\caption{This figure shows the simulation results with the baseline potassium conductance doubled according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an increased and earlier repolarization slope and decreased plateau duration. The second plot shows the expected currents for such an action potential with an increased potassium current. }
+	\label{fig:doubleK}
 \end{figure}
-
-
-\subsection{2.2}
-\par{}
-In this section we manipulated the rate constants to delay the O state peak by roughly 20 mS without having the peak value drop below 40\%. We first attempted to lower the k\textsubscript{O} constant to delay the C4 to O transition, however doing so also severely lowers the O peak. However decreasing k\textsubscript{v} delays the transitions between the C states towards the O state, thereby delaying the O peak. After iteratively manipulating these parameters we came to a final parameter set where k\textsubscript{v} (Kvo) was changed from 30 to 20, k\textsubscript{O} was changed from 77 to 30, and k\textsubscript{-v} (k-vo) was changed from 2 to 0.5. Figure \ref{fig:exp2.2} shows the resultant shift in the peaks. As can be seen we achieved a 20-25 mS delay in the O peak (blue line) without decreasing the peak below 40\% as compared to figure \ref{fig:exp2.1}. 
 \begin{figure}[H]
 	\centering
 	\centering
-	\includegraphics[width = .95\textwidth]{exp4.png}
-	\caption{  }
-	\label{fig:exp2.2}
+	\includegraphics[width = .95\textwidth]{HalfKSimulation.png}
+	
+	\caption{This figure shows the simulation results with the baseline potassium conductance halved according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an decreased and delayed repolarization slope and increased plateau duration. The second plot shows the expected currents for such an action potential with an increased potassium current. }
+	\label{fig:halfK}
 \end{figure}
 
 
+\par{}
+Finally we manipulated the calcium conductance, which is the primary driving ion during the plateau phase of the action potential. Calcium currents maintain the membrane voltage during the plateau despite the potassium repolarizing current. Increases in calcium conductance cause a striking change in the repolarization phase in our simulation of the trans membrane voltage seen in \ref{fig:doubleCa}. Here we can see that the plateau voltage is raised above zero and the plateau is sustained but not for as long as we might expect. This is because calcium channels are only active for a certain amount of time, and the cell still rapidly repolarizes due to potassium and other currents after this time. Again when we perform the reverse manipulation, halving the calcium conductance, we see a reverse result in the simulation. In this case \ref{fig:halfCa} shows a decrease in the plateau amplitude and the plateau duration. The decrease in duration results from the potassium current being able to more quickly overtake the calcium current due to the reduced calcium conductance.
 
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{DoubleCaSimulation.png}
+	
+	\caption{This figure shows the simulation results with the baseline calcium conductance doubled according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an increased time to repolarization and increased plateau duration as well as amplitude. The second plot shows the expected currents for such an action potential with a increased calcium current. }
+	\label{fig:doubleCa}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{HalfCaSimulation.png}
+	
+	\caption{This figure shows the simulation results with the baseline calcium conductance halved according to Table 1. As can be seen the membrane voltage shows a myocardial action potential with an decreased time to repolarization and decreased plateau duration. The second plot shows the expected currents for such an action potential with a decreased calcium current. }
+	\label{fig:halfCa}
+\end{figure}
+
+\subsection{2: How do the simulation results change as we manipulate the parameters within physiological ranges and what explains these changes? }
+\par{}
+In the field of cardiac electrophysiology conductance parameters are usually expressed according to S/F \cite{TenTusscher2003} however this model used units of S/cm2. However it is reasonable to expect to see conductances that are roughly half their baseline values in certain disease states.\cite{DaFaria2008} Doubled conductances however are typically out of range for normal physiological conditions even in disease states. The resulting changes of the simulation are described above. When we look at these results in our recorded data (\ref{fig:recNa}, \ref{fig:recK},\ref{fig:recCa}) it is difficult to see the expected variations. In the case of the sodium recordings, between the noise and baseline drift of the recordings it is difficult to discern if the trends we see are indeed real or just artifact, however in some cases it would seem that the increased sodium seems to have a higher upstroke peak than control and the decreased sodium with a lower. These results however are far less striking than the intracellular simulation recordings.
+\par{}
+The same trend is seen in the Potassium recordings where noise and drift complicate our analysis. In general we can say that there seems to be a reduced repolarization in the half potassium conductance recordings as expected. The increased potassium conductance recordings also seem to show some trend of hyperpolarization but this is difficult to actually describe given the poor quality of the signals.
+\par{}
+In the case of the calcium conductance recordings we see that an increase in calcium conductance does seem to raise the extracellular voltage after the initial spike as compared to baseline while the reduced calcium conductance has the opposite effect. Overall these recorded results illustrate the difficulty of translating electrical recordings directly to single cellular measures and vise versa. The reasoning for observed changes that could be identified in the recordings as well as all of the changes seen in the  simulations are well described in the previous section.
+\subsection{3: Explain the relationship between intracellular potential and extracellular measured potential and explain what can be done to ensure the best recorded signal}
+\par{}
+In the field of cardiac electrophysiology typically measurements are taken on an organ level of extracellular voltage. This voltage of course originates in the individual cells as there are no electrically active components of the extracellular space that we know of in the heart. So often these recordings are seen as a sort of proxy for examining the cellular potentials, but this is not the whole picture. Considering a single cardiac myocyte, during the upstroke of its action potential a waveform is generated , as can be seen in our recordings. The polarity of this waveform depends on the orientation of the recording electrodes in relationship to the cell. After the upstroke there is a short down stroke caused by initial potassium conductance before calcium conductance kicks in to cause the plateau. This initial repolarization before the plateau causes another wave of the opposite sign of the initial wave on our recording electrodes. When the cell reaches the plateau phase, we see an isoelectric period in our recordings as no electrical changes are occurring to be recorded. Finally when repolarization occurs we see another waveform of the opposite sign of the initial waveform, indicating a cellular change in voltage opposite of the initial upstroke of the action potential. In this way the recording of electrical potentials extracellularly can inform us about intracellular voltage, but we must be careful to consider the location, orientation, and polarity of our recordings.
+\par{}
+To attempt to improve our signal recording we made sure to record near to the insertion of the wires, and played signal from both wires to amplify the signal we were trying to record. The hardware of the spike recorder likely applies some forms of amplification and possibly active filtering. On the software side we utilized the built in 60 hz attenuation filter to remove as much of the ambient 60 hz power noise as possible, as well as the built in 1 hz to 50 hz notch filter to exclude any frequencies not relevant to our recordings. We also could have utilizer a software such as PFEIFER to perform baseline correction and filtering to remove any non standard signals, but we opted not to in order as we deemed that the benefit gained from this would be minimal given our signals. Another approach would be to signal average across multiple stimulations in the same simulation, however doing so would require time alignment of the signals which is a computationally difficult or manually intractable problem when considering more than just a handful of signals.
+\par{}
+We also manipulated the recording electrode placement, as seen in \ref{fig:recPos} and found that at some electrode orientations we achieved vastly different signals. One possible explanation for this phenomena is that position one is adjacent to the stimulation site but the path between the electrode and ground is not over the stimulation site, whereas position 2 creates a path that directly crosses the wire insertion point, resulting in dramatically increased signals. However this did not account for the strange morphology of the signals recorded from position 2, and thus we feel that there must be something going on with this recording site that we are unsure how to explain. There is clearly still an initial two waves seen by the electrode corresponding to the initial sodium driven upstroke and the foloowing short potassium downstroke before the plateau, but we do not see any real plateau phase nor do we see a repolarization wave. This may be due to the orientation of this recording site or some other factors unaccounted for by our analysis.
+ Despite this, the difference between the two recording sites highlights the need to consider recording position and orientation when designing experimental recordings of cardiac tissue.
+
+\subsection{4: Describe what happens when different signals are played from each wire and what implications this has}
+\par{}
+For this trial, the results of which can be seen in \ref{fig:recInterfere}, we used the two calcium conductance change signals, one on each wire and recorded from position 2. From the recorded signals we can clearly see that the interference signal is different from baseline, but based on that signal alone, diagnosis would be impossible. This raises an important problem that detecting cellular level differences is very difficult from non direct extracellular recordings, especially when multiple cells can be exhibiting conflicting signals. Especially with only one electrode it is daunting to try and image a way to reconstruct the individual signals of each of these two "cells". Thus when designing experiments we must account for these limitations in our experimental designs and create experimental designs based on the specific goals we have. If we were to want to reconstruct these individual cells, at least two recordings, but preferably more from several sites around the cells, would be desired to parse out the individual cell contributions. These considerations are what drive the experimental design of cardiac electrophysiological research.
+
+\subsection{5: Describe what magnitude of change of the simulation parameters is required to produce identifiable changes in the extracellular recording. What kinds of limitations might this suggest for experiments or clinical application?}
+\par{}
+In order to see even minor changes in the recorded signals we needed to make very aggressive changes to the model parameters given our recording location. Changing each conductance to double or half often produced a visible result on the recorded signals, but in most cases this change was far less than expected. Perhaps more detailed analysis of the recording location could have revealed an orientation of recording that optimized the detection of these differences however in the orientation we used only large changes produced a visible effect. Thus any smaller changes would have gone un noticed. In the context of experimental or clinical applications, this stresses the importance of proper recording location selection and understanding. This also suggests that small changes in cellular activity that are clearly visible on a cellular level, could easily go un noticed or marked off as noise or artifact in both experimental and clinical settings. This severely limits the application of signals collected this way in how they can be used to understand and diagnose cellular level phenomena. To alleviate this care must be taken to optimize the recording of these signals. This would likely mean using a larger number of more sensitive electrodes in a well designed orientation to answer the desired questions. These design features must be carefully considered by clinicians and researchers working with such signals.
 \section{Conclusions}
 \par{}
+The cell model utilized is very similar to ones used previously in class such as the Ten Tusscher myocyte model. \cite{TenTusscher2003} The calculated currents and potentials agree well between the models however the currently examined model is fit specifically to an atrial cell and has many more specific and relative characteristics of that cell type. Overall we conclude from this study that the model used does indeed display the expected results from manipulation of the ion conductances that drive the cardiac myocyte action potential. We were able to explore changes in these ionic conductances as well as any other parameter in the model and the effect on the atrial myocyte action potential. Additionally we find that many changes made on a single or even two cell level may be exceedingly difficult to detect utilizing extracellular recordings. Additionally extracellular recordings add the additional considerations of dealing with noise, artifact, electrode arrangement and number, as well as the particular properties of the surrounding tissue. All of these must be taken into account when studying cellular recordings on a tissue level and even for studying tissue recordings.
 
-The power of CellML as a modeling language is that it allows for quick and robust generation of easy to work with models such as the one explored in this lab. This becomes especially apparent when we consider how easily generated models can be shared, modified, and accessed by collaborators and other researchers through a variety of simulation software. As an language in active development it is constantly being improved and added to by a large community. At this point there are models for many different ion channels and entire cells that can easily be combined and accessed. By standardizing the way in which these models are developed a large barrier between collaborators is removed and progression and development of models is not hindered by differences in model format. Additionally, a disadvantage of models, being that they can become obsolete as new ones are developed, is mitigated by the easily shareable nature of CellML models. New models can rapidly be dispersed and tested by others as well as incorporated. If a model we were using became outdated it would be easy to incorporate the update CellML directly into our simulation software with minimal effort.
-\par{}
-Simulations are a diverse tool that allow for the assembly of data from many different sources into a cohesive structure that reflects many aspects of observed physical phenomena. Additionally simulations provide an advantage of a flexible base for hypothesis testing that would not be feasible via traditional means. If a researcher wanted to test changing the concentrations of an ion outside of the cellular membrane by increments of 1 uM this would be exceedingly arduous and time consuming in an in virto set up. However with a model of the cell in question and a computer and simulation software (such as Jsim) that researcher could feasibly perform such a hypothesis test in a matter of minutes to hours. The amount of fine tuned control over a wide variety of variables is unrivaled in simulations by traditional methods. However there are noteworthy drawbacks. A common saying is that all models are wrong, some models are useful. That is to say, a model may be good for describing the actual phenomena in one circumstance, but completely wrong in a different setting. Thus care must be taken when designing models and selecting one for specific tests. Additionally a model can only be as good as the data and formulations that are used to create it. As new data is being uncovered by more traditional methods, models must constantly be improved. Therefore it is unlikely that models and simulations will ever really replace all of the scientific inquiry process. That being said, models can serve as excellent tools to guide research. Testing initial ideas in a model can give direction to more specific research in vitro. 
-\par{}
-Models also serve a more translational purpose. One goal of the pysiome project is to be able to generate a patient specific model for all organ systems. Such a tool would allow clinicians to identify effective treatment plans and better predict treatment outcomes and complications. Models such as the ones we investigated in this lab can also be used to test the effects of drugs and disease states in these settings. These findings can then be used as inputs for pharmacological studies on drug formulation and treatment plans. 
-\par{}
-In the end, given the current state of the art, models cannot replace direct experimentation. There are many factors that models do not account for which can currently only be accessed by direct experiments. For example, given how the model we used today is structured, we woudl not be able to test the effects of an novel compound on the membrane currents of our fibroblast model. However more sophisticated models are constantly being built. Such models could even predict the effects of such a novel drug if the model were formulated to account for the structure of the proteins of interest and their various interactions. Overall no model is complete, and in order to better fill them out researchers must constantly work to develop, validate, and add experimental backing to the models. Having a model that is sophisticated is not the only factor as well. The model must also be feasible to process on a computer. While there are more and more advanced super computers capable of nearly unimaginable levels of calculations, there are still some models too complex to be usable. Thus a constant constrain on a model is for it to be usably simple, but sufficiently complex to accurately  describe a phenomena.
-\par{}
-Overall our experience in this lab showed us the robust flexibility of using models for scientific inquiry. We were able to rapidly and easily test the effects of different parameter alterations on the response of the model cell. This worked well not only as teaching tool for us to understand the underlying physiological principles but also as a method of hypothesis exploration and testing. Simulations are rapidly gaining popularity in the scientific community for their ease of use and robust nature. As the scientific community proceeds we must be vigilant to continually validate and improve our models, and ensure we are selecting appropriate models for the tasks at hand while recognizing and working within the limitations of our modeling framework with respect to the conclusions we draw from them. The CellML project has provided an excellent method of unifying the model development to allow for more robust collaboration and easier dissemination and application of models within the modeling community. That combined with simulation tools like Jsim will drive simulation based research forward.
+
+
+
+
+\section{Figure Appendix}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RecSodium.png}
+	
+	\caption{This figure shows the recording results with the different sodium conductance values according to Table 1. Baseline in Blue, double conductance in Red, half conductance in Yellow. X axis is time in ms and y is voltage in mV  }
+	\label{fig:recNa}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RecPotassium.png}
+	
+	\caption{This figure shows the recording results with the different potassium conductance values according to Table 1. Baseline in Blue, double conductance in Red, half conductance in Yellow. X axis is time in ms and y is voltage in mV  }
+	\label{fig:recK}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RecCalcium.png}
+	
+	\caption{This figure shows the recording results with the different calcium conductance values according to Table 1. Baseline in Blue, double conductance in Red, half conductance in Yellow. X axis is time in ms and y is voltage in mV }
+	\label{fig:recCa}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RecPositions.png}
+	
+	\caption{This figure shows the recording results with the different recording locations.  Position 1 in Blue, position 2 in Red. X axis is time in ms and y is voltage in mV}
+	\label{fig:recPos}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\centering
+	\includegraphics[width = .95\textwidth]{RecInterference.png}
+	
+	\caption{This figure shows the recording results with the different signals played into the wires at position 2. In one wire the double Ca signal was sent and the other was the half Ca signal. Baseline in Blue, double signal in Red. X axis is time in ms and y is voltage in mV }
+	\label{fig:recInterfere}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
 \bibliography{C:/Users/Jake/Documents/library}
 \bibliographystyle{IEEEtran}
-
+*Note a non English citation, but an English translation of the text was obtained and used
 
 \end{document}
 
 
-%%%%%%%%%%%%%%%% Table Example %%%%%%%%%%%%%%%%%%%%%%
-\rowcolors{2}{gray!25}{white}
-\begin{table}[H]
-	\centering
-	\caption{Simulated measurements for conduction velocity and maximal upstroke velocity}
-	\label{tab:results}
-\begin{tabular}{ccc}
-	\hline \hline
-	Experiment  & Conduction Velocity & Maximal Upstroke Velocity\\ 
-	Number & (cm/ms)& (mV/ms) \\
-	\hline
-	 1 & 16.6389 &  69.8933 \\ 
-	 2 &  18.9606&  73.9121 \\ 
 
-	 3 &  24.7062&  83.871 \\ 
 
-	  4&  45.2948&  109.1537\\ 
-
-	  5&  52.6004&  116.8785\\ 
-
-	  6&  77.6482&  131.6630\\ 
-
-	  7&  2.0641&  0.0222\\ 
-
-	  8&  44.0706&  109.3527\\ 
-
-	  9&  45.2948&  109.1675\\ 
-
-	  10&  2.1013&  -0.0024\\ 
-
-	  11&  2.0896&  -0.0024\\ 
-
-	  12&  60.3930&  179.3235\\ 
-	  13&  38.8214&  86.8933 \\ 
-
-	  14&  31.9728&  60.6956\\ 
-
-	  15&  27.6375&  48.7076\\ 
-	  16&  23.2945&  35.4873\\ 
-	  17&  20.3827&  28.0958\\ 
-	\hline 
-	\hline
-\end{tabular} 
-\end{table}
-
-%%%%%%%%%%%%%%%%% Figure Example %%%%%%%%%%%%%%%%%%%
-	\begin{figure}[H]
-	\centering
-	\begin{subfigure}{0.49\textwidth}
-		\centering
-		\includegraphics[width = \textwidth]{../Simulation/Experiment_11.png}
-		\caption{}
-		\label{fig:left}
-	\end{subfigure}
-	\begin{subfigure}{0.49\textwidth}
-		\centering
-		\includegraphics[width = \textwidth]{../Simulation/Experiment_9.png}
-		\caption{}
-		\label{fig:right}
-	\end{subfigure}
-	\vskip\baselineskip
-	\begin{subfigure}{0.49\textwidth}
-		\centering
-		\includegraphics[width = \textwidth]{../Simulation/Experiment_4.png}
-		\caption{}
-		\label{fig:left}
-	\end{subfigure}
-	\begin{subfigure}{0.49\textwidth}
-		\centering
-		\includegraphics[width = \textwidth]{stimulation.png}
-		\caption{}
-		\label{fig:right}
-	\end{subfigure}
-	\caption{Changes in Stimulation Current. (a) Output figure from experiment 11. (b) Output figure from experiment 9. (c) Output figure from experiment 4. (d) A summary figure showing the changes in conduction velocity and max dV/dt as the stimulation current varies. Note that once you exceed a certain threshold there is relatively no change to the conduction velocity or max dV/dt. }
-	\label{fig:stimulation}
-\end{figure}
 
 
 

@@ -1,0 +1,13 @@
+\contentsline {section}{Introduction}{2}
+\contentsline {section}{Methods}{3}
+\contentsline {subsection}{Hardware Setup}{3}
+\contentsline {subsection}{Simulation Parameter Setup}{4}
+\contentsline {subsection}{Stimulation Generation and Recording}{5}
+\contentsline {section}{Results and Discussion}{5}
+\contentsline {subsection}{1: Manipulation of parameters and their effect on cellular electrical propagation}{5}
+\contentsline {subsection}{2: How do the simulation results change as we manipulate the parameters within physiological ranges and what explains these changes? }{15}
+\contentsline {subsection}{3: Explain the relationship between intracellular potential and extracellular measured potential and explain what can be done to ensure the best recorded signal}{15}
+\contentsline {subsection}{4: Describe what happens when different signals are played from each wire and what implications this has}{16}
+\contentsline {subsection}{5: Describe what magnitude of change of the simulation parameters is required to produce identifiable changes in the extracellular recording. What kinds of limitations might this suggest for experiments or clinical application?}{16}
+\contentsline {section}{Conclusions}{17}
+\contentsline {section}{Figure Appendix}{18}
