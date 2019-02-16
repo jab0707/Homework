@@ -5,7 +5,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-clear,clf;
+%clear,clf;
 % Set the resting potential.
 % Note: fixing this will blunt the effect of the changes in extracellular
 % potassiumm.  It is not clear to me why it is here actually...
