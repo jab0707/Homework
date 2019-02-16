@@ -21,6 +21,29 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
+\bibitem{Natsis2014a}
+K.~Natsis, M.~Piagkou, A.~Skotsimara, V.~Protogerou, I.~Tsitouridis, and
+  P.~Skandalakis, ``{Horseshoe kidney: A review of anatomy and pathology},''
+  \emph{Surgical and Radiologic Anatomy}, vol.~36, no.~6, pp. 517--526, 2014.
+
+\bibitem{PMID:361341}
+\BIBentryALTinterwordspacing
+H.~P. Veit and R.~L. Farrell, ``{The anatomy and physiology of the bovine
+  respiratory system relating to pulmonary disease},'' \emph{The Cornell
+  veterinarian}, vol.~68, no.~4, pp. 555--581, oct 1978. [Online]. Available:
+  \url{http://europepmc.org/abstract/MED/361341}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Shaw2002}
+R.~J. Shaw, R.~Djukanovic, D.~P. Tashkin, A.~B. Millar, R.~M. {Du Bois}, and
+  P.~A. Corris, ``{The role of small airways in lung disease},''
+  \emph{Respiratory Medicine}, vol.~96, no.~2, pp. 67--80, 2002.
+
+\bibitem{Aurigemma2006}
+G.~P. Aurigemma, M.~R. Zile, and W.~H. Gaasch, ``{Contractile behavior of the
+  left ventricle in diastolic heart failure: With emphasis on regional systolic
+  function},'' pp. 296--304, 2006.
+
 \bibitem{Parfrey1996}
 \BIBentryALTinterwordspacing
 P.~S. Parfrey, R.~N. Foley, J.~D. Harnett, G.~M. Kent, D.~C. Murray, P.~E.
@@ -30,10 +53,5 @@ P.~S. Parfrey, R.~N. Foley, J.~D. Harnett, G.~M. Kent, D.~C. Murray, P.~E.
   Available:
   \url{https://oup.silverchair-cdn.com/oup/backfile/Content{\_}public/Journal/ndt/11/7/10.1093/ndt/11.7.1277/2/11-7-1277.pdf?Expires=1490100795{\&}Signature=g{~}KyqCclx{~}9mq6NT1t36Cjbh-dcdjolBKuY25ghydoJsFDeuuTPJbCmJtxBNR7xB5pvBjtKs-7EIfcm-YmwNAh9jM{~}{~}9H5x7DsPEGCZLecHo7o9}
 \BIBentrySTDinterwordspacing
-
-\bibitem{Aurigemma2006}
-G.~P. Aurigemma, M.~R. Zile, and W.~H. Gaasch, ``{Contractile behavior of the
-  left ventricle in diastolic heart failure: With emphasis on regional systolic
-  function},'' pp. 296--304, 2006.
 
 \end{thebibliography}
