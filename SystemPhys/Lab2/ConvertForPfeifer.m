@@ -1,7 +1,7 @@
 clear();fclose('all');
-files = dir('JakeBram_DreamTeam_ECG\');
-addpath('JakeBram_DreamTeam_ECG\');
-for f = 12:length(files)
+files = dir('JakeBram_DreamTeam_ECG/');
+addpath('JakeBram_DreamTeam_ECG/');
+for f = 11
     inFile = fopen(files(f).name,'rt');
     ln = fgetl(inFile);
     %The first line is the headder
@@ -36,22 +36,22 @@ for f = 12:length(files)
 end
 %%
 clear;
-files = dir('Conv1\');
-cd Conv1\
+%files = dir('Conv1/');
+cd Conv1/
 
-for f = 4:length(files)
-    
-    load(files(f).name);
-    
-    ts.potvals = out.ch2';
-    clipIdxs = find(~isfinite(ts.potvals));
-    ts.potvals(clipIdxs) =  [];
-    ts.numleads = 1;
-    ts.numframes = size(ts.potvals,2);
-    ts.label = files(f).name(1:end-4);
-    ts.audit = '';
-    ts.filename = files(f).name;
-    ts.leadinfo = 0;
-    ts.unit = '';
-    save(['PotValOnly/',files(f).name],'ts');
-end
+% for f = 4:length(files)
+%     
+%     load(files(f).name);
+%     
+%     ts.potvals = out.ch2';
+%     clipIdxs = find(~isfinite(ts.potvals));
+%     ts.potvals(clipIdxs) =  [];
+%     ts.numleads = 1;
+%     ts.numframes = size(ts.potvals,2);
+%     ts.label = files(f).name(1:end-4);
+%     ts.audit = '';
+%     ts.filename = files(f).name;
+%     ts.leadinfo = 0;
+%     ts.unit = '';
+%     save(['PotValOnly/',files(f).name],'ts');
+% end
