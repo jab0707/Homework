@@ -64,6 +64,63 @@ end
 
 
 
+
+
+
+%%
+
+
+
+prevName = drugCurves(1).label;
+figure(1);clf();hold on;title(prevName(1:end-1));
+
+j = 1;
+for i = 1:length(drugCurves)
+    
+        
+        if ~strcmp(prevName(1:end-1),drugCurves(i).label(1:end-1))
+            
+            j = j+1;
+            figure(j);clf();hold on;title(drugCurves(i).label(1:end-1));
+        end
+        for k = 1:length(drugCurves(i).signals)
+            plot(drugCurves(i).signals(k).potvals(1,:)');
+            
+        end
+        prevName = drugCurves(i).label;
+ end
+
+%%
+%clustering
+
+for i = 1:length(drugCurves)
+    feature = [];
+    for j = 1:length(drugCurves(i).signals)
+        drugCurves(i).signals(j).spl = spline(1:length(drugCurves(i).signals(j).potvals(1,:)),drugCurves(i).signals(j).potvals(1,:),linspace(1,length(drugCurves(i).signals(j).potvals(1,:)),1500));
+        feature(j,:) = drugCurves(i).signals(j).spl;
+    end
+    
+    class = kmeans(feature,2);
+    drugCurves(i).clustering = class;
+   
+end
+        
+
+
+%%
+
+for i = 1:length(drugCurves)
+    class1 = find(drugCurves(i).clustering == 1);
+    signalsToAverage =[];
+    for j = 1:length(class1)
+        signalsToAverage(j,:) = drugCurves(i).signals(class1(j)).spl;
+    end
+    drugCurves(i).c1BeatMean = mean(signalsToAverage,1);
+    drugCurves(i).c1BeatMed = median(signalsToAverage,1);
+end
+
+%%
+
 function HR = getHR(signals)
 
 dT = zeros(1,length(signals)-1);
@@ -86,3 +143,7 @@ end
 HR = 60000./dT;
 
 end
+
+
+
+
