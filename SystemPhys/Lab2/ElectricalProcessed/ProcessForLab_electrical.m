@@ -4,7 +4,7 @@ close all
 
 files = dir('.');
 
-start = 8;
+start = 10;
 fileChange = [235];
 counter = 1;
 j = 1;
@@ -127,14 +127,14 @@ dT = zeros(1,length(signals)-1);
 QRSTimes = zeros(1,length(signals));
 fids = [signals(1).fids.type];
 idxs = {signals(1).fids.value};
-idxs = int64(idxs{find(fids ==2)});
+idxs = double(floor(idxs{find(fids ==2)}));
 QRSTimes(1) = idxs + signals(1).selfframes(1);
 
 for i = 2:length(signals)
     fids = [signals(i).fids.type];
     idxs = {signals(i).fids.value};
-    idxs = int64(idxs{find(fids ==2)});
-    
+    idxs = idxs{find(fids ==2)};
+    idxs = double(floor(idxs(1)));
     QRSTimes(i) = idxs + signals(i).selfframes(1);
     dT(i-1) = QRSTimes(i) - QRSTimes(i-1);
     
