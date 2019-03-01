@@ -137,10 +137,11 @@ for i = 1:length(experimentOrder)
 end
 
 segments = [2,5,8,10,12,14,17,18,21,24,25,28,29];
+close all;
 figure(1);clf();hold on;
 plot(1:length(F),F);
 scatter(transitions(segments),F(transitions(segments)),'ro')
-
+figure('DefaultAxesFontSize',18);figure(2);clf();plot(1:length(F),F,'k','LineWidth',3);title('Contraction Force');xlabel('Fiducilized beats');ylabel('Force mN');
 %%
 j = 1;
 signalsPerGroup = zeros(length(segments)+1,1);
