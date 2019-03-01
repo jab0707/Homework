@@ -110,7 +110,7 @@ for i = 1:length(drugCurves)
     class = kmeans(feature,2);
     drugCurves(i).clustering = class;
     cl1 = find(class == 1);
-    drugCurves(i).QRSOn = mean([drugCurves(i).signals(cl1).splQrsOn]);
+    drugCurves(i).QRSOn = mean(drugCurves(i).signals.splQrsOn(cl1));
    
 end
         
