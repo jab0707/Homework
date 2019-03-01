@@ -3,7 +3,7 @@ close all
 
 files = dir('.');
 
-start = 8;
+start = 9;
 fileChange = [235];
 counter = 1;
 j = 1;
@@ -122,7 +122,7 @@ end
 
 %%
 %
-experimentOrder = [18:20,15:17,30,31,1,2,13,14,10:12,25,21:23,3:5,26,6:8,27,24];
+experimentOrder = [9,18:20,15:17,30,31,1,2,13,14,10:12,25,21:23,3:5,26,6:8,27,24];
 runningOffset = 0;
 F = [];
 t = [];
@@ -133,11 +133,59 @@ for i = 1:length(experimentOrder)
     t = [t,forceCurves(experimentOrder(i)).T + runningOffset];
     runningOffset = runningOffset + max(t);
     transitions = [transitions,length(t)];
-    labels(i,1) =  {forceCurves(i).label};
+    labels(i,1) =  {forceCurves(experimentOrder(i)).label};
 end
+
+segments = [2,5,8,10,12,14,17,18,21,24,25,28,29];
 figure(1);clf();hold on;
 plot(1:length(F),F);
-scatter(transitions,F(transitions),'ro')
+scatter(transitions(segments),F(transitions(segments)),'ro')
+
+%%
+j = 1;
+signalsPerGroup = zeros(length(segments)+1,1);
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    signalsPerGroup(j) = signalsPerGroup(j) + length(forceCurves(experimentOrder(i)).signals);
+    
+    
+end
+
+%%
+
+grouppedSignals =cell(14,1);
+j = 1;
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    grouppedSignals{j} = [grouppedSignals{j},forceCurves(experimentOrder(i)).signals];
+    
+    
+end
+
+%%
+
+for i = 1:length(grouppedSignals)
+    
+    
+    
+    increment = 1/length(grouppedSignals{i});
+    figure(i);clf();hold on;
+    signals = grouppedSignals{i};
+    for j = 1:length(signals)
+        plot(signals(j).potvals(1,:)'*starlingData.m,'color',[increment*j,(1-j*increment),0])
+    end
+    title(forceCurves(i).label);
+end
 %%
 
 function HR = getHR(signals)

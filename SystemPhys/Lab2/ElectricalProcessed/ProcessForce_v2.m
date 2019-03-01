@@ -3,7 +3,7 @@ close all
 
 files = dir('.');
 
-start = 8;
+start = 9;
 fileChange = [235];
 counter = 1;
 j = 1;
@@ -140,6 +140,52 @@ segments = [2,5,8,10,12,14,17,18,21,24,25,28,29];
 figure(1);clf();hold on;
 plot(1:length(F),F);
 scatter(transitions(segments),F(transitions(segments)),'ro')
+
+%%
+j = 1;
+signalsPerGroup = zeros(length(segments)+1,1);
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    signalsPerGroup(j) = signalsPerGroup(j) + length(forceCurves(experimentOrder(i)).signals);
+    
+    
+end
+
+%%
+
+grouppedSignals =cell(14,1);
+j = 1;
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    grouppedSignals{j} = [grouppedSignals{j},forceCurves(experimentOrder(i)).signals];
+    
+    
+end
+
+%%
+
+for i = 1:length(grouppedSignals)
+    
+    
+    
+    increment = 1/length(grouppedSignals{i});
+    figure(i);clf();hold on;
+    signals = grouppedSignals{i};
+    for j = 1:length(signals)
+        plot(signals(j).potvals(1,:)'*starlingData.m,'color',[increment*j,(1-j*increment),0])
+    end
+    title(signals(1).label);
+end
 %%
 
 function HR = getHR(signals)
