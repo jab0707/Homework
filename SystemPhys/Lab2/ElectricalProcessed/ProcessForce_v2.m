@@ -174,21 +174,33 @@ for i = 1:length(experimentOrder)
 end
 
 %%
-
+close all;
+thingsToPlot = [1,2,5,8,10,12,14,17,18,21,24,25,28,29];
 for i = 1:length(grouppedSignals)
     
     
     
     increment = 1/length(grouppedSignals{i});
-    figure(i);clf();hold on;
+    figure('DefaultAxesFontSize',18);clf();hold on;
     signals = grouppedSignals{i};
+    subplot(211);hold on;
     for j = 1:length(signals)
         plot(signals(j).potvals(1,:)'*starlingData.m,'color',[increment*j,(1-j*increment),0])
     end
+    subplot(212);hold on;
+    plot(drugCurves(experimentOrder(thingsToPlot(i))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(i))).QRSOn)-5:end)','r','LineWidth',2);
+    plot(drugCurves(experimentOrder(thingsToPlot(1))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(1))).QRSOn)-5:end)','k','LineWidth',2);
     title(signals(1).label);
 end
 %%
+for i = 1:length(forceCurves)
+    
+    figure('DefaultAxesFontSize',18);figure(2);clf();plot(1:length(F),F,'k','LineWidth',3);title('Contraction Force');xlabel('Fiducilized beats');ylabel('Force mN');
 
+    
+end
+
+%%
 function HR = getHR(signals)
 
 dT = zeros(1,length(signals)-1);
