@@ -3,7 +3,7 @@ close all
 
 files = dir('.');
 
-start = 8;
+start = 9;
 fileChange = [235];
 counter = 1;
 j = 1;
@@ -137,11 +137,73 @@ for i = 1:length(experimentOrder)
 end
 
 segments = [2,5,8,10,12,14,17,18,21,24,25,28,29];
+close all;
 figure(1);clf();hold on;
 plot(1:length(F),F);
 scatter(transitions(segments),F(transitions(segments)),'ro')
+figure('DefaultAxesFontSize',18);figure(2);clf();plot(1:length(F),F,'k','LineWidth',3);title('Contraction Force');xlabel('Fiducilized beats');ylabel('Force mN');
+%%
+j = 1;
+signalsPerGroup = zeros(length(segments)+1,1);
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    signalsPerGroup(j) = signalsPerGroup(j) + length(forceCurves(experimentOrder(i)).signals);
+    
+    
+end
+
 %%
 
+grouppedSignals =cell(14,1);
+j = 1;
+for i = 1:length(experimentOrder)
+    try
+    if i >= segments(j) 
+        j = j+1;
+    end
+    catch
+    end
+    grouppedSignals{j} = [grouppedSignals{j},forceCurves(experimentOrder(i)).signals];
+    
+    
+end
+
+%%
+close all;
+thingsToPlot = [1,2,5,8,10,12,14,17,18,21,24,25,28,29];
+for i = 1:length(grouppedSignals)
+    
+    
+    signals = grouppedSignals{1};
+    baselineForce = signals(1).potvals(1,:);
+    increment = 1/length(grouppedSignals{i});
+    figure('DefaultAxesFontSize',18);clf();hold on;
+    signals = grouppedSignals{i};
+    subplot(211);hold on;
+    title(signals(1).label);xlabel('time(ms)');ylabel('Force(mN)');axis([0 1500 0 -min((signals(1).potvals(1,:)*starlingData.m))+.1 ]);
+    for j = 1:length(signals)
+        plot(abs(signals(j).potvals(1,:)'*starlingData.m),'color',[increment*j,(1-j*increment),increment*j])
+        
+    end
+    subplot(212);hold on;xlabel('time(ms)');ylabel('Voltage (mv)');axis([0 1500 -3.5 2 ]);
+    plot(drugCurves(experimentOrder(thingsToPlot(i))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(i))).QRSOn)-5:end)','r','LineWidth',2);
+    plot(drugCurves(experimentOrder(thingsToPlot(1))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(1))).QRSOn)-5:end)','k','LineWidth',2);
+    title('Voltage');
+end
+%%
+for i = 1:length(forceCurves)
+    
+    figure('DefaultAxesFontSize',18);figure(2);clf();plot(1:length(F),F,'k','LineWidth',3);title('Contraction Force');xlabel('Fiducilized beats');ylabel('Force mN');
+
+    
+end
+
+%%
 function HR = getHR(signals)
 
 dT = zeros(1,length(signals)-1);

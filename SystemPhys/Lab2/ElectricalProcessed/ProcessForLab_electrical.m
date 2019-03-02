@@ -97,11 +97,20 @@ for i = 1:length(drugCurves)
     feature = [];
     for j = 1:length(drugCurves(i).signals)
         drugCurves(i).signals(j).spl = spline(1:length(drugCurves(i).signals(j).potvals(1,:)),drugCurves(i).signals(j).potvals(1,:),linspace(1,length(drugCurves(i).signals(j).potvals(1,:)),1500));
+        scaledIdxs = rescale(1:length(drugCurves(i).signals(j).potvals(1,:)),1,1500);
+        fids = [drugCurves(i).signals(j).fids.type];
+        vals = {drugCurves(i).signals(j).fids.value};
+        QRSOn = find(fids == 2);
+        QRSOn = vals{QRSOn};
+        QRSOn = (floor(QRSOn(1)));
+        drugCurves(i).signals(j).splQrsOn = scaledIdxs(QRSOn);
         feature(j,:) = drugCurves(i).signals(j).spl;
     end
     
     class = kmeans(feature,2);
     drugCurves(i).clustering = class;
+    cl1 = find(class == 1);
+    drugCurves(i).QRSOn = mean([drugCurves(i).signals(cl1).splQrsOn]);
    
 end
         

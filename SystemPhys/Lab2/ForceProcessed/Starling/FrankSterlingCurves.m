@@ -13,7 +13,7 @@ frankCurves(1).label = 'base';
 frankCurves(2).label = '2mm';
 frankCurves(3).label = '4mm';
 frankCurves(4).label = '6mm';
-start = 11;
+start = 10;
 end1 = 137;
 fileChange = [end1,end1+21,end1 + 42];
 
@@ -58,7 +58,7 @@ m = dV'\forces';
 xs = [0:.1:1.5];
 ys = m*xs;
 
-figure(1);clf();hold on;scatter(dV,forces,'ro');
+figure('DefaultAxesFontSize',18);clf();hold on;scatter(dV,forces,'ro');
 scatter(xs,ys,'bx');
 hold off;
 
@@ -118,8 +118,9 @@ end
 
 peaks = [peaks,peaklist(1,1:7),peaklist(2,1:7),peaklist(3,1:13)];
 baselines = [baselines,baselist(1,1:7),baselist(2,1:7),baselist(3,1:13)];
-figure(1);clf()
-scatter(peaks,baselines,'b');title('FrankStarling');
+figure('DefaultAxesFontSize',18);clf()
+scatter(peaks,baselines,'b');title('Basal Vs Contracted Force');xlabel('Contraction Force (mN)');ylabel('Basline force (mN)');
+
 
 
 
