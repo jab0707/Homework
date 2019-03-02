@@ -179,18 +179,21 @@ thingsToPlot = [1,2,5,8,10,12,14,17,18,21,24,25,28,29];
 for i = 1:length(grouppedSignals)
     
     
-    
+    signals = grouppedSignals{1};
+    baselineForce = signals(1).potvals(1,:);
     increment = 1/length(grouppedSignals{i});
     figure('DefaultAxesFontSize',18);clf();hold on;
     signals = grouppedSignals{i};
     subplot(211);hold on;
+    title(signals(1).label);xlabel('time(ms)');ylabel('Force(mN)');axis([0 1500 0 -min((signals(1).potvals(1,:)*starlingData.m))+.1 ]);
     for j = 1:length(signals)
-        plot(signals(j).potvals(1,:)'*starlingData.m,'color',[increment*j,(1-j*increment),0])
+        plot(abs(signals(j).potvals(1,:)'*starlingData.m),'color',[increment*j,(1-j*increment),increment*j])
+        
     end
-    subplot(212);hold on;
+    subplot(212);hold on;xlabel('time(ms)');ylabel('Voltage (mv)');axis([0 1500 -3.5 2 ]);
     plot(drugCurves(experimentOrder(thingsToPlot(i))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(i))).QRSOn)-5:end)','r','LineWidth',2);
     plot(drugCurves(experimentOrder(thingsToPlot(1))).c1BeatMean(floor(drugCurves(experimentOrder(thingsToPlot(1))).QRSOn)-5:end)','k','LineWidth',2);
-    title(signals(1).label);
+    title('Voltage');
 end
 %%
 for i = 1:length(forceCurves)
