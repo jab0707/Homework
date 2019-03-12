@@ -1,10 +1,14 @@
-function [Itv,Pe,De] = TVDual(I0,mx,delta,alpha,C, sigma, Niter, eps)
-
+function [Itv,Pe,De] = TVPrimalDualInpaint(I0,mx, sigma,alpha, Niter, epsd,epsp)
+mx = double(mx);
 wx = zeros(size(I0));
 wy = zeros(size(I0));
 
+%I0 = I0/10;
+
 %Calculate the gradient of I0
 [Ix,Iy] = grad(I0);
+Itv = zeros(size(I0));
+
  divw = div(wx,wy);
  De = zeros(1,Niter);
  Pe = zeros(1,Niter);
@@ -13,8 +17,9 @@ wy = zeros(size(I0));
 
     [gdwx,gdwy] = grad(divw);
     
-    wx = wx + eps.*(Ix + (sigma)*gdwx);
-    wy = wy + eps.*(Iy + (sigma)*gdwy);
+    
+    wx = wx + epsd.*(Ix);
+    wy = wy + epsd.*(Iy);
     
     %Now project the gradient
     
@@ -24,13 +29,19 @@ wy = zeros(size(I0));
     wy = wy./nW;
     
     divw = div(wx,wy);
-    %Calculate the dual energy
-    De(k) = sum(sum((-I0.*divw - 0.5*(divw.*divw)*sigma)));
-    % Calculate the primal energy
-    Itv = (sigma*C + delta*(mx.*I0) + divw*sigma*delta)./(delta*mx + sigma);
-    [Itx,Ity] = grad(Itv);
     
-    Pe(k) = sum(sum( (I0-Itv).^2/(2*sigma) + sqrt(Itx.*Itx+Ity.*Ity)));
+    Itv = Itv - epsp*((mx.*(Itv-I0))/sigma - alpha*divw);
+    
+    
+    %Calculate the dual energy
+    %%De(k) = sum(sum( (I0-Itv).^2/(2*sigma) - Itv.*divw));
+    
+    %De(k) = sum(sum((-I0.*divw - 0.5*(divw.*divw)*sigma)));
+    % Calculate the primal energy
+ 
+    [Ix,Iy] = grad(Itv);
+    
+    Pe(k) = sum(sum((I0-Itv).^2/(2*sigma) + sqrt(Ix.*Ix+Iy.*Iy)));
     
     end
 
@@ -44,6 +55,16 @@ wy = zeros(size(I0));
         uy = circshift(f,[0,-1]) - f;
     end
         
-    
-end
 
+Itv = Itv - min(Itv(:));
+Itv = Itv/max(Itv(:));
+Itv = Itv * 255;
+Itv = Itv .* (1-mx);
+
+I0 = I0 - min(I0(:));
+I0 = I0/max(I0(:));
+I0 = I0*255;
+
+Itv = I0 + Itv;
+
+end
