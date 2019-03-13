@@ -1,4 +1,4 @@
-function [Itv,Pe,De] = TVDual(I0, sigma, Niter, eps)
+function [Itv,Pe,De] = TVDual(I0,mx,delta,alpha,C, sigma, Niter, eps)
 
 wx = zeros(size(I0));
 wy = zeros(size(I0));
@@ -27,7 +27,7 @@ wy = zeros(size(I0));
     %Calculate the dual energy
     De(k) = sum(sum((-I0.*divw - 0.5*(divw.*divw)*sigma)));
     % Calculate the primal energy
-    Itv = I0 + divw*sigma;
+    Itv = (sigma*C + delta*(mx.*I0) + divw*sigma*delta)./(delta*mx + sigma);
     [Itx,Ity] = grad(Itv);
     
     Pe(k) = sum(sum( (I0-Itv).^2/(2*sigma) + sqrt(Itx.*Itx+Ity.*Ity)));
