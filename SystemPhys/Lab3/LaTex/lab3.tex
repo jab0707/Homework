@@ -62,15 +62,51 @@
 
 \section{Introduction}
 \par{}
-Body surface electrical recordings allows researchers and clinicians to assess the electrical activity of the heart. The use of electrodes to measure and display cardiac electrical activity, known as an electrocardiography (ECG), has been a primary diagnostic and research tool since its invention by Nobel laureate Dr. Willhem Einthoven. During this lab we expored the use of both modern and traditional recording configurations to attain a functional understanding of ECG and vectorcardiography. By considering measurements between two electrodes, or a lead, we can assess the activity of the heart as a current dipole. We first investigated the use of the three limb leads, first developed by Einthoven. These leads form a roughly equilateral triangle around the heart with three measurement vectors, one set per pair of leads. These leads capture the frontal plane of the heart activity. In an attempt to better understand the 3D extent of the cardiac dipole we used the Frank leads, which form three orthogonal axes of measurement. Utilizing three orthogonal lead measures allows for characterization of the cardiac dipole projected onto each of these axis, and by combining the leads allows for 3D characterization. The third leadset we investigated was the precordial leads. These are six leads across the chest which all use Wilson's Central Terminal as a reference. Wilson's central terminal is made by passing each of the lim lead electrodes through a 5 K\si{\ohm} resistor and then connecting them to reference. By doing so, each of the percordial electrodes can be though of as a unipole recording. These precordial recordings are frequently used clinically as they provide detailed insight into electrical activity of different parts of the heart. Finally we used a full torso body surface potential map dataset to assess how these measurements of the heart may change when the subject changes position. Through our investigations of these lead sets we aim to understand how to interpret these data to understand the electrical activity of the heart, the hearts orientation int he chest, and possibly the viability of the cardiac dipole assumption.
+Body surface electrical recordings allows researchers and clinicians to assess the electrical activity of the heart. The use of electrodes to measure and display cardiac electrical activity, known as an electrocardiography (ECG), has been a primary diagnostic and research tool since its invention by Nobel laureate Dr. Willhem Einthoven. During this lab we expored the use of both modern and traditional recording configurations to attain a functional understanding of ECG and vectorcardiography (VCG). By considering measurements between two electrodes, or a lead, we can assess the activity of the heart as a current dipole. We first investigated the use of the three limb leads, first developed by Einthoven. These leads form a roughly equilateral triangle around the heart with three measurement vectors, one set per pair of leads. These leads capture the frontal plane of the heart activity. In an attempt to better understand the 3D extent of the cardiac dipole we used the Frank leads, which form three orthogonal axes of measurement. Utilizing three orthogonal lead measures allows for characterization of the cardiac dipole projected onto each of these axis, and by combining the leads allows for 3D characterization. The third leadset we investigated was the precordial leads. These are six leads across the chest which all use Wilson's Central Terminal as a reference. Wilson's central terminal is made by passing each of the lim lead electrodes through a 5 K\si{\ohm} resistor and then connecting them to reference. By doing so, each of the percordial electrodes can be though of as a unipole recording. These precordial recordings are frequently used clinically as they provide detailed insight into electrical activity of different parts of the heart. Finally we used a full torso body surface potential map dataset to assess how these measurements of the heart may change when the subject changes position. Through our investigations of these lead sets we aim to understand how to interpret these data to understand the electrical activity of the heart, the hearts orientation int he chest, and possibly the viability of the cardiac dipole assumption.
 \par{}
-ECG and VECG have been used for cardiac diagnostics and research or over a century. By using the geometric relationship between the elecrodes one can construct the heart vector at any point during a heartbeat. Each lead, or electrode pair, measures the projection of th ecardiac vector onto the vector formed by that lead. By combining different leads one can reconstruct the heart vector. By plotting the trajectory of this vector through a heartbeat one gets a VECG vector loop. By analyzing different sections fo the vector loop one can assess the activity during different parts of the heartbeat.
+ECG and VCG have been used for cardiac diagnostics and research or over a century. By using the geometric relationship between the elecrodes one can construct the heart vector at any point during a heartbeat. Each lead, or electrode pair, measures the projection of th ecardiac vector onto the vector formed by that lead. By combining different leads one can reconstruct the heart vector. By plotting the trajectory of this vector through a heartbeat one gets a VCG vector loop. By analyzing different sections fo the vector loop one can assess the activity during clinically significant parts of the heartbeat such as the QRS complex, the T wave, and the ST segment.
 \par{}
 \section{Methods}
+\par{}
+For each lead set the subject sat still, upright, and held their breath for the entire 30 second recording. The subject was allowed to rest in between recordings. 
 
-%Setup of recording equipment
+\subsection{Limb Leads}
+\par{}
+In lieu of placing the limb leads on the actual limbs we used locations on the torso as these are equivalent and result in higher quality signals. An electrode was attached to the subject's body in the following locations: Left anterior shoulder (LA), right anterior shoulder (RA), left lower ribcage (LL) and right lower rib cage (RL). In each case the electrode was placed over muscle, not bone. The three leads of the Limb leads were constructed from the RA, LA, and LL. V1 positive was LA, and V1 negative was RA. V2 positive was LL and V2 negative was RA. V3 positive was LL, and V3 negative was LA. RL was used as reference for all three leads. 
+
+\par{}
+
+
+
+\subsection{Frank Leads}
+\par{}
+The leads for the Frank Lead set were constructed as follows. For the X component lead the positive terminal was placed on the left midaxillary line below rib 6 and the negative terminal was placed on the right midaxillary line below rib 6. For the Y component the positive terminal was place on the back of the neck to the right of the spine and the negative terminal was connected to the lower left limb electrode. For the Z component the positive terminal was placed on the center of the chest parallel to the 6th rib and the negative lead was connected to the back to the left of the spine at the level of the 6th rib. All electrodes were placed such that they were not directly over bone. The reference for each lead was connected to the lower right lead from the limb lead set.
+
+\subsection{Precordial Leads}
+\par{}
+The precordial leads were placed as is standard: V1 between rib 4 and 5 on the left on the sternum, V2 between rib 4 and 5 on the right of the sternum, V3 between rib 5 and 6 in the middle of the right pectoral muscle, V4 in between rib 7 and 8 under the nipple, V5 between rib 7 and 8 on the right anterior axillary line, and V6 between rib 7 and 8 on the right mid axillary line. The three limb leads were used to form Wilson's central terminal as a reference by running them through a 5 K\si{\ohm} resistor then connecting them together.
+
+\subsection{Signal Processing}
+\par{}
+All signals recorded were exported as .csv formatted documents. The CSVs were then imported to matlab and saved in a structure format .mat file. PFEIFER, a preprocessing framework for electrograms, was used to filter, baseline correct, fiducilize, auto fiducilize, and time align the signals recorded.\cite{MacLeod2018_p} Briefly, the raw signals for each intervention were converted by a built in conversion tool, which organizes the potential values recorded into a format PFEIFER requires. Once in a compatible format the signals were imported and  a denoising filter was applied to remove 60 cycle Hz noise.  The first heartbeat from the signal was fiducilized manually by a set of isoelectric points. These isoelectric points were then used to baseline correct the entire recording. Additionally a beat specific baseline correction was applied to the individual beat. The user then fiducilizes the first beat by marking the QRS complex, T wave, and T peak. The manually determined fiducials were then used by PFEIFER to automatically detect any remaining heart beats in the input signal and apply the same beat specific baseline correction and fiducilization. The output are time alligned, fiducilized beats with calculated activation, and recovery times, signal integrals, and beat fiducials.
+
+\par{}
+After PFEIFER, the processed beats for each recording site were signal averaged. Because the beats were already time alligned they could easily be collected for each lead recording and averaged over 5 to 20 beats. These signal averaged beats were used for the vector cardiographs.
+
+\subsection{Body Surface Potentials}
+\par{}
+
 
 \section{Results}
+
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/.png}
+	\caption{ }
+	\label{fig:FSCurve}
+\end{figure}
 
 \section{Discussion}
 

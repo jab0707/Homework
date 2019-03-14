@@ -46,7 +46,7 @@ end
 
 %%
 
-figure(1);clf();
+figure('DefaultAxesFontSize',18);clf();
 
 subplot(311);
 
@@ -64,8 +64,7 @@ title('Lead III');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 %%
 
 
-
-figure(2);
+figure('DefaultAxesFontSize',18);
 subplot(311);
 
 plot(beatCollection(:,:,1)');
@@ -79,7 +78,7 @@ subplot(313);
 plot(beatCollection(:,:,3)');
 title('Lead III');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 
-figure(3);
+figure('DefaultAxesFontSize',18);
 subplot(311);
 
 plot(lead1Averaged','r','LineWidth',2);
@@ -115,7 +114,7 @@ end
 
 
 %%
-figure(4);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 c = 'b';
 for i = 1:1716
 if i > QRSStart && i <= QRSEnd
@@ -134,7 +133,7 @@ xlabel('X component (mV)');ylabel('Y component (mV)');
 title('Heart Vectors from Limb Leads and resultant trajectory');
 %%
 
-figure(5);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 c = 'b';
 subplot(221)
 for i = 1:1716
@@ -163,7 +162,7 @@ scatter(Hvect(1,i)',Hvect(2,i)',c)
 end
 title('Pre and Post beat');xlabel('X component (mV)');ylabel('Y component (mV)');
 %%
-
+clear;close all;
 frankFile = 'FrankLeadsBreathHold30sec-pf';
 load([frankFile,'-fts.mat']);
 figure(1);clf();plot(ts.potvals');
@@ -210,7 +209,7 @@ figure(1);subplot(211);plot(frankBeatCollection(cl1,:,1)');title('cl1');subplot(
 plot(frankBeatCollection(cl2,:,1)');title('cl2');
 
 %%
-cltouse = cl2;
+cltouse = cl1;
 f1Averaged = mean(frankBeatCollection(cltouse,:,1),1);
 f2Averaged = mean(frankBeatCollection(cltouse,:,2),1);
 f3Averaged = mean(frankBeatCollection(cltouse,:,3),1);
@@ -222,41 +221,43 @@ for i = 8:11
     f5beats(:,frankLeads(i).selfFrames(1):frankLeads(i).selfFrames(2)) = frankLeads(i).potvals;
     
 end
-figure(1);clf();plot(f5beats(:,50000:end)')
+figure('DefaultAxesFontSize',18);clf();subplot(311);plot(f5beats(1,50000:end)','r','LineWidth',2);title('Frank X lead');xlabel('Time 1/5 ms');ylabel('Voltage (mV)');
+subplot(312);plot(f5beats(2,50000:end)','g','LineWidth',2);title('Frank Y lead');xlabel('Time 1/5 ms');ylabel('Voltage (mV)');
+subplot(313);plot(f5beats(3,50000:end)','b','LineWidth',2);title('Frank Z lead');xlabel('Time 1/5 ms');ylabel('Voltage (mV)');
 
 %%
-figure(1);clf();
+figure('DefaultAxesFontSize',18);clf();
 
 subplot(311);
 
 plot(f5beats(1,50000:end)','r','LineWidth',2);
-title('X');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank X lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 subplot(312);
 
 plot(f5beats(2,50000:end)','g','LineWidth',2);
-title('Y');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank Y lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 subplot(313);
 
 plot(f5beats(3,50000:end)','b','LineWidth',2);
-title('Z');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank Z lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 
 
 %%
-figure(2);
+figure('DefaultAxesFontSize',18);
 subplot(311);
 
 plot(frankBeatCollection(cltouse,:,1)');
-title('X');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank X lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 subplot(312);
 
 plot(frankBeatCollection(cltouse,:,2)');
-title('Y');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank Y lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 subplot(313);
 
 plot(frankBeatCollection(cltouse,:,3)');
-title('Z');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
+title('Frank Z lead');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 
-figure(3);
+figure('DefaultAxesFontSize',18);
 subplot(311);
 
 plot(f1Averaged','r','LineWidth',2);
@@ -271,15 +272,47 @@ plot(f3Averaged','b','LineWidth',2);
 title('Z Averaged');xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
 
 %%
-fQRSOn = 97;
+fQRSon = 97;
 fQRSoff = 596;
 fTon = 944;
 fToff = 1550;
 frankVector = [f1Averaged;f2Averaged;f3Averaged];
 
 %%
+figure('DefaultAxesFontSize',18);hold on;
+subplot(221)
+pcshow(frankVector(:,1:fQRSon-1)','b','MarkerSize',25);
+pcshow(frankVector(:,fToff+1:end)','b','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('Pre and Post beat')
+subplot(222)
+pcshow(frankVector(:,fQRSon:fQRSoff)','r','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('QRS')
+subplot(223)
+pcshow(frankVector(:,fQRSoff+1:fTon-1)','g','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('ST segment')
+subplot(224)
+pcshow(frankVector(:,fTon:fToff)','c','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('T wave')
+%%
+figure('DefaultAxesFontSize',18);hold on;
+pcshow(frankVector(:,1:fQRSon-1)','b','MarkerSize',25);
+pcshow(frankVector(:,fToff+1:end)','b','MarkerSize',25);
+
+pcshow(frankVector(:,fQRSon:fQRSoff)','r','MarkerSize',25);
+
+pcshow(frankVector(:,fQRSoff+1:fTon-1)','g','MarkerSize',25);
+
+pcshow(frankVector(:,fTon:fToff)','c','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('Frank Vector Loop')
+
+%%
 %Frontal
-figure(5);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 c = 'b';
 subplot(221)
 for i = 1:length(frankVector)
@@ -308,8 +341,10 @@ scatter(frankVector(1,i)',frankVector(2,i)',c)
 end
 title('Pre and Post beat');xlabel('X component (mV)');ylabel('Y component (mV)');
 %%
+
+%%
 %coronal
-figure(6);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 c = 'b';
 subplot(221)
 for i = 1:length(frankVector)
@@ -338,7 +373,7 @@ scatter(frankVector(1,i)',frankVector(3,i)',c)
 end
 title('Pre and Post beat');xlabel('X component (mV)');ylabel('Z component (mV)');
 %%
-figure(7);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 c = 'b';
 subplot(221)
 for i = 1:length(frankVector)
@@ -380,7 +415,7 @@ xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component (mV)')
 %%
 
 %percordials time
-
+clear;close all;
 precordName = 'ecg12lead_';
 
 for lead = 1:6
@@ -437,15 +472,38 @@ for lead = 1:6
 
 end
 %%
-figure(1);clf();
+figure('DefaultAxesFontSize',18);clf();
 
 for lead = 1:6
     
     subplot(6,1,lead);
     plot(percordLeads(lead).aveBeat','k','LineWidth',2);
-    title(['V',num2str(lead)]);
+    title(['V',num2str(lead)]);xlabel('Time (1/5 ms)');ylabel('Voltage (mV)');
     
 end
+%%
+%using V1 and V6 to get the coronal plane
+V1V6 = [percordLeads(6).aveBeat;percordLeads(1).aveBeat];
+QRSon = 68;
+QRSoff = 555;
+Ton = 961;
+Toff = 1615;
+
+figure('DefaultAxesFontSize',18);clf();
+hold on;
+subplot(221);
+scatter(V1V6(1,1:QRSon-1),V1V6(2,1:QRSon-1),'b');
+%scatter(V1V6(1,Toff+1:end-400),V1V6(2,Toff+1:end-400),'b');
+title('Pre and Post beat');xlabel('V6 X component (mV)');ylabel('V1 Z component (mV)');
+subplot(222);
+scatter(V1V6(1,QRSon:QRSoff),V1V6(2,QRSon:QRSoff),'r');
+title('QRS');xlabel('V6 X component (mV)');ylabel('V1 Z component (mV)');
+subplot(223);
+scatter(V1V6(1,QRSoff+1:Ton-1),V1V6(2,QRSoff+1:Ton-1),'g');
+title('ST Segment');xlabel('V6 X component (mV)');ylabel('V1 Z component (mV)');
+subplot(224);
+scatter(V1V6(1,Ton:Toff),V1V6(2,Ton:Toff),'c');
+title('T wave');xlabel('V6 X component (mV)');ylabel('V1 Z component (mV)');
 
 %%
 QRSon = 125;
@@ -506,4 +564,62 @@ pcshow(Run1Vector(:,Ton:Toff)','c','MarkerSize',25);
 xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
 title('T wave')
     
+%%
+figure('DefaultAxesFontSize',18);clf();hold on;
+subplot(221)
+pcshow(Run2Vector(:,1:QRSon-1)','b','MarkerSize',25);
+pcshow(Run2Vector(:,Toff+1:end)','b','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('Pre and Post beat')
+subplot(222)
+pcshow(Run2Vector(:,QRSon:QRSoff)','r','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('QRS')
+subplot(223)
+pcshow(Run2Vector(:,QRSoff+1:Ton-1)','g','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('ST segment')
+subplot(224)
+pcshow(Run2Vector(:,Ton:Toff)','c','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('T wave')
 
+%%
+figure('DefaultAxesFontSize',18);clf();hold on;
+subplot(221)
+pcshow(Run3Vector(:,1:QRSon-1)','b','MarkerSize',25);
+pcshow(Run3Vector(:,Toff+1:end)','b','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('Pre and Post beat')
+subplot(222)
+pcshow(Run3Vector(:,QRSon:QRSoff)','r','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('QRS')
+subplot(223)
+pcshow(Run3Vector(:,QRSoff+1:Ton-1)','g','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('ST segment')
+subplot(224)
+pcshow(Run3Vector(:,Ton:Toff)','c','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('T wave')
+
+%%
+figure('DefaultAxesFontSize',18);clf();hold on;
+subplot(221)
+pcshow(Run4Vector(:,1:QRSon-1)','b','MarkerSize',25);
+pcshow(Run4Vector(:,Toff+1:end)','b','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('Pre and Post beat')
+subplot(222)
+pcshow(Run4Vector(:,QRSon:QRSoff)','r','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('QRS')
+subplot(223)
+pcshow(Run4Vector(:,QRSoff+1:Ton-1)','g','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('ST segment')
+subplot(224)
+pcshow(Run4Vector(:,Ton:Toff)','c','MarkerSize',25);
+xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
+title('T wave')
