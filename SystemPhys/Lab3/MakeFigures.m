@@ -457,8 +457,10 @@ load('aligned-sitting.mat')
 load('aligned-right.mat')
 load('aligned-lying.mat')
 load('aligned-left.mat')
-
-
+run1.potvals = run1.potvals/1000;
+run2.potvals = run2.potvals/1000;
+run3.potvals = run3.potvals/1000;
+run4.potvals = run4.potvals/1000;
 
 xNodes = [53,137];
 zNodes = [5,89];
@@ -485,7 +487,7 @@ yVectorRun4 = run4.potvals(yNodes(2),:) - run4.potvals(yNodes(1),:);
 zVectorRun4 = run4.potvals(zNodes(2),:) - run4.potvals(zNodes(1),:);
 Run4Vector = [xVectorRun4;yVectorRun4;zVectorRun4];
 
-figure(1);clf();hold on;
+figure('DefaultAxesFontSize',18);clf();hold on;
 subplot(221)
 pcshow(Run1Vector(:,1:QRSon-1)','b','MarkerSize',25);
 pcshow(Run1Vector(:,Toff+1:end)','b','MarkerSize',25);

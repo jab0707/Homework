@@ -16,6 +16,7 @@
 \usepackage[sort, numbers]{natbib}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{siunitx}
 
 %%%%%%%%%%%%Defining the margins %%%%%%%%%%%%%%%%%%%%%
 \textheight 9.in
@@ -56,12 +57,15 @@
 \begin{document}
 
 \title{Lab 3: ECG Recordings}
-\author{Jake Bergquist, u6010393, Partners: Bram Hunt, Genesis Moreno }
+\author{Jake Bergquist, u6010393, Partners: Bram Hunt, Genesis Morenorojas }
 \maketitle
 
 \section{Introduction}
 \par{}
-Body surface electrical recordings allows researchers and clinicians to assess the electrical activity of the heart. The use of electrodes to measure and display cardial electrical activity, known as an electrocardiography (ECG) has been a primary diagnostic and research tool since its invention by Dr. 
+Body surface electrical recordings allows researchers and clinicians to assess the electrical activity of the heart. The use of electrodes to measure and display cardiac electrical activity, known as an electrocardiography (ECG), has been a primary diagnostic and research tool since its invention by Nobel laureate Dr. Willhem Einthoven. During this lab we expored the use of both modern and traditional recording configurations to attain a functional understanding of ECG and vectorcardiography. By considering measurements between two electrodes, or a lead, we can assess the activity of the heart as a current dipole. We first investigated the use of the three limb leads, first developed by Einthoven. These leads form a roughly equilateral triangle around the heart with three measurement vectors, one set per pair of leads. These leads capture the frontal plane of the heart activity. In an attempt to better understand the 3D extent of the cardiac dipole we used the Frank leads, which form three orthogonal axes of measurement. Utilizing three orthogonal lead measures allows for characterization of the cardiac dipole projected onto each of these axis, and by combining the leads allows for 3D characterization. The third leadset we investigated was the precordial leads. These are six leads across the chest which all use Wilson's Central Terminal as a reference. Wilson's central terminal is made by passing each of the lim lead electrodes through a 5 K\si{\ohm} resistor and then connecting them to reference. By doing so, each of the percordial electrodes can be though of as a unipole recording. These precordial recordings are frequently used clinically as they provide detailed insight into electrical activity of different parts of the heart. Finally we used a full torso body surface potential map dataset to assess how these measurements of the heart may change when the subject changes position. Through our investigations of these lead sets we aim to understand how to interpret these data to understand the electrical activity of the heart, the hearts orientation int he chest, and possibly the viability of the cardiac dipole assumption.
+\par{}
+ECG and VECG have been used for cardiac diagnostics and research or over a century. By using the geometric relationship between the elecrodes one can construct the heart vector at any point during a heartbeat. Each lead, or electrode pair, measures the projection of th ecardiac vector onto the vector formed by that lead. By combining different leads one can reconstruct the heart vector. By plotting the trajectory of this vector through a heartbeat one gets a VECG vector loop. By analyzing different sections fo the vector loop one can assess the activity during different parts of the heartbeat.
+\par{}
 \section{Methods}
 
 %Setup of recording equipment
