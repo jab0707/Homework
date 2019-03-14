@@ -488,20 +488,33 @@ Run4Vector = [xVectorRun4;yVectorRun4;zVectorRun4];
 figure(1);clf();hold on;
 subplot(221)
 pcshow(Run1Vector(:,1:QRSon-1)','b','MarkerSize',25);
-pcshow(Run1Vector(:,Toff+1:end)','b','MarkerSize',25);
-xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
-title('Pre and Post beat')
 subplot(222)
 pcshow(Run1Vector(:,QRSon:QRSoff)','r','MarkerSize',25);
-xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
-title('QRS')
 subplot(223)
 pcshow(Run1Vector(:,QRSoff+1:Ton-1)','g','MarkerSize',25);
-xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
-title('ST segment')
-subplot(224)
+subplot(223)
 pcshow(Run1Vector(:,Ton:Toff)','c','MarkerSize',25);
-xlabel('X component (mV)');ylabel('Y component (mV)');zlabel('Z component(mV)');
-title('T wave')
-    
+    subplot(222);
+    hold on;
+    c = 'r';
+elseif i ==fQRSoff+1 
+    title('QRS');xlabel('Y component (mV)');ylabel('Z component (mV)');
+    subplot(223);
+    hold on;
+    c = 'g';
+elseif i == fTon
+    title('ST segment');xlabel('Y component (mV)');ylabel('Z component (mV)');
+    subplot(224);
+    hold on;
+    c = 'c';
+elseif i == fToff+1
+    title('T wave');xlabel('Y component (mV)');ylabel('Z component (mV)');
+    subplot(221);
+    hold on;
+    c = 'b';
+end
+scatter(frankVector(2,i)',frankVector(3,i)',c)
+end
+title('Pre and Post beat');xlabel('Y component (mV)');ylabel('Z component (mV)');
+
 
