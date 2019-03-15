@@ -91,11 +91,14 @@ The precordial leads were placed as is standard: V1 between rib 4 and 5 on the l
 All signals recorded were exported as .csv formatted documents. The CSVs were then imported to matlab and saved in a structure format .mat file. PFEIFER, a preprocessing framework for electrograms, was used to filter, baseline correct, fiducilize, auto fiducilize, and time align the signals recorded.\cite{MacLeod2018_p} Briefly, the raw signals for each intervention were converted by a built in conversion tool, which organizes the potential values recorded into a format PFEIFER requires. Once in a compatible format the signals were imported and  a denoising filter was applied to remove 60 cycle Hz noise.  The first heartbeat from the signal was fiducilized manually by a set of isoelectric points. These isoelectric points were then used to baseline correct the entire recording. Additionally a beat specific baseline correction was applied to the individual beat. The user then fiducilizes the first beat by marking the QRS complex, T wave, and T peak. The manually determined fiducials were then used by PFEIFER to automatically detect any remaining heart beats in the input signal and apply the same beat specific baseline correction and fiducilization. The output are time alligned, fiducilized beats with calculated activation, and recovery times, signal integrals, and beat fiducials.
 
 \par{}
-After PFEIFER, the processed beats for each recording site were signal averaged. Because the beats were already time alligned they could easily be collected for each lead recording and averaged over 5 to 20 beats. These signal averaged beats were used for the vector cardiographs.
-
-\subsection{Body Surface Potentials}
+After PFEIFER, the processed beats for each recording site were signal averaged. Because the beats were already time aligned they could easily be collected for each lead recording and averaged over 5 to 20 beats. These signal averaged beats were used for the vector cardiographs. In each case the X components is considered from the left to the right shoulder, the y axis from the top of the chest to the bottom, and the Z from the back to the chest.
+In the case of the Frank Lead set the X, Y, and Z components of the vector cardiographs are already defined by the X, Y, and Z lead measurements. In the case of the Precordial recordings to assess the X-Z plane (coronal view) we used V1 as the Z axis and V6 as the X axis. Int he case of the body surface map we chose three orthogonal measurements points to create a lead set like the Frank lead set. The X axis/vector was defined by electrode 53 as the negative terminal and electrode 137 as the positive. The Y axis was defined with electrode 85 as the negative and electrode 96 as the positive. The Z axis was defined with electrode 5 as the negative and electrode 89 as the positive.
 \par{}
+In the case of the limb leads, assessing the X and Y components of the heart vector was not as straight forward. Because the Limb leads are in a plane there is not the ability to assess the Z component of the heart vector. In order to calculate the X and Y components one must consider how the leads are arranged. Lead I is alligned with the X direction in our coordinate system, thus the X component of the heart vector is composed entirely of lead I. We can calculate the Y component from lead I and lead II as the Y component is projected partially onto lead II but not lead I. Assuming that the triangle formed by leads I, II, and III is equilateral, we can derive the relationship that the Y component of the Heart vector which projects onto lead II is equal to $Hy = (I - 2*II)/\sqrt{3}$. 
 
+\subsection{Vector Cardiographs}
+\par{}
+For each lead set we constructed vector cardiographs. These show the trajectory of the heart vector through a heart beat. Using the PFEIFER fiducials we were able to separate the pre and post beat isoelectric periods, the QRS complex, the ST segment, and the T wave into separate vectorgraphs. In the case of the Limb leads only the frontal X Y plane can be shown. In the case of the Frank lead set the frontal (X-Y), coronal (X-Z), and sagital (Y-Z) planes were shown. In the case of the precordial leads the coronal plane made by using V1 as the Z component and V6 as the X component. For the body surface maps a 3D plot was presented for each vector graph using all three components of the vector for each recording position.
 
 \section{Results}
 
@@ -103,10 +106,156 @@ After PFEIFER, the processed beats for each recording site were signal averaged.
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/.png}
+	\includegraphics[width = .95\textwidth]{Figures/LimLeads1.png}
 	\caption{ }
-	\label{fig:FSCurve}
+	\label{fig:Limb1}
 \end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/LimLeads2.png}
+	\caption{ }
+	\label{fig:Limb2}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/LimLeads3.png}
+	\caption{ }
+	\label{fig:Limb3}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/LimLeads4.png}
+	\caption{ }
+	\label{fig:Limb4}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/LimLeads5.png}
+	\caption{ }
+	\label{fig:Limb5}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads1.png}
+	\caption{ }
+	\label{fig:Frank1}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads2.png}
+	\caption{ }
+	\label{fig:Frank2}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads3.png}
+	\caption{ }
+	\label{fig:Frank3}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_3d.png}
+	\caption{ }
+	\label{fig:Frank3D}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_3d_split.png}
+	\caption{ }
+	\label{fig:Frank3D_split}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_xy.png}
+	\caption{ }
+	\label{fig:Frank_xy}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_xz.png}
+	\caption{ }
+	\label{fig:Frank_xz}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_yz.png}
+	\caption{ }
+	\label{fig:Frank_yz}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/Precordial_timeallign_sigaveraged.png}
+	\caption{ }
+	\label{fig:PrecordSig}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/Precordial_V1V6.png}
+	\caption{ }
+	\label{fig:PrecordVect}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/BSP_run1_3d.png}
+	\caption{ }
+	\label{fig:BSP1}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/BSP_run2_3d.png}
+	\caption{ }
+	\label{fig:BSP2}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/BSP_run3_3d.png}
+	\caption{ }
+	\label{fig:BSP3}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .95\textwidth]{Figures/BSP_run4_3d.png}
+	\caption{ }
+	\label{fig:BSP4}
+\end{figure}
+
+
 
 \section{Discussion}
 
