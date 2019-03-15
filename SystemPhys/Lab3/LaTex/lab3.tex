@@ -101,12 +101,19 @@ In the case of the limb leads, assessing the X and Y components of the heart vec
 For each lead set we constructed vector cardiographs. These show the trajectory of the heart vector through a heart beat. Using the PFEIFER fiducials we were able to separate the pre and post beat isoelectric periods, the QRS complex, the ST segment, and the T wave into separate vectorgraphs. In the case of the Limb leads only the frontal X Y plane can be shown. In the case of the Frank lead set the frontal (X-Y), coronal (X-Z), and sagital (Y-Z) planes were shown. In the case of the precordial leads the coronal plane made by using V1 as the Z component and V6 as the X component. For the body surface maps a 3D plot was presented for each vector graph using all three components of the vector for each recording position.
 
 \section{Results}
-
+\par{}
+For each lead set the results are presented as follows. For the Limb lead set a selection of heart beats recorded from each beat is shown after filtering and baseline correction. Note the differences in signal morphology between the leads as well as the odd disturbance in heartrate shown in Figure~\ref{fig:Limb1}. Next several beats for each lead are show in Figure~\ref{fig:Limb2}, followed by the signal averaged beat in Figure~\ref{fig:Limb3}. Note how clean the signals become after averaging. Figure~\ref{fig:Limb4} and Figure~\ref{fig:Limb5} show the VCGs for the lime leads. Figure~\ref{fig:Limb4} illustrates how a VCG is made, but using each computed or measured X and Y component of the heart vector at each time instance and plotting the trajectory of these vectors in the spatial domain. 
+\par{}
+The same process is repeated for the Frank leads with the exception that, given that the frank leads provides three axes of measurement, a 3D plot (Figures~\ref{fig:Frank3D}\ref{fig:Frank3D_split}) and each orthogonal planar projection (Figure~\ref{fig:Frank_xy} Figure~\ref{fig:Frank_xz} Figure~\ref{fig:Frank_yz}) can be plotted.
+\par{}
+For the precordial leads after the processing pipeline each beat is already time aligned due to the nature of the fiducilization. These signal averaged and aligned beats are shown in Figure~\ref{fig:PrecordSig}. Using V1 and V6 a coronal plane VCG can be constructed as is shown in Figure~\ref{fig:PrecordVect}.
+\par{}
+In the case of the body surface potential we chose to use a leadset that mimicked the Frank lead set, with three orthogonal basis vectors. The resulting lead signals were then used to construct the 3D VCGs seen in Figures~\ref{fig:BSP1}, Figure~\ref{fig:BSP2}, Figure~\ref{fig:BSP3}, and Figure~\ref{fig:BSP4}. By exploring these 3D VCGs one can see the planar projections onto all three basis blanes (forntal, coronal, and sagital) as well as explore various other views of the trajectories.
 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/LimLeads1.png}
+	\includegraphics[width = .8\textwidth]{Figures/LimLeads1.png}
 	\caption{Baseline Corrected Limb lead recordings.}
 	\label{fig:Limb1}
 \end{figure}
@@ -114,7 +121,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/LimLeads2.png}
+	\includegraphics[width = .8\textwidth]{Figures/LimLeads2.png}
 	\caption{Limb Lead autofiducilized beats.}
 	\label{fig:Limb2}
 \end{figure}
@@ -122,7 +129,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/LimLeads3.png}
+	\includegraphics[width = .8\textwidth]{Figures/LimLeads3.png}
 	\caption{Limb lead signal averaged beats.}
 	\label{fig:Limb3}
 \end{figure}
@@ -130,7 +137,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/LimLeads4.png}
+	\includegraphics[width = .8\textwidth]{Figures/LimLeads4.png}
 	\caption{Full Vectrocardiograph for the limb leads H vector. Plotted in circles are the trajectories and with arrows are thr vectors. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue. }
 	\label{fig:Limb4}
 \end{figure}
@@ -138,7 +145,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/LimLeads5.png}
+	\includegraphics[width = .8\textwidth]{Figures/LimLeads5.png}
 	\caption{Separated vectorcardiographs. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue. }
 	\label{fig:Limb5}
 \end{figure}
@@ -146,7 +153,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads1.png}
+	\includegraphics[width = .8\textwidth]{Figures/FrankLeads1.png}
 	\caption{ Baseline corrected frank leads. }
 	\label{fig:Frank1}
 \end{figure}
@@ -154,7 +161,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads2.png}
+	\includegraphics[width = .8\textwidth]{Figures/FrankLeads2.png}
 	\caption{ Several autofiducilized beats from the frank leads.}
 	\label{fig:Frank2}
 \end{figure}
@@ -162,7 +169,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads3.png}
+	\includegraphics[width = .8\textwidth]{Figures/FrankLeads3.png}
 	\caption{Signal averaged frank leads.}
 	\label{fig:Frank3}
 \end{figure}
@@ -170,7 +177,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_3d.png}
+	\includegraphics[width = .7\textwidth]{Figures/FrankLeads_3d.png}
 	\caption{Frank lead vector cardiograph in 3D. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:Frank3D}
 \end{figure}
@@ -178,7 +185,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_3d_split.png}
+	\includegraphics[width = .75\textwidth]{Figures/FrankLeads_3d_split.png}
 	\caption{Frank lead vector cardiograph in 3D split by segment. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:Frank3D_split}
 \end{figure}
@@ -186,7 +193,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_xy.png}
+	\includegraphics[width = .75\textwidth]{Figures/FrankLeads_xy.png}
 	\caption{Frank lead vector cardiograph in the X-Y frontal plane. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue. }
 	\label{fig:Frank_xy}
 \end{figure}
@@ -194,7 +201,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_xz.png}
+	\includegraphics[width = .75\textwidth]{Figures/FrankLeads_xz.png}
 	\caption{ Frank lead vector cardiograph in the X-Z coronal plane. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:Frank_xz}
 \end{figure}
@@ -202,7 +209,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/FrankLeads_yz.png}
+	\includegraphics[width = .75\textwidth]{Figures/FrankLeads_yz.png}
 	\caption{ Frank lead vector cardiograph in the Y-Z sagital plane. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:Frank_yz}
 \end{figure}
@@ -210,7 +217,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/Precordial_timeallign_sigaveraged.png}
+	\includegraphics[height = .95\textheight]{Figures/Precordial_timeallign_sigaveraged.png}
 	\caption{Signal averaged, filtered, baseline corrected, time aligned precordial leads.}
 	\label{fig:PrecordSig}
 \end{figure}
@@ -218,7 +225,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/Precordial_V1V6.png}
+	\includegraphics[width = .75\textwidth]{Figures/Precordial_V1V6.png}
 	\caption{Precordial VCG using V6 and V1. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:PrecordVect}
 \end{figure}
@@ -226,7 +233,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/BSP_run1_3d.png}
+	\includegraphics[width = .75\textwidth]{Figures/BSP_run1_3d.png}
 	\caption{Body Surface potential VCG in 3D for run 1, lying down. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:BSP1}
 \end{figure}
@@ -234,7 +241,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/BSP_run2_3d.png}
+	\includegraphics[width = .75\textwidth]{Figures/BSP_run2_3d.png}
 	\caption{Body Surface potential VCG in 3D for run 2, sitting up. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue.}
 	\label{fig:BSP2}
 \end{figure}
@@ -242,7 +249,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/BSP_run3_3d.png}
+	\includegraphics[width = .75\textwidth]{Figures/BSP_run3_3d.png}
 	\caption{Body Surface potential VCG in 3D for run 3, lying on the left. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue. }
 	\label{fig:BSP3}
 \end{figure}
@@ -250,7 +257,7 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \begin{figure}[H]
 	
 	\centering
-	\includegraphics[width = .95\textwidth]{Figures/BSP_run4_3d.png}
+	\includegraphics[width = .75\textwidth]{Figures/BSP_run4_3d.png}
 	\caption{Body Surface potential VCG in 3D for run 4, lying on the right. QRS in Red, ST segment in green, T wave in cyan, isoelectric in blue. }
 	\label{fig:BSP4}
 \end{figure}
@@ -261,6 +268,16 @@ For each lead set we constructed vector cardiographs. These show the trajectory 
 \par{}
 In this lab we sought to investigate the use of various lead sets for assessing ECGs and VCGs. The lead sets we considered were the Limb leads, the Frank orthogonal lead set, and the Precordial lead set with Wilson central terminal as reference. From each of these sets and via our signal processing pipeline we were able to attain high quality ECG signals. 
 
+\par{}
+What is interesting to note is that, when comparing the different lead sets, while all were able to produce what appear to be reasonable vector trajectories (large changes during the QRS and T wave, minimal changes in the isoelectric periods and the ST segment) the comparison between lead sets shows vastly different VCGs. Even when comparing similar planar projections such as a comparison between Figure~\ref{fig:Limb5}, and  Figure~\ref{fig:Frank_xy}, both of which show frontal plane projections of the heart vector the actual trajectories and predominant angles with respect to the X or Y axes vary. In both cases the angle of the QRS trajectory is similar but the shape is widely different. The shapes of the ST and T wave trajectories however are strikingly similar. Thus the differences seen in the QRS trajectories likely result from the lead placement differences between these two sets.
+\par{}
+When making another such lead set comparison, this time between the precordial V6-V1 VCG (Figure~\ref{fig:PrecordVect}) and the Frank coronal plane (Figure~\ref{fig:Frank_xz}) again there are major differences in the trajectories. In both cases the general shapes are similar for the QRS and T wave (inverted for the T wave but this may be due to an axis inversion) but the specific path is not the same.
+
+\par{}
+In the body surface mapping data we see that the main trajectory differences arise in the QRS in the different positions. Between all cases the ST segment and the isoelectric periods did not change much, and given the scale of these trajectories they remained mostly near zero. For the T wave and QRS however changes can be seen in particular betwen lying flat (Figure~\ref{fig:BSP1}) and lying on either side (Figure~\ref{fig:BSp3} Figure~\ref{fig:BSp4}). In these cases the QRS trajectory changes in the 3D extent indicating a shift in the heart's position during these recordings.
+
+\par{}
+Overall in these results we see that the lead sets allow us to get some idea of the electric activity of the heart, but based on the differences between the different lead set projections, it seems that there is some inconsistency. This may be explained by looking at one of the base assumptions of these VCGs, that the heart can be represented as a simple current dipole source. If this were the case we would not expect to see such complex changes in the VCGs across lead sets that reference the same plane of projection. In this way we can generally assume that the simple dipole source model may be incomplete. That being said, such a model can still be useful as it does seem to hold generally or at some level. We are able to deconstruct the limb leads and get a major dipole vector for the heart. It may just be the case that this vector is an oversimplification of the actual heart activity.
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
 %\bibliography{C:/Users/Jake/Documents/library}
