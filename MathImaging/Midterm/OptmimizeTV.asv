@@ -1,0 +1,63 @@
+function [Iest, SigAlphas, err, energy] = OptmimizeTV(Truth,I0,mx, s1,a1, TVIter, OptIter, epsd,epsp,epsas)
+%OPTMIMIZETV Summary of this function goes here
+%   Detailed explanation goes here
+
+SigAlphas = zeros(2,3+OptIter);
+energy = zeros(1,3+OptIter);
+s = s1;
+a = a1;
+
+%
+[Iest,~,~] = TVPrimalDualInpaint(I0,mx, s,a, TVIter, epsd,epsp);
+SigAlphas(1,1) = s;
+SigAlphas(2,1) = a;
+maskedD = mx.*Iest;
+maskedI = mx.*Truth;
+energy(1) = sum(sum(abs(maskedD-maskedI)));
+
+s = s + epsas;
+a = a + epsas;
+%
+[Iest,~,~] = TVPrimalDualInpaint(I0,mx, s,a, TVIter, epsd,epsp);
+SigAlphas(1,2) = s;
+SigAlphas(2,2) = a;
+maskedD = mx.*Iest;
+maskedI = mx.*Truth;
+energy(2) = sum(sum(abs(maskedD-maskedI)));
+
+s = s1;
+a = a1 + epsas;
+%
+[Iest,~,~] = TVPrimalDualInpaint(I0,mx, s,a, TVIter, epsd,epsp);
+SigAlphas(1,3) = s;
+SigAlphas(2,3) = a;
+maskedD = mx.*Iest;
+maskedI = mx.*Truth;
+energy(3) = sum(sum(abs(maskedD-maskedI)));
+
+currentTriangle = 1:3;
+[~,idx] = max(energy(currentTriangle));
+otherInds = setdiff(currentTriangle,currentTriangle(idx));
+newDir = sum(SigAlphas(:,otherInds)-SigAlphas(:,currentTriangle(idx)),2)/2;
+currentTriangle = [otherInds,4];
+
+for i = 1:OptIter
+    
+    newSigAlpha = SigAlphas(:,currentTriangle(idx))+newDir + (newDir/norm(newDir))*eps + [rand()*.1;rand()*.1];
+    SigAlphas(:,i+3) = newSigAlpha;
+    
+    [Iest,~,~] = TVPrimalDualInpaint(I0,mx, newSigAlpha(1),newSigAlpha(2), TVIter, epsd,epsp);
+    maskedD = mx.*Iest;
+    energy(i+3) = sum(sum(abs(maskedD-maskedI)));
+    
+    [~,idx] = max(energy(currentTriangle));
+    otherInds = setdiff(currentTriangle,currentTriangle(idx));
+    newDir = sum(SigAlphas(:,otherInds)-SigAlphas(:,currentTriangle(idx)),2)/2;
+    currentTriangle = [otherInds,i+4];
+    
+end
+
+
+
+end
+
