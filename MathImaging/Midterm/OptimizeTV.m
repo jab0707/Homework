@@ -13,7 +13,7 @@ a = a1;
 %
 tic
 %Initial guess
-[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a, TVIter, epsd,epsp);
+[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a*1000, TVIter, epsd,epsp);
 fprintf('Initilization 1/3 done. ');toc
 Is(:,:,1) = Iest;
 SigAlphas(1,1) = s;
@@ -26,7 +26,7 @@ s = s + epsas;
 %
 %Guess 2
 tic
-[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a, TVIter, epsd,epsp);
+[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a*1000, TVIter, epsd,epsp);
 fprintf('Initilization 2/3 done. ');toc
 Is(:,:,2) = Iest;
 SigAlphas(1,2) = s;
@@ -36,11 +36,11 @@ maskedI = mx.*Truth;
 energy(2) = sum(sum(abs(maskedD-maskedI)));
 
 s = s1 + epsas/2;
-a = a1 + sin(pi/3)/epsas;
+a = a1 + sin(pi/3)*epsas;
 %
 %Guess 3
 tic
-[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a, TVIter, epsd,epsp);
+[Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), s,a*1000, TVIter, epsd,epsp);
 fprintf('Initilization 3/3 done. ');toc
 Is(:,:,3) = Iest;
 SigAlphas(1,3) = s;
@@ -63,7 +63,7 @@ for i = 1:OptIter
     SigAlphas(:,i+3) = newSigAlpha;
     currentTriangle = [otherInds,i+3];
     
-    [Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), newSigAlpha(1),newSigAlpha(2), TVIter, epsd,epsp);
+    [Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), newSigAlpha(1),newSigAlpha(2)*1000, TVIter, epsd,epsp);
     Is(:,:,i+3) = Iest;
     maskedD = mx.*Iest;
     energy(i+3) = sum(sum(abs(maskedD-maskedI)));
