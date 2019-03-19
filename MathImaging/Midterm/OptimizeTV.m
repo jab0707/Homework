@@ -54,7 +54,7 @@ currentTriangle = [otherInds,4];
 
 for i = 1:OptIter
     tic
-    newSigAlpha = SigAlphas(:,currentTriangle(idx)) + (newDir/norm(newDir))*eps + [rand()*.1;rand()*.1];
+    newSigAlpha = SigAlphas(:,currentTriangle(idx))+newDir + (newDir/norm(newDir))*eps + [rand()*.1;rand()*.1];
     SigAlphas(:,i+3) = newSigAlpha;
     
     [Iest,~,~] = TVPrimalDualInpaint(I0,abs(mx-1), newSigAlpha(1),newSigAlpha(2), TVIter, epsd,epsp);
