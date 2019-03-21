@@ -13,6 +13,7 @@ Itv = zeros(size(I0));
  De = zeros(1,Niter);
  Pe = zeros(1,Niter);
     for k=1:Niter
+    
     %Calculate the gradient with respect to w
 
     [gdwx,gdwy] = grad(divw);
@@ -30,7 +31,9 @@ Itv = zeros(size(I0));
     
     divw = div(wx,wy);
     
+    
     Itv = Itv - epsp*((mx.*(Itv-I0))/sigma - alpha*divw);
+    
     
     
     %Calculate the dual energy
@@ -42,9 +45,12 @@ Itv = zeros(size(I0));
     [Ix,Iy] = grad(Itv);
     
     Pe(k) = sum(sum((I0-Itv).^2/(2*sigma) + sqrt(Ix.*Ix+Iy.*Iy)));
+    if max(abs(Itv(:))) > 1e150
+        Itv = Itv/10;
+    end
+    
     
     end
-
     function divf = div(ux,uy)
     divf = (ux - circshift(ux,[1,0])) + (uy - circshift(uy,[0,1]));
 

@@ -1,7 +1,7 @@
 
 function [Iest, SigAlphas,Is, energy] = OptimizeTV(Truth,I0,mx, s1,a1, TVIter, OptIter, epsd,epsp,epsas,epsdecay)
-%OPTMIMIZETV Summary of this function goes here
-%   Detailed explanation goes here
+%note to self: Do a better job at commenting code/spend/allocate more time
+%to do so rather than doing it last minute.
 
 Is = zeros(size(I0,1),size(I0,2),OptIter +3);
 mx = abs(mx);
@@ -67,6 +67,9 @@ for i = 1:OptIter
     Is(:,:,i+3) = Iest;
     maskedD = mx.*Iest;
     energy(i+3) = sum(sum(abs(maskedD-maskedI)));
+    if isnan(energy(i+3))
+        error('Nan Energy');
+    end
     epsas = epsas - epsdecay;
     fprintf(['For iteration ',num2str(i),' the ']);
     toc
