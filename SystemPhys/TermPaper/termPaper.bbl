@@ -21,11 +21,10 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{Zenger2019}
-B.~Zenger, W.~Good, R.~MacLeod, J.~Tate, V.~Sharma, and J.~Bergquist,
-  ``{Electrocardiographic Comparison of Dobutamine and Bruce Cardiac Stress
-  Testing With High Resolution Mapping in Experimental Models},'' \emph{2018
-  Computing in Cardiology Conference (CinC)}, vol.~45, pp. 2--5, 2019.
+\bibitem{Beleslin1994}
+B.~D. Beleslin, M.~Ostojic, and J.~Stepanovic, ``{Stress Echocardiography in
+  the Detection of Myocardial Ischemia},'' \emph{Circulation}, vol.~90, no.~3,
+  pp. 1168--1176, 1994.
 
 \bibitem{Burton2018}
 \BIBentryALTinterwordspacing
@@ -35,5 +34,11 @@ B.~M. Burton, K.~K. Aras, W.~W. Good, J.~D. Tate, B.~Zenger, and R.~S. MacLeod,
   Electrocardiology}, vol.~51, no.~4, pp. 725--733, 2018. [Online]. Available:
   \url{https://doi.org/10.1016/j.jelectrocard.2018.05.005}
 \BIBentrySTDinterwordspacing
+
+\bibitem{Zenger2019}
+B.~Zenger, W.~Good, R.~MacLeod, J.~Tate, V.~Sharma, and J.~Bergquist,
+  ``{Electrocardiographic Comparison of Dobutamine and Bruce Cardiac Stress
+  Testing With High Resolution Mapping in Experimental Models},'' \emph{2018
+  Computing in Cardiology Conference (CinC)}, vol.~45, pp. 2--5, 2019.
 
 \end{thebibliography}
