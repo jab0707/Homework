@@ -53,79 +53,79 @@
 
 \begin{document}
 
-\title{Differences in Chemical vs Exercise Induced Ischemia: Implications for Development of Ischemic Models }
+\title{Differences in Pharmaceutical vs Exercise Induced Ischemia: Implications for Development of Ischemic Models }
 
 \author{Jake Bergquist, u6010393}
 \maketitle
 
 \section{Introduction}
 
--Coronary Artery Disease affects (large number) annually
+%-Coronary Artery Disease affects (large number) annually
+The detection of cardiac ischemia has been a topic of active research for decades as cardiac ischemia is a predictor of several potentially fatal heart conditions such as coronary artery disease, coronary artery dissection and others.\cite{BLZ:Saf2018,BLZ:Jes2013,BLZ:Noe2017,BLZ:Jes2012} Given the commonality of ischemia between many different heart conditions, its detection and diagnosis is a high impact area of medical research. Cardiac ischemia occures when the supply of blood to a region of the heart is outpaced by the demand for nutrients such as oxygen. This can occur when a coronary artery become blocked partially or fully, or when some other change in flow occurs, or when the rate of metabolism increases past the ability of the coronary arteries to supply sufficient blood. The resulting lack of oxygen to the cardiac tissue leads the cardiomyocytes to become ischemic. If the ischemia does not presist its effects on the heart are reversible, thus it is critically important to diagnose and treat the ischemia quickly. The most predominant feature of ischemia that can be detected with non invasive methodology is changes in the ST segment of the ECG.\cite{RSM:Jan86a} When cardiomyocytes become ischemic there is a decrease in membrane voltage due to  missmanagement of ions within the cell. This results in a local elevation of the potential which is reflected primarily during the plateau phase of the myocardial action potential, which corresponds tot he ST segment of the ECG. 
+%-At currently defined clinically significant levels it causes myocardial ischemia, and eventual infarction
 
--At currently defined clinically significant levels it causes myocardial ischemia, and eventual infarction
+%-Sub clinical levels of disease can present as ischemia seen in routine exercise stress tests, but not always
 
--Sub clinical levels of disease can present as ischemia seen in routine exercise stress tests, but not always
+%-theoretically during such stress tests ischemia is present, but it is not always detectable
 
--theoretically during such stress tests ischemia is present, but it is not always detectable
+%-Stress tests are done either mechanically (running on a treadmill) or chemically (a stimulant), and they are treated the same, but it has been shown that there are differences in the physiological response.\cite{Beleslin1994} Additionally this work shows differences in sensitivity and specificity of these methods.
 
--Stress tests are done either mechanically (running on a treadmill) or chemically (a stimulant), and they are treated the same, but it has been shown that there are differences in the physiological response.\cite{Beleslin1994} Additionally this work shows differences in sensitivity and specificity of these methods.
+%-An understanding of how ischemia develops under conditions of subclinical coronary artery disease during cardiac stress tests would improve the understanding of the effects on the body and improve our ability to detect it during such stress tests in order to diagnose pathologies such as sub clinical coronary artery disease
 
--An understanding of how ischemia develops under conditions of subclinical coronary artery disease during cardiac stress tests would improve the understanding of the effects on the body and improve our ability to detect it during such stress tests in order to diagnose pathologies such as sub clinical coronary artery disease
+%-computational Modeling approaches for cardiac ischemia have developed quickly in the last decade and can be used to improve our understanding of how various ischemia patterns present electrically
 
--computational Modeling approaches for cardiac ischemia have developed quickly in the last decade and can be used to improve our understanding of how various ischemia patterns present electrically
-
--By combining the modeling approaches with our understanding of how these different types of stress tests induce different ischemia we can better formulate models for understanding and diagnosing such ischemia
+%-By combining the modeling approaches with our understanding of how these different types of stress tests induce different ischemia we can better formulate models for understanding and diagnosing such ischemia
 
 \section{Background}
 
--Introduction to the structure and function of coronary vasculature
+%-Introduction to the structure and function of coronary vasculature
 
--Discuss aberrations present in coronary vascular disease (plaques, hardening) and how these affect cardiac perfusion 
+%-Discuss aberrations present in coronary vascular disease (plaques, hardening) and how these affect cardiac perfusion 
 
--Introduce how clinical stress tests are conducted and the difference between chemical and physical stress tests
+%-Introduce how clinical stress tests are conducted and the difference between chemical and physical stress tests
 
--Segment about ecgi in reference to stress tests
+%-Segment about ecgi in reference to stress tests
 
--Introduce the concepts of computational modeling of ischemia on a whole heart scale
+%-Introduce the concepts of computational modeling of ischemia on a whole heart scale
 
 
 \section{Methods}
-Paper 1:\cite{Beleslin1994}
--Human patients identified to have significant coronary artery disease and accompanying ischemia via invasive methods were subjected to ischemic stress tests. Physiological differences between Bruce and chemical stress tests as well as a difference in specificity and sensitivity and overall accuracy were assessed. 
+%Paper 1:\cite{Beleslin1994}
+%-Human patients identified to have significant coronary artery disease and accompanying ischemia via invasive methods were subjected to ischemic stress tests. Physiological differences between Bruce and chemical stress tests as well as a difference in specificity and sensitivity and overall accuracy were assessed. 
 
--Limitations: No in depth analysis of the electrical signals from these patients. Analysis of the ischemia created was limited. Was performed in human subjects therefore no in depth dissection or measurement of the ischemia at the source could be performed (ie with direct recording electrodes). Study did not attempt to explain differences in response to different stress test stressors.
+%-Limitations: No in depth analysis of the electrical signals from these patients. Analysis of the ischemia created was limited. Was performed in human subjects therefore no in depth dissection or measurement of the ischemia at the source could be performed (ie with direct recording electrodes). Study did not attempt to explain differences in response to different stress test stressors.
 
 
 
-Paper 2:\cite{Burton2018}
+%Paper 2:\cite{Burton2018}
 
--Formulates and ischemic model based on in situ large animal induced ischemic events where ischemia is monitored by intramural and epicardial electrical recordings.
+%-Formulates and ischemic model based on in situ large animal induced ischemic events where ischemia is monitored by intramural and epicardial electrical recordings.
 
--Utilizes a passive bidomain formulation to solve for the extracellular potentials throughout the heart given prescribed transmembrane voltages within the measured ischemic zone utilizing a finite element solution. 
+%-Utilizes a passive bidomain formulation to solve for the extracellular potentials throughout the heart given prescribed transmembrane voltages within the measured ischemic zone utilizing a finite element solution. 
 
--Limitations: Utilizes data from one kind of ischemic stress not representative of an actual stress test. Border zone surrounding the ischemic zone is characterized by a uniform dual exponential decay of trans membrane potential. Comparison to measured epicardial potentials shows partial but not complete matching.
+%-Limitations: Utilizes data from one kind of ischemic stress not representative of an actual stress test. Border zone surrounding the ischemic zone is characterized by a uniform dual exponential decay of trans membrane potential. Comparison to measured epicardial potentials shows partial but not complete matching.
 
 
 \section{Results}
-Paper 1:
--The three different stress tests used (exercise, dobutamine, and dipyridamole) showed variation in the physiological parameters measured as well as a difference in sensitivity and specificity to detecting ischemia.
+%Paper 1:
+%-The three different stress tests used (exercise, dobutamine, and dipyridamole) showed variation in the physiological parameters measured as well as a difference in sensitivity and specificity to detecting ischemia.
 
--paper concludes that despite these differences chemical stressors can serve in place of exercise stress tests in patients who are unwilling/unable to perform the standard Bruce exercise stress test.
+%-paper concludes that despite these differences chemical stressors can serve in place of exercise stress tests in patients who are unwilling/unable to perform the standard Bruce exercise stress test.
 
-Paper 2:
+%Paper 2:
 
--was able to recapitulate ischemic extracellular potentials on the epicardium using modeled ischemic transmembrane sources. Demonstrated that the passive bidomain can be used to model ischemia within the heart.
+%-was able to recapitulate ischemic extracellular potentials on the epicardium using modeled ischemic transmembrane sources. Demonstrated that the passive bidomain can be used to model ischemia within the heart.
 
 
 \section{Discussion}
 
--While paper 1 concludes that the stress tests examined are all adequate for detecting ischemia, there are clear differences in the pysiological response. This implies a difference in the ischemia induced. This idea of different ischemia produced by different stress tests is supported by other studies.\cite{Zenger2019}
+%-While paper 1 concludes that the stress tests examined are all adequate for detecting ischemia, there are clear differences in the pysiological response. This implies a difference in the ischemia induced. This idea of different ischemia produced by different stress tests is supported by other studies.\cite{Zenger2019}
 
--Paper 1 highlights the need to further investigate these differences. By applying the method of paper 2 we may gain a deeper understanding of the ischemia that developed. As a consequence of this proposed integration the findings may inform clinicians on how better to interpret the results of the different stress tests, leading to more accurate and effective diagnosis of cardiac ischemia.
+%-Paper 1 highlights the need to further investigate these differences. By applying the method of paper 2 we may gain a deeper understanding of the ischemia that developed. As a consequence of this proposed integration the findings may inform clinicians on how better to interpret the results of the different stress tests, leading to more accurate and effective diagnosis of cardiac ischemia.
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
-\bibliography{C:/Users/Jake/Documents/library}
+\bibliography{library,biglit,blz}
 \bibliographystyle{IEEEtran}
 
 

@@ -21,24 +21,48 @@
 \providecommand{\BIBdecl}{\relax}
 \BIBdecl
 
-\bibitem{Beleslin1994}
-B.~D. Beleslin, M.~Ostojic, and J.~Stepanovic, ``{Stress Echocardiography in
-  the Detection of Myocardial Ischemia},'' \emph{Circulation}, vol.~90, no.~3,
-  pp. 1168--1176, 1994.
-
-\bibitem{Burton2018}
+\bibitem{BLZ:Saf2018}
 \BIBentryALTinterwordspacing
-B.~M. Burton, K.~K. Aras, W.~W. Good, J.~D. Tate, B.~Zenger, and R.~S. MacLeod,
-  ``{Image-based modeling of acute myocardial ischemia using experimentally
-  derived ischemic zone source representations},'' \emph{Journal of
-  Electrocardiology}, vol.~51, no.~4, pp. 725--733, 2018. [Online]. Available:
-  \url{https://doi.org/10.1016/j.jelectrocard.2018.05.005}
+B.~Safdar, P.~Ong, and P.~G. Camici, ``{Identifying Myocardial Ischemia due to
+  Coronary Microvascular Dysfunction in the Emergency Department: Introducing a
+  New Paradigm in Acute Chest Pain Evaluation},'' \emph{Clinical Therapeutics},
+  pp. 1--11, 2018. [Online]. Available:
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0149291818304612}
 \BIBentrySTDinterwordspacing
 
-\bibitem{Zenger2019}
-B.~Zenger, W.~Good, R.~MacLeod, J.~Tate, V.~Sharma, and J.~Bergquist,
-  ``{Electrocardiographic Comparison of Dobutamine and Bruce Cardiac Stress
-  Testing With High Resolution Mapping in Experimental Models},'' \emph{2018
-  Computing in Cardiology Conference (CinC)}, vol.~45, pp. 2--5, 2019.
+\bibitem{BLZ:Jes2013}
+\BIBentryALTinterwordspacing
+L.~Jespersen, S.~Z. Abildstr{\o}m, A.~Hvelplund, and E.~Prescott, ``{Persistent
+  angina: highly prevalent and associated with long-term anxiety, depression,
+  low physical functioning, and quality of life in stable angina pectoris},''
+  \emph{Clinical Research in Cardiology}, vol. 102, no.~8, pp. 571--581, 2013.
+  [Online]. Available: \url{https://doi.org/10.1007/s00392-013-0568-z}
+\BIBentrySTDinterwordspacing
+
+\bibitem{BLZ:Noe2017}
+\BIBentryALTinterwordspacing
+B.~M.~C. Noel, P.~C. J., W.~M. Norine, F.~J. L., C.~P. G., C.~W. M., C.~J.
+  Austin, C.~L. S., C.~Filippo, D.~C. Marcelo, D.~P. S., G.~Z. S., G.~Paul,
+  H.~E. M., H.~Ahmed, H.~J. A., H.~J. S., I.~Erin, K.~Ruth, L.~G. N., L.~Peter,
+  L.~Joao, M.~Puja, D.-N. Patrice, O.~Michelle, P.~G. D., Q.~A. A., R.~Harmony,
+  R.~British, S.~George, T.~Viviany, W.~Janet, and W.~Nanette, ``{Ischemia and
+  No Obstructive Coronary Artery Disease (INOCA)},'' \emph{Circulation}, vol.
+  135, no.~11, pp. 1075--1092, Mar. 2017. [Online]. Available:
+  \url{https://doi.org/10.1161/CIRCULATIONAHA.116.024534}
+\BIBentrySTDinterwordspacing
+
+\bibitem{BLZ:Jes2012}
+\BIBentryALTinterwordspacing
+L.~Jespersen, A.~Hvelplund, S.~Z. Abildstr{\o}m, F.~Pedersen, S.~Galatius,
+  J.~K. Madsen, E.~J{\o}rgensen, H.~Kelb{\ae}k, and E.~Prescott, ``{Stable
+  angina pectoris with no obstructive coronary artery disease is associated
+  with increased risks of major adverse cardiovascular events},''
+  \emph{European Heart Journal}, vol.~33, no.~6, pp. 734--744, Mar. 2012.
+  [Online]. Available: \url{http://dx.doi.org/10.1093/eurheartj/ehr331}
+\BIBentrySTDinterwordspacing
+
+\bibitem{RSM:Jan86a}
+M.~Janse, ``Electrophysiology and electrocardiology of acute myocardial
+  ischemia,'' vol. Suppl, pp. 46A--52A, 1986.
 
 \end{thebibliography}
