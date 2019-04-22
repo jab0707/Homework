@@ -32,6 +32,7 @@
 \newcommand{\etal}{{\em et al.}}
 \newcommand{\degrees}{{$^{\circ}$}}
 \newcommand{\fig}[1]{Figure~\ref{#1}}
+\newcommand{\spo}{{SPO$_2$}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Setting to control figure placement
 % These determine the rules used to place floating objects like figures 
 % They are only guides, but read the manual to see the effect of each.
@@ -82,14 +83,19 @@ The subject was fit with four recording electrodes, one ont he left pectoral mus
 	\label{fig:Protocol}
 \end{figure}
 
+\subsection{Processing}
+The recorded ECG data was processed using PFEIFER, a preprocessing framework for electrograms, that filters, baseline corrects, fiducilizes, auto fiducilizes, and time aligns the signals.\cite{MacLeod2018_p} Signals were assessed for qualitative differences during each recovery period and interesting changes were hilighted in the results.
+
 \section{Results}
 Using the palpatory method we measured a systolic blood pressure of 110 mmHg. Utilizing the Auscultatory method we could not quite distinguish when the non laminar sounds (Korotkow's sounds) started and stopped, however we were able to take the combined method measurements. This produced a systolic (when radial pulse returns) pressure of 110 mmHg, and a diastolic (first sound of Korotkow's sounds) pressure of 85 mmHg.
+
+Before either exercise protocol the resting heart rate was 84 bpm and the \spo{} was 
 \section{Discussion}
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
-%\bibliography{C:/Users/Jake/Documents/library}
-%\bibliographystyle{IEEEtran}
+\bibliography{C:/Users/Jake/Documents/library}
+\bibliographystyle{IEEEtran}
 
 
 \end{document}

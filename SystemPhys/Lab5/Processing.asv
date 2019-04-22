@@ -171,7 +171,7 @@ end
 %plot hand recorded data
 load('rec.mat');
 x1 = 1:50;x2 = 51:100;x3 = 101:150;
-
+figure('DefaultAxesFontSize',18);clf();
 p1h1 = rec(2:13,1);
 p1sp1 = rec(2:13,2);
 
@@ -211,8 +211,7 @@ sp2sp2 = interp1(1:length(rec(37:44,2)),rec(37:44,2),linspace(1,length(rec(37:44
 
 sp2h3 = interp1(1:length(rec(45:51,1)),rec(45:51,1),linspace(1,length(rec(45:51,1)),50));
 sp2sp3 = interp1(1:length(rec(46:51,2)),rec(46:51,2),linspace(1,length(rec(45:51,1)),50));
-%%
-figure('DefaultAxesFontSize',18);clf();
+
 hold on;
 plot(x1,sp1h1,'r','linewidth',2);
 plot(x2,sp1h2,'g','linewidth',2);
@@ -293,34 +292,22 @@ figure('DefaultAxesFontSize',18);clf();
 subplot(321);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,1),1),'r','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,1),1),'r--','linewidth',2);
-title('I');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(322);hold on;
 plot(p1_bmean(1,:),'k','linewidth',1);
 plot(p2_bmean(1,:),'k--','linewidth',1);
 title('I');
 xlabel('time (ms)');
 ylabel('voltage (mv)');
-subplot(323);hold on;
+subplot(322);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,2),1),'g','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,2),1),'g--','linewidth',2);
-title('II');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(324);hold on;
 plot(p1_bmean(2,:),'k','linewidth',1);
 plot(p2_bmean(2,:),'k--','linewidth',1);
 title('II');
 xlabel('time (ms)');
 ylabel('voltage (mv)');
-subplot(325);hold on;
+subplot(323);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,3),1),'b','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,3),1),'b--','linewidth',2);
-title('III');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(326);hold on;
 plot(p1_bmean(3,:),'k','linewidth',1);
 plot(p2_bmean(3,:),'k--','linewidth',1);
 title('III');
