@@ -249,8 +249,8 @@ else
     c =2;
 end
 p1_bmean(1,:) = mean(p1_bs.allSpls(find(cl == c),:,1));
-p1_bmean(2,:) = mean(p1_bs.allSpls(find(cl == c),:,1));
-p1_bmean(3,:) = mean(p1_bs.allSpls(find(cl == c),:,1));
+p1_bmean(2,:) = mean(p1_bs.allSpls(find(cl == c),:,2));
+p1_bmean(3,:) = mean(p1_bs.allSpls(find(cl == c),:,3));
 
 
 cl = kmeans(p2_bs.allSpls(:,:,1),2);
@@ -262,8 +262,8 @@ else
     c =2;
 end
 p2_bmean(1,:) = mean(p2_bs.allSpls(find(cl == c),:,1));
-p2_bmean(2,:) = mean(p2_bs.allSpls(find(cl == c),:,1));
-p2_bmean(3,:) = mean(p2_bs.allSpls(find(cl == c),:,1));
+p2_bmean(2,:) = mean(p2_bs.allSpls(find(cl == c),:,2));
+p2_bmean(3,:) = mean(p2_bs.allSpls(find(cl == c),:,3));
 
 %%
 figure('DefaultAxesFontSize',18);clf();
@@ -290,39 +290,127 @@ ylabel('voltage (mv)');
 %%
 figure('DefaultAxesFontSize',18);clf();
 
-subplot(321);hold on;
+subplot(341);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,1),1),'r','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,1),1),'r--','linewidth',2);
-title('I');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(322);hold on;
+title('R1');
+ylabel({'I','voltage (mv)'});
+subplot(342);hold on;
+plot(mean(p1_r2s.allSpls(1:5,:,1),1),'r','linewidth',2);
+plot(mean(p2_r2s.allSpls(1:5,:,1),1),'r--','linewidth',2);
+title('R2');
+
+subplot(343);hold on;
+plot(mean(p1_r3s.allSpls(1:5,:,1),1),'r','linewidth',2);
+plot(mean(p2_r3s.allSpls(1:5,:,1),1),'r--','linewidth',2);
+title('R3');
+subplot(344);hold on;
 plot(p1_bmean(1,:),'k','linewidth',1);
 plot(p2_bmean(1,:),'k--','linewidth',1);
-title('I');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(323);hold on;
+title('Base');
+
+subplot(345);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,2),1),'g','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,2),1),'g--','linewidth',2);
-title('II');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(324);hold on;
+ylabel({'II','voltage (mv)'});
+subplot(346);hold on;
+plot(mean(p1_r2s.allSpls(1:5,:,2),1),'g','linewidth',2);
+plot(mean(p2_r2s.allSpls(1:5,:,2),1),'g--','linewidth',2);
+
+subplot(347);hold on;
+plot(mean(p1_r3s.allSpls(1:5,:,2),1),'g','linewidth',2);
+plot(mean(p2_r3s.allSpls(1:5,:,2),1),'g--','linewidth',2);
+
+subplot(348);hold on;
 plot(p1_bmean(2,:),'k','linewidth',1);
 plot(p2_bmean(2,:),'k--','linewidth',1);
-title('II');
-xlabel('time (ms)');
-ylabel('voltage (mv)');
-subplot(325);hold on;
+
+subplot(3,4,9);hold on;
 plot(mean(p1_r1s.allSpls(1:5,:,3),1),'b','linewidth',2);
 plot(mean(p2_r1s.allSpls(1:5,:,3),1),'b--','linewidth',2);
-title('III');
+
+xlabel('time (ms)');
+ylabel({'III','voltage (mv)'});
+subplot(3,4,10);hold on;
+plot(mean(p1_r2s.allSpls(1:5,:,3),1),'b','linewidth',2);
+plot(mean(p2_r2s.allSpls(1:5,:,3),1),'b--','linewidth',2);
+
 xlabel('time (ms)');
 ylabel('voltage (mv)');
-subplot(326);hold on;
+subplot(3,4,11);hold on;
+plot(mean(p1_r3s.allSpls(1:5,:,3),1),'b','linewidth',2);
+plot(mean(p2_r3s.allSpls(1:5,:,3),1),'b--','linewidth',2);
+
+xlabel('time (ms)');
+ylabel('voltage (mv)');
+subplot(3,4,12);hold on;
 plot(p1_bmean(3,:),'k','linewidth',1);
 plot(p2_bmean(3,:),'k--','linewidth',1);
-title('III');
+
 xlabel('time (ms)');
 ylabel('voltage (mv)');
+
+
+%%
+figure('DefaultAxesFontSize',18);clf();
+
+subplot(341);hold on;
+plot(mean(p1_r1s.allSpls(end-5:end,:,1),1),'r','linewidth',2);
+plot(mean(p2_r1s.allSpls(end-5:end,:,1),1),'r--','linewidth',2);
+title('R1');
+ylabel({'I','voltage (mv)'});
+subplot(342);hold on;
+plot(mean(p1_r2s.allSpls(end-5:end,:,1),1),'r','linewidth',2);
+plot(mean(p2_r2s.allSpls(end-5:end,:,1),1),'r--','linewidth',2);
+title('R2');
+
+subplot(343);hold on;
+plot(mean(p1_r3s.allSpls(end-5:end,:,1),1),'r','linewidth',2);
+plot(mean(p2_r3s.allSpls(end-5:end,:,1),1),'r--','linewidth',2);
+title('R3');
+subplot(344);hold on;
+plot(p1_bmean(1,:),'k','linewidth',1);
+plot(p2_bmean(1,:),'k--','linewidth',1);
+title('Base');
+
+subplot(345);hold on;
+plot(mean(p1_r1s.allSpls(end-5:end,:,2),1),'g','linewidth',2);
+plot(mean(p2_r1s.allSpls(end-5:end,:,2),1),'g--','linewidth',2);
+ylabel({'II','voltage (mv)'});
+subplot(346);hold on;
+plot(mean(p1_r2s.allSpls(end-5:end,:,2),1),'g','linewidth',2);
+plot(mean(p2_r2s.allSpls(end-5:end,:,2),1),'g--','linewidth',2);
+
+subplot(347);hold on;
+plot(mean(p1_r3s.allSpls(end-5:end,:,2),1),'g','linewidth',2);
+plot(mean(p2_r3s.allSpls(end-5:end,:,2),1),'g--','linewidth',2);
+
+subplot(348);hold on;
+plot(p1_bmean(2,:),'k','linewidth',1);
+plot(p2_bmean(2,:),'k--','linewidth',1);
+
+subplot(3,4,9);hold on;
+plot(mean(p1_r1s.allSpls(end-5:end,:,3),1),'b','linewidth',2);
+plot(mean(p2_r1s.allSpls(end-5:end,:,3),1),'b--','linewidth',2);
+
+xlabel('time (ms)');
+ylabel({'III','voltage (mv)'});
+subplot(3,4,10);hold on;
+plot(mean(p1_r2s.allSpls(end-5:end,:,3),1),'b','linewidth',2);
+plot(mean(p2_r2s.allSpls(end-5:end,:,3),1),'b--','linewidth',2);
+
+xlabel('time (ms)');
+ylabel('voltage (mv)');
+subplot(3,4,11);hold on;
+plot(mean(p1_r3s.allSpls(end-5:end,:,3),1),'b','linewidth',2);
+plot(mean(p2_r3s.allSpls(end-5:end,:,3),1),'b--','linewidth',2);
+
+xlabel('time (ms)');
+ylabel('voltage (mv)');
+subplot(3,4,12);hold on;
+plot(p1_bmean(3,:),'k','linewidth',1);
+plot(p2_bmean(3,:),'k--','linewidth',1);
+
+xlabel('time (ms)');
+ylabel('voltage (mv)');
+

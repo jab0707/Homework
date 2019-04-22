@@ -57,7 +57,7 @@
 \begin{document}
 
 \title{Lab 5: Exercise Stress}
-\author{Jake Bergquist, u6010393, Partners: Bram Hunt,  }
+\author{Jake Bergquist, u6010393, Partners: Bram Hunt, Katie Davis }
 \maketitle
 
 \section{Introduction}
@@ -79,19 +79,76 @@ The subject was fit with four recording electrodes, one ont he left pectoral mus
 	
 	\centering
 	\includegraphics[width = .8\textwidth]{Figures/protocol.png}
-	\caption{}
+	\caption{The designed exercise protocol. During phase I the subject were perform short bouts (30 seconds) of intense exercise (roughly 130 bpm pedal rate) followed by  180 second rest periods. Continuous ECG will be taken dsuring the rest periods as well as periodic \spo{}, BP, and heart rate measures. Phase II  will follow a 30 minute rest period and will be identical to phase I with the exception of the exercise being moderate (roughly 80 bpm pedal rate). Baseline recordings are taken before each phase.)}
 	\label{fig:Protocol}
 \end{figure}
 
 \subsection{Processing}
-The recorded ECG data was processed using PFEIFER, a preprocessing framework for electrograms, that filters, baseline corrects, fiducilizes, auto fiducilizes, and time aligns the signals.\cite{MacLeod2018_p} Signals were assessed for qualitative differences during each recovery period and interesting changes were hilighted in the results.
+The recorded ECG data was processed using PFEIFER, a preprocessing framework for electrograms, that filters, baseline corrects, fiducilizes, auto fiducilizes, and time aligns the signals.\cite{MacLeod2018_p} The time aligned baseline signals were averaged to produce cleaner signals. This was done by clustering similar beats using the kmeans clustering algorithm (MATLAB), and averaging these signals. The same process was performed for the first 5 and last 5 beats of each exercise protocol to produce signal averaged post experiment and post rest signals. Signals were assessed for qualitative differences during each recovery period and interesting changes were highlighted in the results.
 
 \section{Results}
 Using the palpatory method we measured a systolic blood pressure of 110 mmHg. Utilizing the Auscultatory method we could not quite distinguish when the non laminar sounds (Korotkow's sounds) started and stopped, however we were able to take the combined method measurements. This produced a systolic (when radial pulse returns) pressure of 110 mmHg, and a diastolic (first sound of Korotkow's sounds) pressure of 85 mmHg.
 
-Before either exercise protocol the resting heart rate was 84 bpm and the \spo{} was 
+During the investigation of the venous system we measured the height at which the veins int he subject's foot just began to collapse. This was found to be 17 mm. Given the specific gravity of blood (1.056 g/mm) we get a value of around 1.32 mmHg for the venous pressure. When we pressed the blood in a vein back towards the valve we observed that the vein bulged and the blood was prevented from flowing in retrograde.
+
+Before either exercise protocol the resting heart rate was 84 bpm and the \spo{} was 98\%. The baseline blood pressure was 110/85. Throughout the entire phase I and II the blood pressure remained elevated at 120/80 - 120/90. During  the 30 minute rest phase the blood pressure dropped to 110/75 but returned to the 120/80 range after the first phase II exercise protocol.
+
+In Figure~\ref{HR} we see the heart rate for each recovery period. As can be seen for Phase I (solid lines) the heart rate starts at a higher level than the starting heart rate for phase II (dashed lines). In each case the heart rate drops rapidly at the onset of the rest periods and continues to drop throughout the rest periods. 
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .8\textwidth]{Figures/HR.png}
+	\caption{Heart rate during each recovery period. Red: recovery period 1, green: recovery period 2, blue: recovery period 3. Solid lines from phase I, dashed from phase II.}
+	\label{HR}
+\end{figure}
+
+The Oxygen saturation levels for each rest period are displayed in Figure~\ref{spo}. As can be seen the oxygen saturation did no fluctuate heavily during any rest period or across rest periods and phases of tyher experiment. The only notable exception is Phase I, recovery period 1 (red solid line) that had a slightly higher average \spo. 
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .8\textwidth]{Figures/spo2.png}
+	\caption{\spo{} during each recovery period. Red: recovery period 1, green: recovery period 2, blue: recovery period 3. Solid lines from phase I, dashed from phase II.}
+	\label{spo}
+\end{figure}
+
+The signal averaged baseline ECG signals are shown in Figure~\ref{base} for each of the three limb leads. As can be seen the Phase II signals (dashed lines) are of a much higher amplitude. In Figure~\ref{exer} we see the signals from each limb lead immediately after exercise ceases with Phase I in solid lines and Phase II in dashed lines. Like the differences between baselines we see a similar increase in amplitude between Phase I and II. Finally Figure~\ref{reco} shows the signals at the end of each rest period before exercise was resumed. 
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .8\textwidth]{Figures/baselines.png}
+	\caption{Baseline ECG. Red: lead I, green: lead II 2, blue: lead III. Solid lines from phase I, dashed from phase II. Signals were signal averaged from a continuous 30 second recording.}
+	\label{base}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .8\textwidth]{Figures/PostExercise.png}
+	\caption{Post exercise ECG. Red: lead I, green: lead II 2, blue: lead III, Black: baseline. Column 1 from rest period 1, column 2 from rest period 2, column 3 from rest period 3. Solid lines from phase I, dashed from phase II.}
+	\label{exer}
+\end{figure}
+
+\begin{figure}[H]
+	
+	\centering
+	\includegraphics[width = .8\textwidth]{Figures/postrest.png}
+	\caption{Post rest ECG. Red: lead I, green: lead II 2, blue: lead III, Black: baseline. Column 1 from rest period 1, column 2 from rest period 2, column 3 from rest period 3. Solid lines from phase I, dashed from phase II.}
+	\label{reco}
+\end{figure}
+
+
 \section{Discussion}
 
+During the first phase of this lab we measured blood pressure using a purely palpatory method, a purely ausculatory method, and a combined method. We found that the radial method was very effective for the measurement of the systolic pulse, and quite reliable but limited in that it did not allow for a diastolic measurement. On the other hand when we used the ausculatory method we found that the sounds were difficult to distinguish and as such it was only feasible to measure a semi accurate diastolic pressure. We felt that the combined method was most accurate as it combined the strengths of the two methods. It was very difficult to hear the first non laminar flow sounds that depict the systolic pressure by the ausculatory method. The first diastolic sound was the most prominent sound and to our lack of practice with the method it was the only reliable measure we could make from the ausculatory method. The palpatory method was easier to use likely due to the ease of finding a radial pulse.
+
+During the next phase of the lab we investigated the behavior of the veins. We found that the veins on the subject's hands were unsuitable for observation however the veins on the feet were very pronounced. By using these we were able to roughly measure the venous pressure by elevating the feet above the heart until the veins very nearly collapsed (around 17 mm). Given the specific gravity of blood (1.056 g/mm) we get a value of around 1.32 mmHg for the venous pressure. This is quite a bit lower than the atrial pressure, as expected. When we press on the veins and push the blood back against the valve it causes the vein to bulge out as the blood cannot flow in retrograde against the valve.
+
+We then moved to the exercise portion. This section was designed to investigate the effects of different intensities of exercise on the resulting recovery period. One observation to address first was the fact that the amplitude of all phase II signals (dashed lines in all ECG figures) was higher than phase I signals (solid lines in ECG figures). This is likely due to the fact that after phase I the subject was sweaty, and as such this provided better contact with the ECG electrodes, resulting in superior capture of the signal. This becomes more clear when one looks at either Figure~\ref{exer} or Figure~\ref{reco} in which the rest 3 (R3) signals for phase I and II approach a similar amplitude as the subject has perspired significantly by this point in both phase I and II. When we turn to Figure~\ref{HR} it is clear that phase I exercise was more intense than phase II, as the starting heart rate for each phase I recovery was much higher than that of phase II. Indeed the phase I exercise 2 produced the highest recorded heart rate (during rest 2 (green solid line, Figure~\ref{HR})). Additionally the phase I heart rates decayed quickly but never reached the rest heart rate of 84 bpm. The heart rates of phase I recovery did not even reach the phase II baseline of 100 bpm, showing that the intense exercise at the 180 second intervals did not allow for full recovery of the subject. An interesting trend seen across all recovery periods is an initial steep decline in heart rate followed by a less steep decline. This demonstrates that the heart is making a rapid adjustment to the cessation of exercise but is still not at a resting value. The steepness of the initial heart rate change is less in the phase II rest periods (dashed lines), and the heart rate actually approaches or crosses the baseline of 100 bpm in these periods, suggesting that at moderate exercise levels the subject was able to recover.
+
+The changes seen in Figure~\ref{spo} are seemingly not significant. The measured \spo{} fluctuated in the high 90\% range for the duration of all recovery periods. The pulseoximeters used may have limited the resolution of this analysis due to accuracy issues. Other than the noted amplitude changes between phases there are no striking differences between any of the ECGs presented. This is in a way a good thing. We do not see any ST elevation, QRS broadening, T wave inversion, or other rhythmic changes that would be indicative of a disease state. However what is interesting is that there was an observed change in the perceived condition of the subject. The subject reported feeling much worse during the intense exercise recovery periods. Overall the results of this trial were expected. Increased intensity resulted in less recovery and a worsened perceived quality. However given a healthy subject the heart seemed to perform as expected, and no ECG, blood pressure, heart rate, or \spo{} abnormalities were found.
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
 \bibliography{C:/Users/Jake/Documents/library}
