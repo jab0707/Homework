@@ -1,0 +1,68 @@
+This is BibTeX, Version 0.99d (TeX Live 2018)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: TermProj.aux
+The style file: IEEEtran.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: library.bib
+Database file #2: biglit.bib
+Warning--string name "j-cae" is undefined
+--line 3199 of file biglit.bib
+Warning--string name "j-abe" is undefined
+--line 6016 of file biglit.bib
+Warning--string name "j-je" is undefined
+--line 17197 of file biglit.bib
+Database file #3: strings.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in RSM:Bur2018b
+Warning--empty journal in RSM:Goo2018
+Warning--empty journal in RSM:Bea2015a
+
+Done.
+You've used 6 entries,
+            4087 wiz_defined-function locations,
+            1685 strings with 31388 characters,
+and the built_in function-call counts, 5891 in all, are:
+= -- 462
+> -- 184
+< -- 60
++ -- 99
+- -- 34
+* -- 312
+:= -- 851
+add.period$ -- 12
+call.type$ -- 6
+change.case$ -- 6
+chr.to.int$ -- 129
+cite$ -- 9
+duplicate$ -- 396
+empty$ -- 395
+format.name$ -- 39
+if$ -- 1347
+int.to.chr$ -- 0
+int.to.str$ -- 6
+missing$ -- 75
+newline$ -- 41
+num.names$ -- 6
+pop$ -- 158
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 436
+stack$ -- 0
+substring$ -- 306
+swap$ -- 367
+text.length$ -- 17
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 6
+warning$ -- 3
+while$ -- 30
+width$ -- 7
+write$ -- 84
+(There were 6 warnings)
