@@ -56,14 +56,27 @@
 
 \begin{document}
 
-\title{Term Project: Optimization fo Reconstruction}
+\title{Term Project: Optimization of Reconstruction}
 \author{Jake Bergquist, u6010393 }
 \maketitle
 
 \section{Introduction}
+Work done in our labs has shown that an incomplete sampling of the epicardial
+potentials during our typical experimental preparations creates significant error
+during computational modeling of the heart.\cite{RSM:Tat2018b} Many experimental preparations such as those used in our labs as well as those of collaborators utilize these epicardial sock electrode arrays that only provide partial coverage of the cardiac source.\cite{RSM:Bur2018b,Zenger2019,RSM:Goo2018,RSM:Bea2015a} In such
+cases, we must aproximate the missing data on the atria from the signals we do recover on the ventricles. A
+common approach that we have used in the past is to approximate the missing signals by interpolating from the
+measured data often using a surface Laplacian approach, however, it is
+unclear if interpolation approaches are able to reconstruct the missing
+atrial signals in a scenario in which only ventricular signals are
+measured.\cite{Huiskamp1991}
 
+To address the difficulties we encounter with this reconstruction we developed an experimental setup where we utilize a rigid peri-cardiac cage that forms a closed surface of recording electrodes around the cardiac source. This cage is constructed such that each electrode has equal solid angle to the center of the cage and should capture the entire cardiac surface.
+
+Before addressing the reconstruction techniques we need to employ on  the epicardial sock electrode array we wanted to work with a more simple case in which only the cardiac cage was considered. 
 
 \section{Methods}
+
 
 \section{Results}
 
@@ -74,7 +87,7 @@
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
-\bibliography{C:/Users/Jake/Documents/library}
+\bibliography{library,biglit}
 \bibliographystyle{IEEEtran}
 
 
