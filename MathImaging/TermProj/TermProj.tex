@@ -212,10 +212,10 @@ at 50\% into the QRS complex are displayed in Figure~\ref{Fig:Res}. Only one of 
 \begin{figure}[h]
 	% \centering
 	\includegraphics[width=0.9\textwidth]{Figures/Figure1.png}
-	\caption{Potentials on the basal subset of the cage for each
+	\caption{Potentials on the atrial subset of the cage for each
 		reconstruction method across three beat morphologies. The time point
 		displayed for each case is 50\% into the QRS complex. The measured
-		column shows the signals measured from the cage. The optimized
+		column shows the potential distribution measured from the cage. The optimized
 		reconstruction column shows potentials from the Opt. 1 method. The
 		Laplacian Interpolation column shows the potentials from the spatial
 		Laplacian interpolation. Row A shows a ventricular paced beat. Row B
@@ -223,8 +223,50 @@ at 50\% into the QRS complex are displayed in Figure~\ref{Fig:Res}. Only one of 
 	\label{Fig:Res}
 \end{figure}
 
+When comparing the signals directly we see in Figure~\ref{Fig:Sigs_cg} when we select an electrode on the top of the cage in the $C_A$ region we see that for the ventricular paced beat all three of the reconstruction methods (Opt. 1, Opt. 2, and Laplacian interpolation) perform similarly well in reconstructing the measured signal. However when we consider a beat with a more complex signal morphology such as an atrial paced beat we see that while the two optimization based methods perform well, the Lalacian interpolation performs poorer. An investigation of the weights calculated by the optimization methods is shown in Figure~\ref{Fig:reco_vis}. As can be seen, both the linear components of the optimization methods ($D$ for Opt. 1, and $E$ for Opt 2) select weights near the top of the border between the cage near the electrode that is being reconstructed with some pattern of weights on the remaining cage. However, the time derivative weights in Opt. 2 ($F$) also weight a region of the cage associated with the activation front, as seen by the potential distribution.
+
+\begin{figure}[h]
+	% \centering
+	\includegraphics[width=0.9\textwidth]{Figures/cgSigs.png}
+	\caption{Time signals taken at one location on the atrial portion of the cage ($C_A$) for each of the reconstruction methods. The measured signal (A), Optimization method 1 reconstruction (B), Optimization method 2 (B), and Laplacian interpolation (D). The left column shows a ventricular paced beat morphology, and the right column shows an atrial paced beat morphology.}
+	\label{Fig:Sigs_cg}
+\end{figure}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.9\textwidth]{Figures/reco_vis.png}
+	\caption{Patterns of the weights of the reconstruction matrices as compared to a potential distribution during the QRS complex. The potential distribution shown as $C_V$ and $C_A$ is taken during the QRS complex to highlight the morphology of the activation front. The specific electrode weights for $D$, $E$, and$F$ is one on same side of the cage as the breakthrough site. The electrode being reconstructed is highlighted with the purple circle. Units for $C_V$ and $C_A$ in mV, all weights are unit-less, $D$ and $F$ share a color bar.}
+	\label{Fig:reco_vis}
+\end{figure}
+
 
 \section{Discussion}
+
+The main goal of this project was to investigate utilization of reconstruction methods for reconstructing of sampling of one part of the cardiac source from another part across different beat morphologies. I then compared the optimization based methods to the standard Laplacian interpolation which is common in this field.  I found that not only were we able to reconstruct the entire recorded signals from only a subset with high fidelity but also that the optimization based methods greatly outperformed Laplacian interpolation. This study leveraged an ideal scenario using the optimization problem in
+which the desired missing data was available and could
+be incorporated into the formulation, which is often not the case in
+typical experimental preparations. This investigation showed that missing signals
+during experiments can be reconstructed from measured signals with high
+fidelity if the reconstruction is formulated properly. Thus, the results
+from the optimization approaches provide a benchmark of ``ideal
+reconstruction'' against which to compare other methods such as
+Laplacian interpolation.  Such optimization approaches could also be
+reformulated to incorporate inverse computed potentials or other relevant
+measurements in place of the of the missing data. The optimization could
+also be reformulated to minimize the difference between the fully
+reconstructed and measured potentials forward computed to another
+measurement surface (such as a torso surface) and the measured potentials
+at that other surface, as a way to optimize the reconstruction mapping
+matrix. Once computed, the reconstruction mapping matrices ($D$, or $E$ and
+$F$) could be then used to reconstruct the missing potentials in
+subsequent beats of a similar morphology. I did find that utilizing the optimized mapping matrices  created by utilizing one beat morphology did not translate well to other beat morphologies. This suggests that the optimization formulations are not taking into account some form of non linear behavior. Further investigation into these non linearities could elucidate their relationships and lead to a more robust formulation. 
+
+In an attempt to identify what the optimization methods were identifying to use for reconstruction I visualized the weights from the different mapping matrices to try to identify patterns that could be generalized or at least under to understand what is missing from conventional reconstruction approaches. In Figure~\ref{Fig:reco_vis} we see that the linear portions fo the reconstructions, either $D$ or $E$ behave mostly as expected, by weighting signals highly that are close to the electrode of interest (circled in purple). However what is odd is the apparent negative weighting in a strange pattern across the remainder of the ventricular portion of the cage as well as a very high weighting at the apex of the cage. While the weights close to the electrode of interest mimic what a Laplacian interpolation would do, the remaining pattern is unexpected and difficult to interpret. When I look at the weights of the derivative of the signals with respect to time something immediately jumps out at me. The weights pattern for electrodes near the breakthrough site (the site on the cage that sees the QRS complex the earliest) mimics shape of the activation front/breakthrough site to some degree. This trend dissipates when the electrode of interest is farther from this site, but the presence of a pattern like this is interesting to find. I see a similar pattern for all beat morphologies I investigated, but I chose to show it using a paced ventricular beat as that morphology is the simplest.
+
+This project implies that there is plenty of improvement yet to be made on these reconstruction problems in the context of electrophysiology, and that the standard approaches such as Laplacian interpolation, may not be sufficient in some cases. Other work by our collaborations has shown that Laplacian interpolation performs well when the samples being used for interpolation surround the missing area, however int he case presented by this project perhaps interpolation is a misnomer. Given the geometry of the cage it is more like extrapolation to the upper region of the cage rather than interpolation. While there are several contexts where interpolation is needed, such as interpolating on body surface electrode recordings to allow for the use of limited lead sets, there are other scenarios such as those encountered in our lab where a more extrapolation like problem is the case. I plan to utilize the techniques developed in this project to refine our understanding of such extrapolation and interpolation problems in order to formulate more accurate and robust methods. In particular I have begun working on a similar approach as the one presented here to reconstruct the potentials on the atrial region of the epicardial surface given only ventricular sock recordings. My hope is that this work will better inform our computational models with the eventual end goal being to improve the formulation and use of the electrocardiography inverse problem.
+
+
+\section{Acknowledgments}
+I would like to thank my fellow graduate students who collected this data with me, and helped me think about these problems. My adviser who helped direct my study, my funding sources for paying me, and you Dr. Joshi, for working with me through my limited mathematical background to get me to a point where I can perform interesting studies such as this one with techniques I have learned in your class.
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
