@@ -126,7 +126,7 @@ D = C_AC_V^T(C_VC_V^T)^{-1}
 \end{equation}
 
 \begin{equation}
-D^{I+1} = D^I + \epsilon(2D^NC_VC_V^T - 2C_AC_V^T)
+D^{I+1} = D^I - \epsilon(2D^NC_VC_V^T - 2C_AC_V^T)
 \label{EQ:Opt1_5}
 \end{equation}
 
@@ -143,12 +143,32 @@ C_V^TE^TEC_V + 2C_V^TE^TFC'_V - 2C_V^TE^TC_A + C'_V^TF^TFC'_V - 2C'_V^TF^TC_A + 
 \end{equation}
 
 \begin{equation}
-
+2EC_VC_V^T + 2FC'_VC_V^T - 2C_AC_V^T +0 +0 +0
 \label{EQ:Opt2_2}
 \end{equation}
 
+\begin{equation}
+E^{i+1} = E^i - \epsilon_1(2(E^iC_V + FC'_V - C_A)C_V^T)
+\label{EQ:Opt2_3}
+\end{equation}
+
+\begin{equation}
+2FC'_VC'_V^T + 2EC_VC'_V^T - 2C_AC'_V^T +0 +0 +0
+\label{EQ:Opt2_4}
+\end{equation}
+
+\begin{equation}
+E^{i+1} = E^i - \epsilon_2(2(F^iC'_V + EC_V - C_A)C'_V^T)
+\label{EQ:Opt2_5}
+\end{equation}
+
+By expanding the formulation in Equation~\ref{EQ:Opt2} we get Equation~\ref{EQ:Opt2_1}. Because we have two variables to optimize ($E$ and $F$) we first take the derivative of Equation~\ref{EQ:Opt2_1} with respect to $E$ which yields Equation~\ref{EQ:Opt2_2}. We can use this to calculate the gradient step of $E$ as Equation~\ref{EQ:Opt2_3}. By repeating this process with respect to $F$ we get Equations~\ref{EQ:Opt2_4}~and~\ref{EQ:Opt2_5}. By taking simultaneous steps in $E$ and $F$ both can be optimized.
+
+As a comparison to these methods I computed a surface Laplacian interpolation using the SCIRun problem solving environment in order to interpolate the $C_V$ potentials onto the atrial region. The resulting three reconstructions were calculated and compared using a premature ventricular contraction, a sinus beat, and a paced sinus beat morphology. The resulting maximum and mean error in the reconstructed potential was calculated. For visualization a time point during the QRS complex, the most dynamic section of the heartbeat, was visualized on a planar projection of the reconstructed atrial region. A planar projection was performed to allow for the simultaneous viewing of the reconstructed area despite its curvature.
+
 \section{Results}
 
+The numerical results summaraized in Table~\ref{tab:err} show that for the reconstruction of the atrial portion of the cage the optimization methods performed similarly well, while the Laplacian interpolation performed poorly for both the sinus and atrially paced beats. The paced ventricular beat (premature ventricular contraction) beat morphology is considerably simpler than a sinus beat and in this case the Laplacian interpolation performed comparably to the other optimization based methods.
 
 \begin{table}[htbp]
 	\centering
@@ -186,7 +206,7 @@ agreement with the measured signals for the ventricular paced beat
 morphologies. However, there was striking disagreement between the
 Laplacian interpolated and measured signals for both the sinus and atrial
 paced morphologies. The potential distributions for each beat
-at 50\% into the QRS complex are displayed in Figure~\ref{Fig:Res}.
+at 50\% into the QRS complex are displayed in Figure~\ref{Fig:Res}. Only one of the optimization method reconstructions is shown as the optimization method potential distributions are indistinguishable at this time point.
 
 
 \begin{figure}[h]
