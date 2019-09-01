@@ -5,25 +5,22 @@
 
 %Problem 1
 
-%Initilize matrices containing the x anbd y coordinates for each pixel
-fig_yvals = zeros(256,256);
-fig_xvals = fig_yvals;
+%
+fig = zeros(256,256);
 for ind = 1:256
     fig_yvals(ind,:) = -ones(1,256)*ind;
     fig_xvals(:,ind) = ones(1,256)*ind;
 end
+test = line1(fig_xvals);
 
-%functions to define the lines defined at the end of the script
+%functions to d
 figTriangle = ((fig_yvals >= line1(fig_xvals)) +...
               (fig_yvals <= line2(fig_xvals)) +...
               (fig_yvals <= line3(fig_xvals))) == 3;
           
 figure(1);
 imagesc(figTriangle);
-
-
-%plotblem 2
-
+axis([ 1 256 1 256])
 
 
 

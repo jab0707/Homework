@@ -62,29 +62,29 @@
 
 \section{Q1}\
 \subsection{a,b}
-When looking at Figure | we see the square with an equalateral triangle drawn in. The Sides of the square are 256, and the sides of the triangle are 160. The angle at each of the Vertices is A (60\degrees) and the distance from the centroid to the verticies is R. If we construct a sub triangle by making the line h from the centroid to the bottom side and using R we find a new angle B. This angle (B) is half of A (30\degrees).To find the location of the vertex V2 we need to calculate (Cx,Cy) + (x,-h) Where (Cx,Cy) are the coordinates of the center (128,128). For V1 this would be (Cx,Cy) + (-x,-h), and for V3 it would be (Cx,Cy) + (0,R).Given the sub triangle we drew using R h and x we can calculate $x = 128/2$, $h = xTan(B)$ and $R = x/cos(B) =  h/sin(B)$
+When looking at Figure | we see the square with an equalateral triangle drawn in. The Sides of the square are 256, and the sides of the triangle are 160. The angle at each of the Vertices is A (60\degrees) and the distance from the centroid to the verticies is R. If we construct a sub triangle by making the line h from the centroid to the bottom side and using R we find a new angle B. This angle (B) is half of A (30\degrees).To find the location of the vertex V2 we need to calculate (Cx,Cy) + (x,-h) Where (Cx,Cy) are the coordinates of the center (128,-128). For V1 this would be (Cx,Cy) + (-x,-h), and for V3 it would be (Cx,Cy) + (0,R).Given the sub triangle we drew using R h and x we can calculate $x = 160/2$, $h = xTan(B)$ and $R = x/cos(B) =  h/sin(B)$
 
 
 These verticie locations come out to be:
 
-$x = 64$
+$x = 160/2 = 80$
 
-$h = 36.95 -> 37$
+$h = 46.1 -> 46$
 
-$R = 73.9 -> 74$
+$R = 92.3 -> 92$
 
-$V1: (128,-128) + (-64,-37) = (64,-165)$
+$V1: (128,-128) + (-80,-46) = (48,-174)$
 
-$V2: (128,-128) + (64,-37) = (192,-165)$
+$V2: (128,-128) + (80,-46) = (208,-174)$
 
-$V3 : (128,-128) + (0,74) = (128,-54)$
+$V3 : (128,-128) + (0,92) = (128,-36)$
 
 Now that we have the locations of the vertices we can calculate the lines that define these edges. We will use the slope intercept form.
-For V1 to V2 the equation is $y = -165$.
-For V1 to V3 the slope is $111/64$, the y intercept is $-276$, thus $y = (111/64)x - 276$
-For V2 to V3 the slope is $-111/64$, the y intercept is $74$, thus $y = -(111/64)x + 74$
+For V1 to V2 the equation is $y = -174$.
+For V1 to V3 the slope is $138/80$, the y intercept is $-256.8$, thus $y = (138/80)x - 256.8$
+For V2 to V3 the slope is $-138/80$, the y intercept is $184.8$, thus $y = -(138/80)x + 184.8$
 
-To define when a pixel is within the triangle it must be under V1 to V3 line, under the V3 to V2 line, and above the V1 to V2 line. To determine this we can take any point on the entire grid, and plug its x coordinate into one of the line formulas. This will produce a Y coordinate of the line of interest. If the y coordinate of our point is equal to the calculate y then our selected point is on the line. If the calculated y is greater than the point's y value the point is below the line, and if the calculated value is less than the point's y value then the point is above the line. In this way we can define the image mathematically. BEcause we are working with discrete numbers we will round the calculated value to the nearest integer.
+To define when a pixel is within the triangle it must be under V1 to V3 line, under the V3 to V2 line, and above the V1 to V2 line. To determine this we can take any point on the entire grid, and plug its x coordinate into one of the line formulas. This will produce a Y coordinate of the line of interest. If the y coordinate of our point is equal to the calculate y then our selected point is on the line. If the calculated y is greater than the point's y value the point is below the line, and if the calculated value is less than the point's y value then the point is above the line. In this way we can define the image mathematically. Because we are working with discrete numbers we will round the calculated value to the nearest integer.
 
 
 
