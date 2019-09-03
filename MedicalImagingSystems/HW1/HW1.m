@@ -19,18 +19,20 @@ figTriangle = ((fig_yvals >= line1(fig_xvals)) +...
               (fig_yvals <= line3(fig_xvals))) == 3;
           
 figure(1);
-imagesc(figTriangle);
+imshow(figTriangle);
 
 
 %plotblem 2
 
+f_handle = fopen('Prob2.raw');
+raw_signal = fread(f_handle,[144,192]);
+fclose(f_handle);
+figure(1);clf();
+surf(raw_signal)
+set(gca, 'ZScale', 'log')
 
-
-
-
-
-
-
+figure(2);clf()
+imshow(rescale(raw_signal));
 
 
 

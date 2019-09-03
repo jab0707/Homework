@@ -28,6 +28,7 @@
 \newcommand{\etc}{{\em etc.,}}
 \newcommand{\etal}{{\em et al.}}
 \newcommand{\degrees}{{$^{\circ}$}}
+\newcommand{\micro}{{$\mu$}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% Setting to control figure placement
@@ -66,7 +67,15 @@ The specific tissue of interest in this report was taken from human atria. These
 
 \section{Methods}
 \subsection{Image Acquisition}
-Atrial tissue samples were obtained fromt he lab instructor. These samples had be prepared with WGA conjugated to AlexaFluor-488 stain and a connexin43 stain conjugated to AlexxaFluor-594. The sample 
+Atrial tissue samples were obtained fromt he lab instructor. These samples had be prepared with WGA conjugated to AlexaFluor-488 stain and an anti-connexin43 antibody conjugated to AlexxaFluor-594. The sample was imaged using excitation spectra of | nm (for the WGA 488 fluorophore) and | nm (for the connexin 594 fluorophore). Recording were done with either the hybrid photomultiplier or the conventional photomultiplier. The effect of increasing laser power, changing photomultiplier gain, and changing pinhole size were examined. Additionally a 3D stack of images was acquired by sampling at 50 depths through the tissue.
+\par{Baseline:} A baseline image was acquired with a pinhole size of 1 AU, 1024 x 1024 pixels (| \micro m pixel size), and lazer power of | and | for the | nm and |nm lasers respectively. The hybrid photomultiplier was used with default settings. Two images were take, one using the | nm filter and another with the |nm filter uin order to record signal from both fluorophores.
+\par{Laser Power:} A 2D image was taken with increased laser power. The | nm laser power was increased from | to |, and the | nm laser was increased from | to |. All other parameters followed baseline parameters.
+\par{Gain Adjustment:} A 2D image was acquired using the conventional photomultipliers with a gain of 500 V and 700 V. All other parameters followed the baseline parameters.
+\par{Pinhole Size:} A 2D image was acquired with a pinhole size of 3 AU. All other parameters followed the baseline parameters.
+\par{3D Stack: } A 3D stack was acquired at a resolution of 512 x 512 pixels per stack ( | \micro m pixel size). A total of 50 slices were taken making for a 512 x 512 x 50 image stack for both fluorophore channels. All other parameters followed the baseline parameters.
+
+\subsection{Image Processing}
+
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
 \bibliography{C:/Users/Jake/Documents/library}

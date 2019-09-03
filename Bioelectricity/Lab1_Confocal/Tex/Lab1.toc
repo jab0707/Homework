@@ -1,1 +1,3 @@
 \contentsline {section}{Introduction}{2}% 
+\contentsline {section}{Methods}{3}% 
+\contentsline {subsection}{Image Acquisition}{3}% 
