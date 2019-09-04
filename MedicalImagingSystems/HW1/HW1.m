@@ -23,34 +23,37 @@ figTriangle = ((fig_yvals >= line1(fig_xvals)) +...
 figure(1);
 imshow(figTriangle);
 
-
+%%
 %plotblem 2
 
-f_handle = fopen('Prob2.raw');
+f_handle = fopen('Prob2.raw');%access the file location
 raw_signal = fread(f_handle,[288,192],'float',0,'b');
+%read in both the real and imaginary components at once
 fclose(f_handle);
 %Need to parse the input to be the complex matrix
 raw_signal = [raw_signal(1:2:end,:) + raw_signal(2:2:end,:)*1i];
 %Every second entry int he raw file is the previous entry's complex value
+%raw_signal = raw_signal';%transpose to deal with Matlab being   column first
+
 
 
 %Plotting the magintue of the signal
 figure(1);clf();
-surf(log(abs(transpose(raw_signal))))
+surf(log(abs(transpose(raw_signal)))')
 set(gca,'Colormap',gray)
 axis('equal')
 axis('tight')
 
 %Showing the magnitude of the signal as grayscale
 figure(2);clf()
-imshow(rescale(log(abs(raw_signal))));
+imshow(rescale(log(abs(raw_signal)))');
 axis('equal')
 axis('tight')
 
 %reconstructing the image using inverse transform
 MRI_Image = ifftshift(abs(ifft2(raw_signal)));
 figure(3);
-imagesc(MRI_Image)
+imagesc(MRI_Image')
 axis('equal')
 axis('tight')
 colormap(gray);
@@ -59,12 +62,12 @@ colormap(gray);
 MRI_Image_Forward_FT = ifftshift(abs(fft2(raw_signal)));
 figure(4);
 subplot(211);
-imagesc(MRI_Image)
+imagesc(MRI_Image')
 axis('equal')
 axis('tight')
 colormap(gray);
 subplot(212);
-imagesc(MRI_Image)
+imagesc(MRI_Image')
 axis('equal');
 axis('tight')
 colormap(gray);
@@ -77,21 +80,14 @@ colormap(gray);
 
 %%
 
-%Making an RGB version of the image to overlay color on the ROIs. I do this
-%rather than blacking or whiting them out because it would be difficult to
-%discern a blacked or white our region from a grayscale image. By coloring
-%these regions it makes it more clear
 
-RGB_MRI(:,:,1) = MRI_Image;
-RGB_MRI(:,:,2) = MRI_Image;
-RGB_MRI(:,:,3) = MRI_Image;
 
-RGB_MRI = rescale(RGB_MRI);%I want to use color the image
+RGB_MRI = rescale(MRI_Image);%I want to use color the image
 %be scaled to have intensities between 0 and 255
 
 close all
 figure(1);
-imshow(RGB_MRI)
+imshow(RGB_MRI')
 axis('equal')
 axis('tight')
 impixelinfo%adds tool to the figure to inspect pixel locations and values
@@ -121,7 +117,7 @@ r3_vals = MRI_Image(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4));
 RGB_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4),1) = 255;
 RGB_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4),2:3) = 0;%Make the ROIs red
 h = figure(1);
-imagesc(RGB_MRI);
+imagesc(RGB_MRI');
 set(h,'Position',[10,10,1440,1920])
 axis('equal')
 axis('tight')
