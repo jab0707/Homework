@@ -10,6 +10,7 @@
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage[super]{cite}
+\usepackage{siunitx}
 \usepackage{subcaption}
 \usepackage[table]{xcolor}
 \usepackage{amsmath}
@@ -81,9 +82,30 @@ With the search criteria Thrombin, and homo sapiens I found that the thee most r
 Position g in the structure has the highest proportion of amino acids that are charged at 4/5. The first of those is an arginine. It is at the amino terminal end which implies a pKa near 9.04. Even if this were a non terminal amino acid it would have a pKa of ~ 12.48. Thus this amino acid will be positively charged. The two are lysines which have a side chain pKa of 10.79, resulting in a positive charge. The next is a glutamic acid which has a side chain pKa of 4.25, resulting in a negative charge at neutral pH. The last amino acid in this position is a leucene which does not ionize as a side chain and thus will have a neutral charge.
 
 \subsection{b}
+For the next part I used the Table 1.1 from lecture notes 1.b. I added the Hydrophobicity of the side chain measurements to fidn the total energy for the transfer from water to an non-polar solvent.
+i) Ala-Thr-Ser: -3.65 + 14.74 + 18.23 = 29.32 kJ/mol
+ii) Phe-Ile-Trp: -8.57 + -16.71 + -5.84 = -31.12 kJ/mol
+
+
+\section{Q3}
+There appears to be a fairly linear relationship between volume and hydrophobicity scale number for the amino acids with a hydrophobic side chain (A V I L M F Y W) with tyrosine sitting as a bit of an outlier. Additionally if C R and K are excluded then the remaining amino acids (some charged, some polar) (D N E Q H) also show a fiarly linear relationship. The fitline shown in Figure~| is approximated for the entire dataset. The slope is roughly 80 units volume per hydrophobicity scale number. When compared tot he surface area vs free energy of transfer graph from the lecture notes it appears that both graphs depict a simmilar motif, with two groups having distinct linear trends, one group with most of the non-polar side chains and one trend with most of the polar side chains. The trend int he lecture notes graph has a strikingly simmilar slope by eye (the relevant axes are flipped) however the data seems to be  better fit to a linear relationship in the lecture notes graph than in Figure~|
+
+\section{Q4}
 
 
 
+\section{Q5}
+\subsection{a}
+We know that $k = {EA}/L$ for the lognitudional spring constant of a rod or rod like object where k is the spring constant, E is the young's modulus, A is the cross sectional area, and L is the length. Thus for this muscle the spring constant is k = 40 * 1000 / 100 = 400 MPa*mm. Doing some unit conversion/homogenation to clear things up 1 Pa = 1 $\frac{kg}{m*s^2}$. $1 MPa = 1*10^6 Pa$. Thus $400 MPa*mm = 4*10^8Pa*mm = 4*10^5 Pa*m = 4*10^5 kg/s^2$.
+
+\subsection{b}
+Assuming that the weight is pulling directly down on the face of the muscle towards earth (the vector of the force is in line with gravity) then the Force exerted by this weight would be $F = m*a = 10 kg * 9.8 m/s^2 = 98 N$. We can calculate the change in length ($\delta L$) according to : $\frac{F}{A} = E\frac{\delta L}{L}$ by solving for L. We know all of the other terms. This rearranges to $\delta L = \frac{FL}{AE} = \frac{98 N*0.1 m}{0.001 m^2 * 4*10^7 Pa} =   \frac{9.8 kg*m^2 / s^2}{ 4*10^4 m*kg/s^2} = 2.45*10^{-4}m = 0.245 mm$. The fractional extension is $\delta L/L$ which is 0.00245.
+
+\subsection{c}
+Like in A, the stiffness is calculated as $k = {EA}/L$ . In this case this comes out to $k = 2.3GPa*20 nm^2 / 1 \mu m = 46 GPa*nm^2/\mu  m = 4.6*10^7 Pa*nm^2/\mu  m = 4.6*10^{-11}Pa*m^2/\mu  m = 4.6*10^{-5}Pa*m = 4.6*10^{-5} kg/s^2$
+
+\subsection{d}
+Given the cross sectional area of $20 nm^2 = 2*10^{-17}m$ at $10^{15}$ filaments per square meter this is a fractional area of $\frac{2*10^{-17} m * 10^{15} }{ 1 m} = 2*10^-2$. 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
 

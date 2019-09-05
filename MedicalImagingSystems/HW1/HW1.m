@@ -22,6 +22,7 @@ figTriangle = ((fig_yvals >= line1(fig_xvals)) +...
           
 figure(1);
 imshow(figTriangle);
+title('Matlab Drawn Triangle')
 
 %%
 %plotblem 2
@@ -33,43 +34,38 @@ fclose(f_handle);
 %Need to parse the input to be the complex matrix
 raw_signal = [raw_signal(1:2:end,:) + raw_signal(2:2:end,:)*1i];
 %Every second entry int he raw file is the previous entry's complex value
-%raw_signal = raw_signal';%transpose to deal with Matlab being   column first
 
-
-
-%Plotting the magintue of the signal
+%Plotting the magintue of the signal as a surface
 figure(1);clf();
-surf(log(abs(transpose(raw_signal)))')
-set(gca,'Colormap',gray)
+surf((log(abs(raw_signal)))')%during all visualizations the data is transposed
 axis('equal')
 axis('tight')
-
+%%
 %Showing the magnitude of the signal as grayscale
 figure(2);clf()
 imshow(rescale(log(abs(raw_signal)))');
 axis('equal')
 axis('tight')
 
+
+%%
 %reconstructing the image using inverse transform
 MRI_Image = ifftshift(abs(ifft2(raw_signal)));
-figure(3);
-imagesc(MRI_Image')
-axis('equal')
-axis('tight')
-colormap(gray);
 
 %Reconstructing using the forward transform
 MRI_Image_Forward_FT = ifftshift(abs(fft2(raw_signal)));
 figure(4);
-subplot(211);
+subplot(121);
 imagesc(MRI_Image')
 axis('equal')
 axis('tight')
+title('Inverse Reconstruction')
 colormap(gray);
-subplot(212);
+subplot(122);
 imagesc(MRI_Image')
 axis('equal');
 axis('tight')
+title('Forward Reconstruction')
 colormap(gray);
 
 
@@ -78,16 +74,14 @@ colormap(gray);
 %problem 3
 
 
-%%
 
 
-
-RGB_MRI = rescale(MRI_Image);%I want to use color the image
-%be scaled to have intensities between 0 and 255
+Segmented_MRI = rescale(MRI_Image);
+%The image needs to be scaled between 0 to 255 so I can hilight the ROIs
 
 close all
 figure(1);
-imshow(RGB_MRI')
+imshow(Segmented_MRI')
 axis('equal')
 axis('tight')
 impixelinfo%adds tool to the figure to inspect pixel locations and values
@@ -98,27 +92,35 @@ impixelinfo%adds tool to the figure to inspect pixel locations and values
 %patch of any of the corners will do
 
 background = MRI_Image(1:20,1:20);
-RGB_MRI(1:20,1:20,2) = 255;%MAke tghe background green
-RGB_MRI(1:20,1:20,[1,3]) = 0;
+backgroundSegment = Segmented_MRI(1:20,1:20);%For vis purposes
+Segmented_MRI(1:20,1:20) = 255;%Outline the backgound ROI
+Segmented_MRI(2:19,2:19) = backgroundSegment(2:19,2:19);
 
 %three regions of interest are chosen from the white matter
 r1_coords = [50,50,54,54];
 r1_vals = MRI_Image(r1_coords(1):r1_coords(3),r1_coords(2):r1_coords(4));
-RGB_MRI(r1_coords(1):r1_coords(3),r1_coords(2):r1_coords(4),1) = 255;%Make the ROIs red
-RGB_MRI(r1_coords(1):r1_coords(3),r1_coords(2):r1_coords(4),2:3) = 0;
+r1_vals_segment = Segmented_MRI(r1_coords(1):r1_coords(3),r1_coords(2):r1_coords(4));%For vis purposes
+Segmented_MRI(r1_coords(1):r1_coords(3),r1_coords(2):r1_coords(4),1) = 0;%Color the ROI Black
+%replace the center to make a black box outlining the ROI
+Segmented_MRI(r1_coords(1)+1:r1_coords(3)-1,r1_coords(2)+1:r1_coords(4)-1) = r1_vals_segment(2:end-1,2:end-1);
+
+
 
 r2_coords =[45,120,49,124];% [120,45,124,49];
 r2_vals = MRI_Image(r2_coords(1):r2_coords(3),r2_coords(2):r2_coords(4));
-RGB_MRI(r2_coords(1):r2_coords(3),r2_coords(2):r2_coords(4),1) = 255;%Make the ROIs red
-RGB_MRI(r2_coords(1):r2_coords(3),r2_coords(2):r2_coords(4),2:3) = 0;
+r2_vals_segment = Segmented_MRI(r2_coords(1):r2_coords(3),r2_coords(2):r2_coords(4));%For vis purposes
+Segmented_MRI(r2_coords(1):r2_coords(3),r2_coords(2):r2_coords(4),1) = 0;%Color the ROI Black
+%replace the center to make a black box outlining the ROI
+Segmented_MRI(r2_coords(1)+1:r2_coords(3)-1,r2_coords(2)+1:r2_coords(4)-1) = r2_vals_segment(2:end-1,2:end-1);
 
 r3_coords =[100,125,104,129];% [125,100,129,104];
 r3_vals = MRI_Image(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4));
-RGB_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4),1) = 255;
-RGB_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4),2:3) = 0;%Make the ROIs red
+r3_vals_segment = Segmented_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4));%For vis purposes
+Segmented_MRI(r3_coords(1):r3_coords(3),r3_coords(2):r3_coords(4),1) = 0;%Color the ROI Black
+%replace the center to make a black box outlining the ROI
+Segmented_MRI(r3_coords(1)+1:r3_coords(3)-1,r3_coords(2)+1:r3_coords(4)-1) = r3_vals_segment(2:end-1,2:end-1);
 h = figure(1);
-imagesc(RGB_MRI');
-set(h,'Position',[10,10,1440,1920])
+imshow(Segmented_MRI');
 axis('equal')
 axis('tight')
 
@@ -145,15 +147,17 @@ MRI_Image_everyOther_subset = ifftshift(abs(ifft2(everyOther_raw)));
 
 
 figure(1);
-subplot(211);
-imagesc(MRI_Image_center_subset)
+subplot(121);
+imagesc(MRI_Image_center_subset')
 axis('equal')
 axis('tight')
+title('Inner 50%');
 colormap(gray);
-subplot(212);
-imagesc(MRI_Image_everyOther_subset)
+subplot(122);
+imagesc(MRI_Image_everyOther_subset')
 axis('equal');
 axis('tight')
+title('Every Other');
 colormap(gray);
 
 
@@ -162,15 +166,22 @@ colormap(gray);
 
 
 close all;
+%kernal a
 averaging_kernal = ones(3,3)/9;
 
+%kernal b
+%orientation flipped due to matlab conventions
 vertical_edge_detector = zeros(3,3);
-vertical_edge_detector(1,:) = 1;
-vertical_edge_detector(3,:) = -1;
+vertical_edge_detector(:,3) = 1;
+vertical_edge_detector(:,1) = -1;
 
+%kernal c
+%orientation flipped due to matlab conventions
 horizontal_edge_detector = zeros(3,3);
-horizontal_edge_detector(:,3) = 1;
-horizontal_edge_detector(:,1) = -1;
+horizontal_edge_detector(1,:) = 1;
+horizontal_edge_detector(3,:) = -1;
+
+
 
 conv1_results = conv2(MRI_Image,averaging_kernal,'same');
 %I use the same argument to not get increased image size
@@ -183,29 +194,29 @@ conv3_results = conv2(MRI_Image,horizontal_edge_detector,'same');
 
 figure(1);
 subplot(2,2,1);
-imagesc(MRI_Image)
+imagesc(MRI_Image')
 axis('equal')
 axis('tight')
 colormap(gray);
 title('Original')
 subplot(222);
-imagesc(conv1_results)
+imagesc(conv1_results')
 axis('equal')
 axis('tight')
 colormap(gray);
 title('3x3 Average')
 subplot(223);
-imagesc(conv2_results)
+imagesc(conv2_results')
 axis('equal')
 axis('tight')
 colormap(gray);
-title('Vertical bottom edge detector')
+title('Vertical edge detector')
 subplot(224);
-imagesc(conv3_results)
+imagesc(conv3_results')
 axis('equal')
 axis('tight')
 colormap(gray);
-title('Horizontal Right edge detector')
+title('Horizontal edge detector')
 
 function y = line1(x)
 %v1 v2 line (line 1)
