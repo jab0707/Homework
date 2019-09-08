@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 SystemPhys/HW1/results.mat
+Bioelectricity/Lab1_Confocal/Group2.lif
