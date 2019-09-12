@@ -75,6 +75,81 @@ Atrial tissue samples were obtained fromt he lab instructor. These samples had b
 \par{3D Stack: } A 3D stack was acquired at a resolution of 512 x 512 pixels per stack ( | \micro m pixel size). A total of 50 slices were taken making for a 512 x 512 x 50 image stack for both fluorophore channels. All other parameters followed the baseline parameters.
 
 \subsection{Image Processing}
+Fir each of the 2d images the .liff stack was imported to the FIJI processing system. Each image was manually adjusted for brightness and contrast to provide the clear visualization. Due to the requirements of the lab, each image was set at a constant relative scaling from 0 to 64\% of the intensity histogram when the brightness and constrast was adjusted. For each 2d image the histogram of signal intensities was assessed for the WGA channel. A threshold was applied at an intensity value of the mode plus one standard deviation. This threshold was used to make a selection in the image of the background signal. The histogram of this background was assessed to calculate the standard deviation of the background. The selection was then inverted to attain a selection of the signal. The histogram of the signal was used toc alculate the mean signal intensity, which when divided by the background standard deviation produced the signal to noise ratio (SNR) of the image. The WGA channel was visualized along with the total signal histogram for each parameter manipulation. Additionally the baseline image cas was visulized using a merged image of the WGA and CX43 channels, with the WGA chanel colored red and the cx43 channel colored green.
+
+
+\section{Results}
+
+
+\begin{figure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/WGA_Baseline.png}
+		\caption{}
+		\label{fig:wga_b}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/WGA_Baseline_Hist.png}
+		\caption{}
+		\label{fig:wga_b_hist}
+	\end{subfigure}
+	\caption{Baseline WGA signal using baseline settings and the hybrid photomultiplier. The acquired signal is shown (a) in red with a 50 micron scale bar in the bottom right. The accompanying signal intensity histogram (b) shows a mode intensity fo 24 with standard deviation of 28.449.}
+	\label{fig:wga_base}
+\end{figure}
+
+
+\begin{figure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/CX43_Baseline.png}
+		\caption{}
+		\label{fig:cx43_b}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/CX43_baseline_Hist.png}
+		\caption{}
+		\label{fig:cx43_b_hist}
+	\end{subfigure}
+	\caption{Baseline connexin signal using baseline settings and the hybrid photomultiplier. The acquired signal is shown (a) in green with a 50 micron scale bar in the bottom right. The accompanying signal intensity histogram (b) shows a mode intensity fo 0 with standard deviation of 1.237.}
+	\label{fig:cx43_base}
+\end{figure}
+
+\begin{figure}
+	
+		\centering
+		\includegraphics[width=.95\textwidth]{FinalFigures/BaselineMerge.png}
+		
+	\caption{Baseline connexin and WGA signal merged using baseline settings and the hybrid photomultiplier. The acquired signal is shown with connexin signal in green and WGA snal in red. A 50 micron scale bar is shown in the bottom right.}
+	\label{fig:base_merge}
+\end{figure}
+
+\begin{figure}
+	
+	\centering
+	\includegraphics[width=.95\textwidth]{FinalFigures/WGA_Baseline_Binary.png}
+	
+	\caption{Baseline connexin and WGA signal merged using baseline settings and the hybrid photomultiplier. The acquired signal is shown with connexin signal in green and WGA snal in red. A 50 micron scale bar is shown in the bottom right.}
+	\label{fig:base_binary}
+\end{figure}
+
+\begin{figure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/CX43_Baseline.png}
+		\caption{}
+		\label{fig:cx43_b}
+	\end{subfigure}%
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=.95\linewidth]{FinalFigures/CX43_baseline_Hist.png}
+		\caption{}
+		\label{fig:cx43_b_hist}
+	\end{subfigure}
+	\caption{Baseline connexin signal using baseline settings and the hybrid photomultiplier. The acquired signal is shown (a) in green with a 50 micron scale bar in the bottom right. The accompanying signal intensity histogram (b) shows a mode intensity fo 0 with standard deviation of 1.237.}
+	\label{fig:cx43_base}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%% Correct Bibliography Style
 
