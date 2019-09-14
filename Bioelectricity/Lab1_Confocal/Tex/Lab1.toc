@@ -2,4 +2,5 @@
 \contentsline {section}{Methods}{3}
 \contentsline {subsection}{Image Acquisition}{3}
 \contentsline {subsection}{Image Processing}{3}
-\contentsline {section}{Results}{3}
+\contentsline {section}{Results}{4}
+\contentsline {section}{Discussion}{11}
