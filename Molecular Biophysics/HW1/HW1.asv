@@ -29,16 +29,18 @@ for ind = 1:length(D)
     
 end
 %%
-
-alpha = 0.462;
-offset = 2e12;
-testR = M.^(alpha);
-
-figure(1);clf();hold on; 
-scatter(M,testR/offset,'r');
+figure(2);clf();
 scatter(M,r,'b');
 set(gca,'yscale','log')
 set(gca,'xscale','log')
-legend({'fit data','measured data'});
-xlabel('Molecular Weight (log)');
-ylabel('Stokes Radius (log)');
+
+alpha = 0.462;
+offset = 1e12;
+testR = M.^(alpha);
+figure(1);clf(); scatter(M,testR,'r')
+set(gca,'yscale','log')
+set(gca,'xscale','log')
+
+figure(3);clf();hold on; scatter(M,testR/offset,'r');scatter(M,r,'b');
+set(gca,'yscale','log')
+set(gca,'xscale','log')
