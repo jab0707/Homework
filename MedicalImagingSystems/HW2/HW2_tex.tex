@@ -115,7 +115,11 @@ N_+ - N_- = \frac{N \gamma \hbar  B_0}{2kT}
 
 By substituting this quantity into Eq~\ref{eqKey} and substituting out $\hbar$ according to Eq~\ref{eq1} we get our final result.
 
-b) at the given dimensions, each voxel would have dimensions of $24/192 cmx 24/192 cmx 1.0mm = 1.25 mm x 1.25 mm x 1.0 mm$ giving us a volume of $1.6 mm^3$ per voxel. $85\%$ of this volume is occupied by water in our tumor. Water has a density of $~1 g/cm^3 = 0.001 g/mm^3$ giving us $1.6 mm^3 * 85\% * 0.001g/mm^3 = 0.0014 g$ of water. At an atomic mass of 14 g/mole, at at a mass of 0.0014 g this gives us $\frac{0.0014 g}{14 g/mole} = 0.0001 mole$ of water molecules. At 2 hydrogen per water molecule this gives us a total of $0.0002 mole$ of hydrogen atoms or $1.2 * 10^{21} $ hydrogen nucli in water molecules. Assuming a body temperature of 310.15 K (37 Celsius), knowing that $\gamma/2*\pi = 42.58 MHz/T$ for hydrogen nuclei, with a 3 T magnet:\\ $M_0 = \frac{N\gamma^2h^2}{16\pi^2kT}B_0 =\frac{Nh^2}{4kT}\frac{\gamma^2}{4\pi^2}B_0 = \frac{1.2*10^{21}* (6.6*10^{-34} J/s)^2}{4*(1.4*10^{-23} J/K)*310.15 K}(42.58 MHz/T)^2*3T$
+b) at the given dimensions, each voxel would have dimensions of $24/192 cmx 24/192 cmx 1.0mm = 1.25 mm x 1.25 mm x 1.0 mm$ giving us a volume of $1.6 mm^3$ per voxel. $85\%$ of this volume is occupied by water in our tumor. Water has a density of $~1 g/cm^3 = 0.001 g/mm^3$ giving us $1.6 mm^3 * 85\% * 0.001g/mm^3 = 0.0014 g$ of water. At an atomic mass of 18 g/mole, at at a mass of 0.0014 g this gives us $\frac{0.0014 g}{18 g/mole} = 7.8*10^{-5}mole$ of water molecules. At 2 hydrogen per water molecule this gives us a total of $1.6*10^{-4} mole$ of hydrogen atoms or $9.6 * 10^{19} $ hydrogen nucli in water molecules. Assuming a body temperature of 310.15 K (37 Celsius), knowing that $\gamma/2*\pi = 42.58 MHz/T$ for hydrogen nuclei, with a 3 T magnet:\\ $M_0 = \frac{N\gamma^2h^2}{16\pi^2kT}B_0 =\frac{Nh^2}{4kT}\frac{\gamma^2}{4\pi^2}B_0 = \frac{9.6 * 10^{19}* (6.6*10^{-34} J*s)^2}{4*(1.4*10^{-23} J/K)*310.15 K}(42.58 MHz/T)^2*3T$\\
+$\frac{9.6 * 10^{19}* (6.6*10^{-34} J*s)^2}{4*(1.4*10^{-23} J/K)*310.15 K}(4.258 * 10^7 Hz/T)^2*3T = 9.4*10^{-12}J/T$\\
+
+Addressing the unit conversions:\\
+$\frac{ (J*s)^2}{J/K*K}\frac{Hz^2*T}{T^2} = J*s^2\frac{1}{T*s^2} = J/T$
 
 
 \section{Q2}
@@ -324,21 +328,42 @@ xlabel('TE (msec)');ylabel('intensity');set(gca,'fontsize',18);
 \end{figure}
 
 \subsection{c}
-To maximize contrast we must maximize Eq~\ref{eq26} with respect to TE.
+To maximize contrast we must maximize Eq~\ref{eq26} with respect to TE where $T_{2t}$ is the T2 for the tumor, $T_{2b}$ is the T2 for the background, $I^*_T$ is the $I^*$ for the tumor, and $I^*_b$ is the $I^*$ for the background.
 \begin{equation}
-\frac{I_{tumor}}{I_{background}} = \frac{e^{-\frac{TE}{T_{2tumor}}}}{e^{-\frac{TE}{T_{2background}}}} = e^{-\frac{TE}{T_{2tumor}} + \frac{TE}{T_{2background}}} = e^{TE(-\frac{1}{T_{2tumor}} + \frac{1}{T_{2background}})}
+I_{tumor}-I_{background} = I^*_Te^{-\frac{TE}{T_{2t}}}-I^*_be^{-\frac{TE}{T_{2b}}} 
 \label{eq26}
 \end{equation}
-By taking the derivative and setting it qual to zero we can get the maxizing value of TE by solving for TE. This is given by Eq~\ref{eq27}
+Taking the derivative and setting it equal to zero then solving for TE gives the maximizing TE. This is seen in EQ~\ref{eq29}~-~\ref{eq34}.
 \begin{equation}
-\frac{I_{tumor}}{I_{background}} = \frac{e^{-\frac{TE}{T_{2tumor}}}}{e^{-\frac{TE}{T_{2background}}}} = e^{-\frac{TE}{T_{2tumor}} + \frac{TE}{T_{2background}}} = e^{TE(-\frac{1}{T_{2tumor}} + \frac{1}{T_{2background}})}
-\label{eq27}
+\frac{d}{dTE}I_{tumor}-I_{background} = -\frac{I^*_T}{T_{2t}}e^{-\frac{TE}{T_{2t}}}+\frac{I^*_b}{T_{2b}}e^{-\frac{TE}{T_{2b}}} => 0
+\label{eq29}
+\end{equation}
+\begin{equation}
+\frac{I^*_b}{T_{2b}}e^{-\frac{TE}{T_{2b}}}=\frac{I^*_T}{T_{2t}}e^{-\frac{TE}{T_{2t}}}
+\label{eq30}
+\end{equation}
+\begin{equation}
+e^{-\frac{TE}{T_{2b}}}e^{\frac{TE}{T_{2t}}}=\frac{I^*_TT_{2b}}{I^*_bT_{2t}}
+\label{eq31}
+\end{equation}
+\begin{equation}
+ln(e^{TE(\frac{1}{T_{2t}}-\frac{1}{T_{2b}})})=\ln(\frac{I^*_TT_{2b}}{I^*_bT_{2t}})
+\label{eq32}
+\end{equation}
+\begin{equation}
+TE(\frac{1}{T_{2t}}-\frac{1}{T_{2b}})=ln(\frac{I^*_TT_{2b}}{I^*_bT_{2t}})
+\label{eq33}
+\end{equation}
+\begin{equation}
+TE_{max}=\frac{ln(\frac{I^*_TT_{2b}}{I^*_bT_{2t}})}{\frac{1}{T_{2t}}-\frac{1}{T_{2b}}} = \frac{ln(\frac{1400*79.0}{187.9*84.1})}{\frac{1}{84.1}-\frac{1}{79.0}} = -2.5*10^3
+\label{eq34}
 \end{equation}
 
+The TE value we get is negative as seen in EQ~\ref{eq34}, however we can take the absolute value of this TE to get out desired TE, seeing as pixel contrast is an absolute value measurement of the difference between the intensities. This negation could also be corrected by flipping the order of the intensities int he original contrast definition. Thus $TE_{max} = 2.5*10^3 msec$.
 
 \section{Q5}
 \subsection{a}
-Generically we have Eq~\ref{eq10}. In our case of a 180 degree pulse $M_{initial} = m_0cos(\alpha) = -M_0$. Substituting this into Eq~\ref{eq10} and distributing $M_0$ in the second term gives the relationship and simplification shown in Eq~\ref{eq28} which is the longitudinal magnetization as a function of $T_1$, $TI$, and $M_0$ where $t = TI$.
+Generically we have Eq~\ref{eq10}. In our case of a 180 degree pulse $M_{initial} = m_0cos(\alpha) = -M_0$. Substituting this into Eq~\ref{eq10} and distributing $M_0$ in the second term gives the relationship and simplification shown in Eq~\ref{eq28} which is the longitudinal magnetization as a function of $T_1$, $TI$, and $M_0$ where $t = TI$. Because these are magnitudes we do not need to worry about projecting the value into the xy plane using a second flip. 
 
 \begin{equation}
 M_z(t) = -M_0  e^{-\frac{t}{T_1}} + m_0-M_0e^{-\frac{t}{T_1}}) = M_0(1-2e^{-\frac{t}{T_1}})
@@ -392,6 +417,36 @@ end
 	\caption{Results of fitting the data for each tissue (red) and plotting using the fit parameters (blue) and Eq~\ref{eq28}. (a) shows the data and fit for tissue 1, while (b) shows the data and fit for tissue 2.}
 	\label{fig:tissuefits}
 \end{figure}
+
+\section{c}
+Like in problem 4 we need to take the derivative of our equation of inters (EQ~\ref{eq28}) in the formulation of contrast between two measurements with respect to TI where t=TI. The contrast eqation is shown in EQ~\ref{eq35}and the resulting derivative and solution for the maximizing TI are shown in EQ~\ref{eq36}~-~\ref{eq39} where $T_{1a}$ is the $T_1$ of tissue 1, $T_{1b}$ is the $T_1$ of tissue 2, $M_{0a}$ is the $M_0$ of tissue 1, and $M_{0b}$ is the $M_0$ of tissue 2.
+
+\begin{equation}
+M_{za}-M_{zb} = M_{0a}(1-2e^{-\frac{TI}{T_{1a}}})-M_{0b}(1-2e^{-\frac{TI}{T_{1b}}})
+\label{eq35}
+\end{equation}
+\begin{equation}
+\frac{d}{dTI}(M_{za}-M_{zb})= -\frac{-2M_{0a}}{T_{1a}}e^{-\frac{TI}{T_{1a}}}+\frac{-2M_{0b}}{T_{1b}}e^{-\frac{TI}{T_{1b}}} => 0
+\label{eq36}
+\end{equation}
+
+\begin{equation}
+\frac{2M_{0b}}{T_{1b}}e^{-\frac{TI}{T_{1b}}}=\frac{2M_{0a}}{T_{1a}}e^{-\frac{TI}{T_{1a}}}
+\label{eq37}
+\end{equation}
+
+\begin{equation}
+e^{TI(\frac{1}{T_{1b}}-\frac{1}{T_{1a}})}= \frac{2M_{0b}T_{1a}}{2M_{0a}T_{1b}}
+\label{eq38}
+\end{equation}
+\begin{equation}
+TI_{maximizer}= \frac{ln(\frac{2M_{0b}T_{1a}}{2M_{0a}T_{1b}})}{\frac{1}{T_{1b}}-\frac{1}{T_{1a}}} = \frac{ln(\frac{359*609}{972*409})}{\frac{1}{409}-\frac{1}{609}} = -744msec
+\label{eq39}
+\end{equation}
+
+Again like problem 4 the result is negative but can be taken at absolute value for the reasons explained in problem 4 part c. Thus the TI that maximizes the contrast for these two tissue for the LONGITUDINAL MAGNETIZATION is 744 msec.
+\section{EC}
+For any given sample the bulk magnetization of the sample is given by $\sum_{i = 1}^{N}\mu _i$ where $N$ is the number of spins in the sample and each $\mu$ is the individual magnetic vectors defined by Eq~\ref{eq4}. This is in the absence of a $B_0$ magnetic field. In a $B_0$ these vectors will align either with or against $B_0$ with energy described by EQ~\ref{eq5}. So far this is looking a lot like problem 1, we need a way to incorporate the individual spin states of these particles into the bulk magnetization shown in problem 1. I am not sure how to address this at the moment but I did find a resource online that described $|\mu| = \gamma \hbar \sqrt{I(I+1)}$ (http://mri.beckman.illinois.edu/interactive/topics/contents/basic\_concepts/index.shtml) where I is the spin quantum number referred to in this problem. I think that substituting this definition for $\mu$ and going through the derivation presented in problem 1 would be on the right track. I however am having trouble reconciling this definition with the ones we have used so far. 
 
 \end{document}
 
