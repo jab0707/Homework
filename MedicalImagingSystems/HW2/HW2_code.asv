@@ -44,24 +44,23 @@ plot([10:1:250],coeffs_background(1).*[10:1:250]+coeffs_background(2),'b','linew
 xlabel('TE (msec)');ylabel('intensity');set(gca,'fontsize',18);
 
 
-%Q5
+%q5
+
 TI = [50 100 200 400 800 1600];
 tissue1 = [-889 -684 -461 99.4 385 780];
 tissue2 = [-261 -217 -108 118 254 339];
 
-objFunc_tiss1 = @(param) LongMagIntensity(TI,tissue1,param);
-optParams_tiss1 = fminsearch(objFunc_tiss1,[100,100]);
+objFunc = @(param) LongMagIntensity(TI,tissue1,param);
+optParams = fminsearch(objFunc,[500,500]);
+
 figure(1);clf();hold on;
 plot(TI,tissue1,'r','linewidth',2);
-plot([50:1600],optParams_tiss1(1).*(1-2*exp(-[50:1600]/optParams_tiss1(2))),'b','linewidth',2);
-xlabel('TI (msec)');ylabel('intensity');set(gca,'fontsize',18);
+plot([50:1600],tissue1,'r','linewidth',2);
 
-objFunc_tiss2 = @(param) LongMagIntensity(TI,tissue2,param);
-optParams_tiss2 = fminsearch(objFunc_tiss2,[100,100]);
-figure(2);clf();hold on;
-plot(TI,tissue2,'r','linewidth',2);
-plot([50:1600],optParams_tiss2(1).*(1-2*exp(-[50:1600]/optParams_tiss2(2))),'b','linewidth',2);
-xlabel('TI (msec)');ylabel('intensity');set(gca,'fontsize',18);
+[costTissue1, T1_tissue1,M0_tissue1] = FitParameters(TI,tissue1,0.001,0.001);
+
+
+
 
 function cost = LongMagIntensity(TI,m,param)
     M0 = param(1);
