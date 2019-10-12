@@ -1,6 +1,6 @@
 %Q2
 %part 1 making a spiral with trig functions
-timeSprial = [0:.1:100*pi];
+timeSprial = [0:.1:10*pi];
 xgradSpiral = -sin(timeSprial).*timeSprial;
 ygradSpiral = -cos(timeSprial).*timeSprial;
 flipSpiral = ones(length(timeSprial),1);
@@ -63,5 +63,6 @@ end
 figure(figNum);clf();
 plot(fullPath(1,:),fullPath(2,:),'linewidth',2)
 axis('equal')
+xticks('off')
 
 end
