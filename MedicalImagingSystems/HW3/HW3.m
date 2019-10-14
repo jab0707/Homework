@@ -1,15 +1,22 @@
 %Q2
 %part 1 making a spiral with trig functions
-timeSprial = [0:.1:10*pi];
-xgradSpiral = -sin(timeSprial).*timeSprial;
-ygradSpiral = -cos(timeSprial).*timeSprial;
-flipSpiral = ones(length(timeSprial),1);
-PlotKSpace(xgradSpiral,ygradSpiral,flipSpiral,1);
+timeSpiral = [0:.1:10*pi];
+xgradSpiral = -sin(timeSpiral).*timeSpiral;
+ygradSpiral = -cos(timeSpiral).*timeSpiral;
+%negative one at each time instance with a 180 flip
+flipSpiral = ones(length(timeSpiral),1);
+%one when sampling, 0 when positioning
+sampleSprial = ones(length(timeSpiral),1);
+PlotKSpace(xgradSpiral,ygradSpiral,flipSpiral,sampleSprial,1);
 figure(2);
-plot(xgradSpiral);
-figure(3)
-plot(ygradSpiral);
+plot(xgradSpiral,'linewidth',2)
+xlabel('time');
+ylabel('Gx');
 
+figure(3)
+plot(ygradSpiral,'linewidth',2)
+xlabel('time');
+ylabel('Gy');
 %Part two making a start step
 
 %get it into the starting position
@@ -40,15 +47,28 @@ addOnY = repmat(repeatYgrad,1,11);
 xgradStep = [xgradStep,addOnX,-.2.*ones(1,10)];
 ygradStep = [ygradStep,addOnY,zeros(1,10)];
 
-PlotKSpace(xgradStep,ygradStep,ones(size(xgradStep)),4);
+samplingStep = ones(length(xgradStep),1);
+samplingStep(1:10)=0;
+
+PlotKSpace(xgradStep,ygradStep,ones(size(xgradStep)),samplingStep,4);
 figure(5);
-plot(xgradStep);
+plot(xgradStep,'linewidth',2)
+xlabel('time');
+ylabel('Gx');
 figure(6)
-plot(ygradStep);
+plot(ygradStep,'linewidth',2)
+xlabel('time');
+ylabel('Gy');
 
-
-function PlotKSpace(xgrad,ygrad,flips,figNum)
-
+function PlotKSpace(xgrad,ygrad,flips,sampling,figNum)
+%Plots the K space trajectory. Designed with single shot trajectories in
+%mind. Currently does not handle multiple positing trajectories. Assumes
+%last positing location is beginning of sampling trajectory
+if sampling(1) == 1
+    sampling = [1;sampling];
+else
+    sampling = [0;sampling];
+end
 
 fullPath = zeros(2,length(xgrad) + 1);
 
@@ -56,13 +76,19 @@ for t = 1:length(xgrad)
 fullPath(:,t+1) = fullPath(:,t).*flips(t);%If there is a flip at this time point, then flip the previous coordinates
 
 fullPath(:,t+1) = fullPath(:,t) + [xgrad(t);ygrad(t)];
-
-    
-    
 end
-figure(figNum);clf();
-plot(fullPath(1,:),fullPath(2,:),'linewidth',2)
+figure(figNum);clf;hold on;
+%plot any positiing
+%Note for future: add functionality to split
+%positining paths so that they can be plotted properly if there
+%Is more than one.
+%Plot the sampling trajectory and positining
+plot(fullPath(1,:),fullPath(2,:),'b','linewidth',2)
+%Plot the positing trajectory over the sampling in a different color
+plot(fullPath(1,sampling == 0),fullPath(2,sampling == 0),'r','linewidth',2)
 axis('equal')
-xticks('off')
+xlabel('Kx');
+ylabel('Ky');
+hold off
 
 end

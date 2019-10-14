@@ -18,6 +18,7 @@
 \usepackage{tabularx}
 \usepackage{siunitx}
 \usepackage{matlab-prettifier}
+\usepackage{wrapfig,lipsum,booktabs}
 %%%%%%%%%%%%Defining the margins %%%%%%%%%%%%%%%%%%%%%
 \textheight 9.in
 \textwidth 6.5in
@@ -70,18 +71,202 @@ For question 1 I have re-drawn the sequence on the attached pages as can be seen
 \noindent\textbf{a: }
 Looking at sequence a it was clear that I would achieve this sort of pattern using sin and cos waveforms of the two gradients.  However simply using a sin for one gradient and a cos for the other would result in a circular trajectory in the K space when the two were integrated and used to plot the K space trajectory. Thsu there needed to be a term that started at zero and constantly increased as time went on such that the amplitudes of the sin and cos functions would increase result in spirals. The easiest way to do this was to multiply the function defining the waveform by time. My initial sketch for what this shouldlook like in the pulse sequence is shown in Drawing  4. Note that after excitation the acquistion is constant as the $G_x$ and $G_y$ change in the linearly increasing sinusiodal waveform.
 
-The second sequence was not as easily drawn out with simple trig function. It shows a repetitive sequence of alternating directions of $G_x$ pulses interpsaced with negative $G_y$ pulses to advance the sampling through the K space. There is first an initial positiing pulse on both gradients to get tot he starting position. These Sequences are depicted in Drawing 5.
+The second sequence was not as easily drawn out with simple trig function. It shows a repetitive sequence of alternating directions of $G_x$ pulses interpsaced with negative $G_y$ pulses to advance the sampling through the K space. There is first an initial positiing pulse on both gradients to get to the starting position. These Sequences are depicted in Drawing 5.
 
 \noindent\textbf{b: }
-The matlab code below was used to generate k-space sampling matching those presented. I had to change around the sina nd cos functions for the spiral plot a few times to make sure it started in the proper position and went in the proper direction. The resulting K space sampling is shown in Figure~
+The matlab code below was used to generate k-space sampling matching those presented. I had to change around the sin and cos functions for the spiral plot a few times to make sure it started in the proper position and went in the proper direction. The resulting K space sampling is shown in Figure~\ref{fig:spiral}. A shows the K space sampling resulting from the gradients shown in B and C. As for the second pattern Figre~\ref{fig:step} shows the matlab results wit A being the K space trajectory, B being the x gradient and C being the Y gradient. The red line denotes a positioning trajectory while the blue line denotes the sampling trajectory.
+
+
+\begin{figure}[H]
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/SpiralK.png}
+	\caption{}
+	\label{Fig:spiralK}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/SpiralGx.png}
+	\caption{}
+	\label{Fig:spiralGx}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/SpiralGy.png}
+	\caption{}
+	\label{Fig:spiralGy}
+\end{subfigure}
+\caption{The K space trajectory and associated gradients for the spiral pattern. A shows the rresulting trajectory. B shows the X gradient, and C shows the Y gradient. The units of the axes are 1/distance for A, and Gauss/distance squared by time for B and C. Teh actual values of the axes are irrelevant to replicating the pattern as the pattern can be scaled to match desired axes limits.}
+\label{fig:spiral}
+\end{figure}
+
+\begin{figure}[H]
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/StepK.png}
+	\caption{}
+	\label{Fig:stepK}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/StepGx.png}
+	\caption{}
+	\label{Fig:stepGx}
+\end{subfigure}
+\begin{subfigure}{0.3\textwidth}
+	
+	\includegraphics[width=\textwidth]{Figures/StepGy.png}
+	\caption{}
+	\label{Fig:stepGy}
+\end{subfigure}
+\caption{The K space trajectory and associated gradients for the step pattern. A shows the resulting trajectory with an initial positing in red and the sampling in blue. B shows the X gradient, and C shows the Y gradient. The units of the axes are 1/distance for A, and Gauss/distance squared by time for B and C. Teh actual values of the axes are irrelevant to replicating the pattern as the pattern can be scaled to match desired axes limits.}
+\label{fig:step}
+\end{figure}
 
 \begin{lstlisting}[style=Matlab-editor]
-%
+%Q2
+%part 1 making a spiral with trig functions
+timeSpiral = [0:.1:10*pi];
+xgradSpiral = -sin(timeSpiral).*timeSpiral;
+ygradSpiral = -cos(timeSpiral).*timeSpiral;
+%negative one at each time instance with a 180 flip
+flipSpiral = ones(length(timeSpiral),1);
+%one when sampling, 0 when positioning
+sampleSprial = ones(length(timeSpiral),1);
+%Function defined below
+PlotKSpace(xgradSpiral,ygradSpiral,flipSpiral,sampleSprial,1);
+figure(2);
+plot(xgradSpiral,'linewidth',2)
+xlabel('time');
+ylabel('Gx');
+
+figure(3)
+plot(ygradSpiral,'linewidth',2)
+xlabel('time');
+ylabel('Gy');
+%Part two making a start step
+
+%get it into the starting position
+clear
+xgradStep(1:10) = .1;
+ygradStep(1:10) = .1;
+
+%The following segments will be repeated to do each step
+repeatXgrad(1:10) = -.2;%First going backwayrds in x
+repeatYgrad(1:10) = 0;%And not moving on y
+%There are 11 steps to go from the most positive y value to the y axis, and
+%I assume a unit value for the maximum y. Let's assume we only take two
+%time steps to get from one y level to another
+repeatXgrad(11:12) = 0;%Don't move x during this time
+repeatYgrad(11:12) = -1/22;%11 steps per 1 unit, but pbroken into two steps makes 22 per one unit
+
+repeatXgrad(13:22) = .2;%now go forward in x
+repeatYgrad(1:10) = 0;%And not moving on y
+
+repeatXgrad(23:24) = 0;%Don't move x during this time
+repeatYgrad(23:24) = -1/22;%11 steps per 1 unit, but pbroken into two steps makes 22 per one unit
+
+%Repeat the above 11 times then add one final negative x move
+
+addOnX = repmat(repeatXgrad,1,11);
+addOnY = repmat(repeatYgrad,1,11);
+
+xgradStep = [xgradStep,addOnX,-.2.*ones(1,10)];
+ygradStep = [ygradStep,addOnY,zeros(1,10)];
+
+samplingStep = ones(length(xgradStep),1);
+samplingStep(1:10)=0;
+
+PlotKSpace(xgradStep,ygradStep,ones(size(xgradStep)),samplingStep,4);
+figure(5);
+plot(xgradStep,'linewidth',2)
+xlabel('time');
+ylabel('Gx');
+figure(6)
+plot(ygradStep,'linewidth',2)
+xlabel('time');
+ylabel('Gy');
+
+function PlotKSpace(xgrad,ygrad,flips,sampling,figNum)
+%Plots the K space trajectory. Designed with single shot trajectories in
+%mind. Currently does not handle multiple positing trajectories. Assumes
+%last positing location is beginning of sampling trajectory
+if sampling(1) == 1
+sampling = [1;sampling];
+else
+sampling = [0;sampling];
+end
+
+fullPath = zeros(2,length(xgrad) + 1);
+
+for t = 1:length(xgrad)
+fullPath(:,t+1) = fullPath(:,t).*flips(t);%If there is a flip at this time point, then flip the previous coordinates
+
+fullPath(:,t+1) = fullPath(:,t) + [xgrad(t);ygrad(t)];
+end
+figure(figNum);clf;hold on;
+%plot any positiing
+%Note for future: add functionality to split
+%positining paths so that they can be plotted properly if there
+%Is more than one.
+%Plot the sampling trajectory and positining
+plot(fullPath(1,:),fullPath(2,:),'b','linewidth',2)
+%Plot the positing trajectory over the sampling in a different color
+plot(fullPath(1,sampling == 0),fullPath(2,sampling == 0),'r','linewidth',2)
+axis('equal')
+xlabel('Kx');
+ylabel('Ky');
+hold off
+
+end
 \end{lstlisting}
 
 \section{Q3}
+\noindent\textbf{a: }
+For this problem we want to use EQ~\ref{eq1} to calculate gsl. First we solve for $G_Z$, which we can rearrange for as shown in Eq~\ref{eq2}. We choose a $\gamma$ value for hydrogen atoms in water at $42.58 \frac{MHz}{T}$ which converts to $4258 \frac{Hz}{Gauss}$. In our case the slive thichness is 1.0 mm, or 0.1 cm, which is our value for $z$. The sinc pulse for this gls1  is 4 ms, which equates to a $f_0$ of $1/4ms = 250 Hz$. Plugging in all of these number to Eq~\ref{eq2} gives us $3.69 Gauss/cm$ for Gsl1. The gfrf should have the same area under the curve as half of the gsl. If we can assume that the gsrf has a duration of half that of the gsl1 (which appears to be the case based on the image) then the amplitude of the gsrf is $-3.69 Gauss/cm$. For gsl2 the sinc pulse is twice as long, leading to a $f_0$ that is half that of gsl1, thus the aplitude of gsl2 is half that of gsl1, which is $1.85 Gauss/cm$.
+
+\begin{equation}
+f_0 = \frac{\gamma}{2\pi}G_zz
+\label{eq1}
+\end{equation}
+\begin{equation}
+G_z = \frac{2\pi f_0}{\gamma z}
+\label{eq2}
+\end{equation}
+
+\noindent\textbf{b: }
+For this problem we want to focuse on Eq~\ref{eq3}. A simmilar formula holds for the $G_y$ and $K_y$ relationship. We know that the spatial frequency k space trajectory traveresed ($K_x$) is equal to the inverse of the spatial domain, therefore $K_x = \frac{1}{20cm}$. Given that we want to take 192 samples (to get our 192 x 192 image) and we are working with a 50 KHz digitizer we can determine that the time of the gro pulse must be $\frac{192}{50KHz} = 0.0038 s = t$. Now given that we have rectangular pulses, and an integral calculates the area underr the curve, we can simplify Eq~\ref{eq3} by incorperating the fact that $\int_{0}^{t}G_x(\tau)d\tau = G_xt$, while also solving for $G_x$ to get Eq~\ref{eq4}. Now using the same gamma as above ($4258 Hz/Gauss$) we can plug in our known quantities and get that the gro pulse must have an amplitude of $0.019 Gauss/cm$. This corresponds to a traversal across the K space whereas given the structure of this pulse sequence, the grdp must dephase the signal into the positive X direction of th eK space before the 180 inversion sets the K space location to be at the beginning of the gro trajectory. Thus the grdp should have a duration half that of the gro and an amplitude \textbf{the same} as the gro. 
+
+\begin{equation}
+K_x = \frac{\gamma}{2\pi} \int_{0}^{t}G_x(\tau)d\tau
+\label{eq3}
+\end{equation}
+\begin{equation}
+G_x = \frac{2\pi K_x}{\gamma t}
+\label{eq4}
+\end{equation}
+
+\noindent\textbf{c: }
+For this part we use the same relationship established in Eq~\ref{eq4} but using terms specific for $G_y$ and $K_y$. In this case the trajectory traveresed by $K_y$ totals to again be $1/20cm$ however it is broken up into 192 steps as each $G_y$ pulse only dephases us one step in either the positive or negative $K_y$ directions. Thus $K_y = \frac{\frac{1}{20 cm}}{192}$ Based on the diagram I assume that the $G_y$ gpe pulses have a duration that matches the grdp which is half of that of the gro as defined in part b. Thus using these changes we can caluclate that the incremental phase encoding amplitude is $0.0002 Gauss/cm$. The initial amplitude is zero as we want at least one trajectory to traverse the origin of the k space.
+	
+
+\section{Q4}
+\noindent\textbf{a: }
+The required sketch is shown in Drawing 6.
+\noindent\textbf{b: }
+For the original sequence we know that the time between the center fo the two rf pulses is equal to half of the TE. The time in between the middle of the second RF pulse and the middle of the gro sequence is also equal to half the TE. The first pulse has a total time of 4 ms, and the second is 8 ms, thus the times between the center of the pulses and the begennings or ends are 2 and 4 ms respectivly. We know that the gro pulse, using the described digitizer, has a duration of 0.0038 sec or 3.8 ms. Thus time time between the intiaition of this pulse and its halfway point is 1.9 ms, which is also the time of the gpe and grdp pulses. the gsl pulse is 2 ms (half the duration of the gls pulse). Thus the closest the two rf pulses could get to each other (thus the shortest TE ) in this case is dictated by the widest pulse that has to be included, which in this case is the gsl at 2 ms, thus the minimal TE is 2x(2ms + 2ms + 4ms) = 16 ms. It is true that the gro could come closer to the gsl2 pulse but this would force the two slice selection gradients too close to allow for the gsrf to occur without overlap. If the gsrf could be shortened (by increasing its amplitude) to match the gpe and grdp pulses this could decrease the minimal TE to (2x(2ms+1.9ms+4ms)) 15.8ms.
+
+For the altered pulse sequence all of the same pulse widths apply. The two pulses can only get so close as to not cause overlab between the gls pulses and the gsrf pulse. These cause a minimal again of 16 ms (2x(2+2+4)). Considering the new position of the grdp pulse this means the teoretical limit of how close in time the center fo the secon RF pulse and the center of the gro pulse can get goes from 5.9 ms(5 ms from the pulse, 1.9 from half of the gro) to 7.8 ms (4 ms from the rf pulse, 1.9 ms from the grdp, 1.9 ms from the gro). This however is still a shorter time that the minimum time between the two rf pulses as dicated by their widths and the width of the gsl (2ms from rf pulse 1, 2ms from gsl, 4ms from rf pulse 2). This timing of 8 ms is larger and thus the limiteng factor.
+\noindent\textbf{c: }
+
+\section{Q5}
+\noindent\textbf{a: }
 
 
+\noindent\textbf{b: }
+For this sectoion we simply perform a manipulation of Eq~\ref{eq1} by instead solving for the z and plugging in all of the same known quantities from equation 3 with the addition of using the maximum allowed gradient amplotude of 4 gauss/cm. This gives us a slice thicknes of 0.092 cm.
+
+Now we can look at the xy resolution inplane. Again we perform the same kind of rearrangement, this time to Eq~\ref{eq3} solving for $K_x$ bu plugging in the maximum $G_x$ of 4 Gauss/cm. We know that the spatial X traveresed is equal to $\frac{1}{K_x}$. This gives us a traversal of 0.077 cm. This is how far we scan for the entire gro, and thus the size of the assumed-to-be-square pixels is 0.097cm/192 = $5.06\mu m$ for a 192x192 pixel slice.
 
 \end{document}
 
