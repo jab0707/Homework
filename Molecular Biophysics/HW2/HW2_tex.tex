@@ -1,0 +1,85 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\usepackage[numbers,round]{natbib}
+\bibliographystyle{apalike}
+\usepackage{changebar}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{comment}
+\usepackage{matlab-prettifier}
+%\usepackage{siunitx}
+%\usepackage{seqsplit}
+\textheight 9in
+\textwidth 6.5in
+%\topmargin -1in
+%\oddsidemargin -.2in
+
+
+%%%%%%%%%%%%%%%%%%%%%%% New commands
+
+% These are handy commands you can use to create consistent and correct
+% special characters, units, and expressions.
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\etc}{{\em etc.}}
+\newcommand{\eg}{{\em e.g.,}}
+\newcommand{\ie}{{\em i.e.,}}
+\newcommand{\cpp}{C{\raisebox{0.5ex}{\tiny++}}}
+\newcommand{\degrees}{{$^{\circ}$}}
+\newcommand{\muv}{${\rm \mu V}$}
+\newcommand{\ohm}{$\Omega$}
+\newcommand{\sft}{${\rm ft^2}$}
+
+
+\begin{document}
+	
+	
+
+
+\title{HW2: Molecular Biophysics}
+\author{Jake Bergquist, u6010393 }
+\maketitle
+
+\section{Q1}
+For this problem first I will use the relationship defined in Eq~\ref{eq1} which relates flux $\phi$ to the diffusion constant $D$, change in concentration $\Delta C$, and change in distance $\Delta x$. I searched and found a literature value for $D = 5.5*10^{-6}\frac{cm^2}{s}$. Based ont eh problem setup we go from a concentration of $4 mM$ to $0 mM$, thus $\Delta c = c2-c1 = -4.4mM$. The length of the axon is $1m = \Delta x$. Now for some unit conversion. $-4.4 mM = -0.004 M = 0.004 * 6.023*10^{23}\frac{molecules}{L} = \frac{-0.004 * 6.023*10^{23}}{1000}\frac{molecules}{cm^3} = -2.409 * 10^{18} \frac{molecules}{cm^3}$, $\Delta x = 1m = 100 cm$. Now that everything is in terms of cm, s, and molecules we can evaluate Eq~\ref{eq1}, which results in a vlaue of $1.32*10^{11}\frac{molecules}{cm^2s}$. By multiplying this flux per area by the crossectional area of the axon we get the quantity of molecules per second out the ned of the axon by diffusion. The axon has a diameter of $10\mu m = 1*10^{-3} cm$. Thus the area is $\frac{4\pi r^2}{3} = \frac{4\pi (d/2)^2}{3} =\frac{4\pi (5*10^{-4)cm})^2}{3} = 7.85*10^{-7} cm^2$. Multiplying this area by the flux we get a total of $1.036*10^5 \frac{molecules}{second}$.  For a signal the described delivery amounts to 3 million molecules per impulse. Using the diffusion rate we jsut solved for this would take 3million/103600 = 28.95 seconds. This rate of fire is way too slow, as a neuron is typically able to fire many many times a second.
+\begin{equation}
+\phi = -D \frac{\Delta c}{\Delta x}
+\label{eq1}
+\end{equation}
+\section{Q2}
+For this section I used the convection equation as described by Eq~\ref{eq2}, where $t$ is time (80 seconds), $u$ is position, $m$ is number of particles ($10^9$), v is drift velocity ($1\frac{\mu m}{s}$), and G is the diffusion constant ($10^{-6}\frac{cm^2}{s}$). If we consider that diffusion happens in all directions, and that it follows a normal or gaussian distribution, then it makes sense that even if a force is pushing objects in a certain direction, this only acts to move the center of the distribution, and it is still possible to find particles on both sides of the distribution (both with and against the applied force). By plugging in u = 0 to Eq~\ref{eq2} we get the molecules/cm = $2.58*10^{10}$.
+\begin{equation}
+convection = \frac{e^{-\frac{(u - tv)^2}{4Gt}}m}{2\sqrt{\pi}\sqrt{Gt}}
+\label{eq2}
+\end{equation}
+\section{Q3}
+Using the relationship established in Eq~\ref{eq3} we can determine the radius of the nano particles by using the effective mass (m) which is equal to $v(D_{gold}-D_{water})$ where $v$ is the volume of the particle $ = \frac{4}{3}\pi r^3$. A simple substitution and rearrangement to solve for r yields Eq~\ref{eq4} where $k$ is the Boltzmann's constant, T is the temperature (assumed to be room temperature of 293 K), g is acceleration due to gravity (9.8 $m/s^2$) and $\lambda$ is the distance at which the density decreases by $e$-fold, 9 mm.  Using this equation and the known values from the problem we get $r = 827^10{-8} m = 82.7 nm$.
+
+\begin{equation}
+\lambda = \frac{kT}{mg}
+\label{eq3}
+\end{equation}
+
+\begin{equation}
+r = (\frac{3kT}{4\pi(D_{gold}-D_{water})g\lambda})^{\frac{1}{3}}
+\label{eq4}
+\end{equation}
+
+\section{Q4}
+The relationship shown in Eq~\ref{eq5} was provided. When the particle is moving with the force 
+
+\begin{equation}
+t = 2(\frac{x^2_0}{2D})(\frac{kT}{FX_0})^2(e^{-\frac{Fx_0}{kT}}-1+\frac{Fx_0}{kT})
+\label{eq5}
+\end{equation}
+
+\end{document}
+
+
+
+
+
+
+
+
