@@ -69,9 +69,27 @@ As is the case with many biomedical domains, a powerful tool for investigation o
 ECGSim is a powerful research and educaton tool that leavarges the forward relationship of cardiacl electrophysiology in order to provide a robust platform for realtime analysis and investigation of the consequences of changes to underlying cardiac source behavior and the resultant body surface ECG. The core of ECGSim is built on the source model of transmembrane voltage efined on the endo and epicardial surfaces, and a boundary element formulation top calculate a forward transfer matrix. Because the transfer matrix can be calculated independently of the cardiac source signals and only depends on the description of the volume conductor (geometry and conductances) it can be precomputed. This allows changes in the cardiac source to be propagated to the body surface ECG in near real time. The key feature of ECGSim allows for dynamic and interactive exploration of how changes to the cardiac source result in changes in the measured ECG. ECGSim allows for changes to action potnetial morphology including changes of resting membrane potnetial, plateau potential, activation time, and recovery time. These changes can be made across the heart gewometry and can be varied heterogeneously. ECGSim comes with several prepared datasets and is available for the integration of novel datasets. The simulated signals can be visualized and interrogated in real time according to activation time, extracellular potential, transmembrane potnetial, recovery time, and activation recovery interval on the heart surface. On the body surface the body surface potential, activation map, and recovery map as well as a few other visualizations can be explored in rela time, in addition to the full simulated ECG signals from the 12 lead (and other) lead sets.
 
 \section{Methods}
+For all sections of this lab the default normal male case file was used. In between each lab section the default file was reloaded to prevent perturbations from previous sections from affecting subsequent ones.
 
+\subsection{1.1: }
+Using the default case I investigated the temporal sequence of activation. I visualized the activation times, as well as the transmembrane potentials and scrolled through time in order to watch the activation propagation. I noted what areas of the endo and epicardium activated first and last, and in what direction the propagation spread.
+\subsection{1.2: }
+Using the default case I investigated the temporal sequence of deactivation or repolarization. I visualized the recovery times, as well as the transmembrane potentials and scrolled through time in order to watch the recovery sequence. I noted what areas of the endo and epicardium recovered first and last and made comparisons to the observations of activation from section 1.1.
+\subsection{1.3: }
+Using the default case I investigated the arrangement and patterns of the extracellular cardiac potentials during the cardiac cycle. I visually assessed timepoints and locations of high potential gradient and observed the range and distributions of potentials during the cycle.
 
+\subsection{2.1: }
+I investigated the reconstruction of the 12 lead ECG in the ECG sim environment by examining the body surface potnetials through the heart beat. By using the vECGSim settings that visualize the lead placement for the simulated 12 lead electrode set I was able to interrogate how the body surface potential map translated tot he 12 lead ECG signals displayed.
+
+\subsection{2.2: }
+ In order to investigate changes to the action potential duration and how they would effect the resultant ECG I modified the action potential duration of the left ventricular free wall by $\pm$25\% and $\pm$50\% . I used the single node selection tool and set the changes to be transmural. I then set the area of effect to cover most of the left ventricular free wall. I oberved and documented hte resulting changes to the ECG signals at each of these perturbations. In particular I assessed changes to the waveform measured by Einthoven lead I. 
+ 
+ \subsection{2.3: }
+ In order to simulate left bundle branch block I altered the activation times of the tissue transmurally int he left ventricle starting at the basal free wall. This region should have the latest activation in the case of left bundle branch block, and thus I delayed activation here by roungly 100 ms. Using the multi-node select tool and a small area of effect I incrementally adjusted actvation times down the left ventricular free wall towards the septum to create a gradient of activation starting at the septum and ending at the basal left ventricular free wall. I then assessed the resulting changes to the ECG under these conditions.
+ 
+ 
 \section{Results}
+
 
 \section{Discussion and Conclusions}
 
