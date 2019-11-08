@@ -1,4 +1,16 @@
 \contentsline {section}{Introduction}{2}% 
 \contentsline {section}{Methods}{3}% 
-\contentsline {section}{Results}{3}% 
-\contentsline {section}{Discussion and Conclusions}{3}% 
+\contentsline {subsection}{1.1: }{3}% 
+\contentsline {subsection}{1.2: }{4}% 
+\contentsline {subsection}{1.3: }{4}% 
+\contentsline {subsection}{2.1: }{4}% 
+\contentsline {subsection}{2.2: }{4}% 
+\contentsline {subsection}{2.3: }{4}% 
+\contentsline {section}{Results}{4}% 
+\contentsline {subsection}{1.1: }{4}% 
+\contentsline {subsection}{1.2: }{6}% 
+\contentsline {subsection}{1.3: }{7}% 
+\contentsline {subsection}{2.1: }{9}% 
+\contentsline {subsection}{2.2: }{10}% 
+\contentsline {subsection}{2.3: }{10}% 
+\contentsline {section}{Discussion and Conclusions}{10}% 
