@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\usepackage[numbers,round]{natbib}
+\bibliographystyle{apalike}
+\usepackage{changebar}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{comment}
+\usepackage{matlab-prettifier}
+%\usepackage{siunitx}
+%\usepackage{seqsplit}
+\textheight 9in
+\textwidth 6.5in
+%\topmargin -1in
+%\oddsidemargin -.2in
+
+
+%%%%%%%%%%%%%%%%%%%%%%% New commands
+
+% These are handy commands you can use to create consistent and correct
+% special characters, units, and expressions.
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\etc}{{\em etc.}}
+\newcommand{\eg}{{\em e.g.,}}
+\newcommand{\ie}{{\em i.e.,}}
+\newcommand{\cpp}{C{\raisebox{0.5ex}{\tiny++}}}
+\newcommand{\degrees}{{$^{\circ}$}}
+\newcommand{\muv}{${\rm \mu V}$}
+\newcommand{\ohm}{$\Omega$}
+\newcommand{\sft}{${\rm ft^2}$}
+
+
+\begin{document}
+	
+	
+
+
+\title{HW2: Molecular Biophysics}
+\author{Jake Bergquist, u6010393 }
+\maketitle
+
+\section{Q1}
+\textbf{a: }
+First we define the three kinetic expressions in terms of the binding and unbinding constants and the substrates and products that contribute to or detract from their current concentrations. These are shown below.\\
+$
+\frac{dC_1}{dt} = R_1Lk_{f1} + C_3k_{ul} - C_1k_{r1} - C_1Xk_{c1}\\
+\frac{dC_2}{dt} = R_1Xk_{c2} + C_3k_{r2} - C_2k_{u2} - C_2Lk_{f2}\\
+\frac{dC_3}{dt} = C_1Xk_{c1} + C_2Lk_{f2} - C_3k_{r2} - C_3k_{ul}\\
+$
+Next we establish the following relationships:\\
+$
+R_1 = R_T - C_1 - C_2 - C_3\\
+X = X_T - C_2 - C_3\\$
+
+By Substituting these relationships in for $R_1$ and $X$ we achieve our final results.\\
+$
+\frac{dC_1}{dt} = (R_T - C_1 - C_2 - C_3)Lk_{f1} + C_3k_{ul} - C_1k_{r1} - C_1(X_T - C_2 - C_3)k_{c1}\\
+\frac{dC_2}{dt} = (R_T - C_1 - C_2 - C_3)(X_T - C_2 - C_3)k_{c2} + C_3k_{r2} - C_2k_{u2} - C_2Lk_{f2}\\
+\frac{dC_3}{dt} = C_1(X_T - C_2 - C_3)k_{c1} + C_2Lk_{f2} - C_3k_{r2} - C_3k_{ul}\\
+$
+
+\textbf{b: }
+First we establish the following relationships:\\
+$
+C_1 = R_1Lk_1\\
+C_2 = R_1Xk_2\\
+C_3 = C_1Xk_3\\
+C_3 = C_2Lk_4\\
+$
+Then we can construct the binding function. We substitute out any terms that do not include $R_1$.\\
+$
+R_1Q = R_1 + C_1 + C_2 + C_3\\
+R_1Q = R_1 + R_1Lk_1 + R_1Xk_2 + C_1Xk_3\\
+R_1Q = R_1 + R_1Lk_1 + R_1Xk_2 + R_1Lk_1Xk_3\\
+Q = 1 + Lk_1 + Xk_2 + Lk_1Xk_3\\
+$
+By factoring out $R_1$ we get the binding polynomial Q. In order to obtain the mentioned analytical solution we would need to establish 6 equations to solve for the 6 unknowns. To do so we would use the 3 kinetic equations established in part a, and add one equation for the change in R1, as well as one for X and one for L. This would give us the 6 required equations that describe the change in each species concentration over time. With this we can solve for the number of bound ligands as a function of ligand concentration.
+
+\section{Q2}
+\textbf{a: }
+First we use the relationship below which can be rearranged as shown:\\
+$
+\Delta G = -RTln(K)\\
+K = e^{-\frac{\Delta G}{RT}}\\
+$
+Next we plug in known values and solve for K, which is unitless:\\
+$
+K = e^{-\frac{\Delta G}{RT}} = e^{-\frac{-3.9 kcal/mol}{1.987 *10^{-3} kcal/mol K * 300 K}} = e^{6.5425} = 694.037\\
+$
+\textbf{b: }
+If we go around in a clockwise circle starting at U we get the following relationships fo free energy changes (note that when we went against the direction of an arrow we had to take the negative fo the free energy for that reaction) We then can substitute in according tot he relationship shown in part A, and divide out the $-RT$ term from each expression. This leaves us with logorithms which can be combined in order to solve for $B_u$ as shown below:\\
+$
+\Delta G_{U->H} +\Delta G_{H->HX}  -\Delta G_{UX->HX}  - \Delta G_{U->UX}  = 0\\
+(-RTln(K)) + (-RTln(B_h))  - (-RTln(K_0)) - (-RTln(B_u)) = 0\\
+ln(K) + ln(B_h)  - ln(K_0) - ln(B_u) = 0\\
+ln(K) + ln(B_h)  - ln(K_0) = ln(B_u) \\
+ln(B_u) = ln(\frac{KB_h}{K_0})\\
+B_u = \frac{KB_h}{K_0} = \frac{694.037*10}{1} = 6940.37 \\
+$
+\textbf{c: }
+We want an expression int he following form:\\
+$
+f(X) = \frac{U + UX}{U + UX + H + HX}\\
+$
+We also have the following relationships to work with:\\
+$
+B_u = \frac{UX}{U*X}\\\\
+B_h = \frac{HX}{H*X}\\\\
+K = \frac{H}{U}\\\\
+K_0 = \frac{HX}{UX}\\\\
+$
+By substituting into the desired equation and such that every term has a $U$ term, then canceling out the $U$ term we get the desired relationship in terms of the rate constants $B_u, k, B_h$, and X.\\
+$
+f(X) = \frac{U + UX}{U + UX + H + HX} = \frac{U + B_u*X*U}{U + B_u*X*U + K_u*U + B_h*H*X} =\frac{U + B_u*X*U}{U + B_u*X*U + K_u*U + B_h*K*U*X} =  \frac{1 + B_u*X}{1 + B_u*X + K_u + H_h*K*X}
+$
+\textbf{d: }
+
+
+\section{Q3}
+\textbf{a: } This is graph 4 because we see that the X-intercept, which describes the binding constant, has not changed, but the slope and Y intercept have canged indicating a change in rate. This is indicative of a noncompetitive inhibitor, as the constant is unaffected but the maximum rate is reduced.\\
+\textbf{b: } This is graph 2 because we see equal behavior of the two curves as would be expected with a symmetric carrier.
+
+\section{Q4}
+\textbf{i: } This value for a monovalent salt solution can be looked up, and in the lecture slides it is listed as $21.5\AA$. \\
+\textbf{ii: } According to the relationship $\phi_0 = \phi(x)e{\kappa x}$ we can solve for the surface potential.\\
+$\phi(3nm) = 40 mV\\
+x = 3nm = 30\AA\\
+1/\kappa = 21.5\AA\\
+\kappa = 0.047 1/\AA\\
+\phi_0 = 40 mv e^{0.047 * 30 \AA/\AA)} = 163.84 mV\\$
+We can then use the value of $KT = 25.7 meV$. $1mV = 1 meV/e$ thus if we divide by $RT$ we get the answer in terms of $KT/e$.\\ 
+$163.84 mV * \frac{e}{KT} = 163.84 mV * \frac{e}{25.7 meV} $ 
+
+\noindent\textbf{iii: } The following equation is used to solve for $\sigma$:\\
+$
+\frac{\sigma}{e} = \frac{\kappa \phi_0}{4\pi L_b}\\
+L_b = 7.13\AA\\
+\sigma = \frac{\kappa \phi_0 e}{4\pi L_b} = \frac{0.047 (1/\AA) * 163.84 mV * e}{4*\pi*7.13\AA} = 0.0859e\; mV/\AA ^2\\$
+
+\section{Q5}
+\textbf{a: } We use the following equation:\\
+$
+pK_{app}(x) = pK_a(\infty) - \frac{0.4343\;e\phi(x)}{KT} =a \\
+$
+\textbf{b: }
+We use the following relationships:\\
+$
+H^+(x) = H^+_{bulk} e^{-\frac{e\phi(x)}{KT}}\\
+Ac^-(x) = Ac^-_{bulk} e^{+\frac{e\phi(x)}{KT}}\\
+K_a(x) = \frac{H^+(x) * Ac^-(x)}{HAC_{bulk}} = \frac{ H^+_{bulk} e^{-\frac{e\phi(x)}{KT}} * Ac^-_{bulk} e^{+\frac{e\phi(x)}{KT}}}{HAC_{bulk}} =\frac{H^+_{bulk} * Ac^-_{bulk}}{HAC_{bulk}} 
+$
+\end{document}
+
+
+
+
+
+
+
+

@@ -265,3 +265,5 @@ Bioelectricity/Lab1_Confocal/Group2.lif
 *.aux
 SystemPhys/.DS_Store
 *.asv
+*.cb2
+*.cb
