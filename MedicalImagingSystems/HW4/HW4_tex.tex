@@ -62,10 +62,12 @@
 \maketitle
 
 \section{Q1}
+\noindent\textbf{a: } Attached is the sketch of the emission spectrum for the element in question. Using these K, L, and M bining energies we calculate a $K_\alpha = 22.0 keV$, a $K_\beta = 24.4 keV$, and $L_\alpha = 2.4 meV$. The $L_\alpha$ peak is filtered out by the $10 keV$ filter assumed in the problem statement. Thus with a $30 keV$ source we get the usual emission spectrum shape with a peak at the $K_\alpha$ and $K_\beta$ energies. Also shown in dotted lines is the shape of the emission curve without the filtering.
 
+\noindent\textbf{b: } Attached is the sketch of the emission spectrum with additional filtering by the element. First of all we know that there will be a decreased emission due to the general blanket absorption of the element. Additionally the element will have sharp spikes in absorption at its K, L, and M binding energies. The absorption profile for this element is shown in the attached figure. The L and M shelves are below the 1$10keV$ filter and thus will have no effect but the K binding energy of $25 keV$ will cause a K shelf to be seen int he emission spectrum when filtered by this element, sharply filtering our energies at or above this energy.
 
 \section{Q2}
-
+\noindent\textbf{a: } 
 
 
 
@@ -73,8 +75,21 @@
 \section{Q3}
 
 \section{Q4}
+First we want to figure out what the exposure is at the lungs that would lead to a dose of 10 mrems = 0.01R. To do so we can use the relationship shown in Eq~\ref{eq1} that relates Dose ($D$) to Exposure ($X$).
+\begin{equation}
+D = \frac{0.873(\frac{\mu}{\rho})_{tissue}}{(\frac{\mu}{\rho})_{air}}X
+\label{eq1}
+\end{equation}
+\noindent We can then check the National Institute of Standards and Technology (NIST) which keeps a database for the mass attenuation coefficients of various materials at various energies. At $50keV = 5\cdot10^{-2}MeV$ we find that dry air near sea level (which we assume to be our case) has a mass attenuation coefficient of $(\frac{\mu}{\rho})_{air} = 0.2080\frac{cm^2}{g}$. For lung tissue we find that at $50keV$ we get a mass attenuation of $(\frac{\mu}{\rho})_{lung} = 0.2270\frac{cm^2}{g}$. Substituting these into [\ref{eq1}] and solving for X we get an exposure of $X = \frac{D(\frac{\mu}{\rho})_{air}}{0.873(\frac{\mu}{\rho})_{lung} } = \frac{0.01 R \cdot 0.2080\frac{cm^2}{g}}{0.873\cdot 0.2270\frac{cm^2}{g}} = 0.0105 R$. 
+
+\noindent Now we know what the exposure needs to be at the location of the lungs. Using this and our knowledge of what the exposure is 1cm from the source (10R) we can find out how far from the source we need to be in order to get  our desired exposure. To do so we use the inverse square law to determine what the distance to get this exposure is. Eq~\ref{eq2} shows us this relationship. By plugging in $1cm$ for $D_1$, $10R$ for $X_1$, and $0.0105R$ for $X_2$ then solving for $D_2$ we get our desired distance.
+\begin{equation}
+\frac{D_1^2}{D_2^2} = \frac{X_2}{X_1}
+\label{eq2}
+\end{equation}
 
 
+\noindent $D_2 = \sqrt{\frac{D_1^2X_1}{X_2}} = \sqrt{\frac{1cm^2\cdot 10R}{0.0105R}} = 30.9 cm$ We can rework this entire formulation, instead solving for the Dose delivered at 1 cm then using the inverse square to calculate at what distance this dose falls off to the desired 10 mrem, and doing so yields the same answer of 30.9 cm. Thus to be safe I would recommend placing the lungs of the patient at least 31 cm from the source. 
 \section{Q5}
 
 \end{document}

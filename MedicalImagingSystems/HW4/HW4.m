@@ -3,6 +3,15 @@ clear
 close all
 %%
 
+D = 0.01;
+uair = 0.2080;
+ulung = 0.2270;
+X = (D*uair)/(0.873*ulung);
+
+
+
+%%
+
 lambdaVals = [10,8,6,4,2,1,0.1,0.05,0.01];
 
 for ind = 1:length(lambdaVals)
