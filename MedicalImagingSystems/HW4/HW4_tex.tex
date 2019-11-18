@@ -73,8 +73,15 @@ For a given number of photons that enter a material, $N_{in}$, we know that the 
  N_{out} = N_{in}e^{-\mu t}
  \label{eq3}
  \end{equation}
-\noindentNow Additionally we know that the intensity of the x-ray beam is given by $I = NE$ where $N$ is the number of photons and $E$ is the energy. Additionally we know 
+\noindent Additionally we know that the intensity of the x-ray beam is given by $I = NE$ where $N$ is the number of photons and $E$ is the energy. Additionally we know that the number of photons, $N$, can be expressed as $N = A_{roi}\lambda$ where $A_{roi}$ is the area of the region of interest and $\lambda$ is the fluence of the source. Using these relationships and Eq~\ref{eq3} we can get an expression for each of our beam intensities. For $beam_2$ this is easy because here is only one mass attenuation coefficient and one tissue thickness thus:\\ $I_{beam2} = EA_{roi}\lambda e^{-\mu_{tissue}t_{tissue}}$\\ For $beam_1$ we have two tisssues (tissue and vessle) and the two thicknesses. Thus our expression becomes \\$I_{beam1} =EA_{roi}\lambda e^{-\mu_{vessel}t_{vessel}}e^{-\mu_{tissue}(t_{tissue}-t_{vessel})}$\\
 
+\noindent\textbf{b: }
+The equation for $beam_2$ is unchanged with the contrast. The equation for $beam_1$ becomes:\\
+$I_{beam1} =EA_{roi}\lambda e^{-\mu_{contrast}t_{vessel}}e^{-\mu_{tissue}(t_{tissue}-t_{vessel})}$\\
+
+\noindent\textbf{c: }
+Let us first consider the case with $beam_1$. We have $I_0^1$ which is the intensity of $beam_1$ without contrast and $I_c^1$ which is the intensity with contrast. If we divide one by the other, say $I_C^1$ by $I_0^1$ we see that most of the tems cancel out and we are left with two exponentials relating the attenuation coefficients of the vessle and the contrast as below:\\
+$\frac{I_c^1}{I_0^1} = \frac{EA_{roi}\lambda e^{-\mu_{contrast}t_{vessel}}e^{-\mu_{tissue}(t_{tissue}-t_{vessel})}}{EA_{roi}\lambda e^{-\mu_{vessel}t_{vessel}}e^{-\mu_{tissue}(t_{tissue}-t_{vessel})}} = \frac{e^{-\mu_{contrast}t_{vessel}}}{e^{-\mu_{vessel}t_{vessel}}}$
 
 \section{Q3}
 
