@@ -89,6 +89,7 @@ Next we plug in known values and solve for K, which is unitless:\\
 $
 K = e^{-\frac{\Delta G}{RT}} = e^{-\frac{-3.9 kcal/mol}{1.987 *10^{-3} kcal/mol K * 300 K}} = e^{6.5425} = 694.037\\
 $
+\\\\
 \textbf{b: }
 If we go around in a clockwise circle starting at U we get the following relationships fo free energy changes (note that when we went against the direction of an arrow we had to take the negative fo the free energy for that reaction) We then can substitute in according tot he relationship shown in part A, and divide out the $-RT$ term from each expression. This leaves us with logorithms which can be combined in order to solve for $B_u$ as shown below:\\
 $
@@ -99,6 +100,7 @@ ln(K) + ln(B_h)  - ln(K_0) = ln(B_u) \\
 ln(B_u) = ln(\frac{KB_h}{K_0})\\
 B_u = \frac{KB_h}{K_0} = \frac{694.037*10}{1} = 6940.37 \\
 $
+\\\\
 \textbf{c: }
 We want an expression int he following form:\\
 $
@@ -113,44 +115,67 @@ K_0 = \frac{HX}{UX}\\\\
 $
 By substituting into the desired equation and such that every term has a $U$ term, then canceling out the $U$ term we get the desired relationship in terms of the rate constants $B_u, k, B_h$, and X.\\
 $
-f(X) = \frac{U + UX}{U + UX + H + HX} = \frac{U + B_u*X*U}{U + B_u*X*U + K_u*U + B_h*H*X} =\frac{U + B_u*X*U}{U + B_u*X*U + K_u*U + B_h*K*U*X} =  \frac{1 + B_u*X}{1 + B_u*X + K_u + H_h*K*X}
+f(X) = \frac{U + UX}{U + UX + H + HX} = \frac{U + B_u*X*U}{U + B_u*X*U + K*U + B_h*H*X} =\frac{U + B_u*X*U}{U + B_u*X*U + K*U + B_h*K*U*X} =  \frac{1 + B_u*X}{1 + B_u*X + K + B_h*K*X}
 $
+\\\\
 \textbf{d: }
-
+Using the equation from part c we can plug in 1/2 for the the $F_u(x)$\\
+$1/2 = \frac{1 + B_u*X}{1 + B_u*X + K + B_h*K*X}\\
+1/2 = \frac{1 + 6940.37*X}{1 + 6940.37*X + 694.037 + 0.1*694.037*X}\\
+1 + 6940.37*X + 694.037 + 0.1*694.037*X = 2(1 + 6940.37*X)\\
+X(6940.37 + 0.1*694.037 - 2*6940.37) = 2 - 1 - 694.37\\
+X = 0.1009\\
+$
 
 \section{Q3}
 \textbf{a: } This is graph 4 because we see that the X-intercept, which describes the binding constant, has not changed, but the slope and Y intercept have canged indicating a change in rate. This is indicative of a noncompetitive inhibitor, as the constant is unaffected but the maximum rate is reduced.\\
-\textbf{b: } This is graph 2 because we see equal behavior of the two curves as would be expected with a symmetric carrier.
+\textbf{b: } This is graph 2 because we see equal behavior of the two curves as would be expected with a symmetric carrier. Both reactions behave the exact same way thus the two curves should match eachother.
 
 \section{Q4}
-\textbf{i: } This value for a monovalent salt solution can be looked up, and in the lecture slides it is listed as $21.5\AA$. \\
-\textbf{ii: } According to the relationship $\phi_0 = \phi(x)e{\kappa x}$ we can solve for the surface potential.\\
+\textbf{i: } This value for a monovalent salt solution can be looked up, and in the lecture slides it is listed as $21.5\AA$. \\\\
+\textbf{ii: } According to the relationship $\phi_0 = \phi(x)e^{\kappa x}$ we can solve for the surface potential.\\
 $\phi(3nm) = 40 mV\\
 x = 3nm = 30\AA\\
 1/\kappa = 21.5\AA\\
 \kappa = 0.047 1/\AA\\
 \phi_0 = 40 mv e^{0.047 * 30 \AA/\AA)} = 163.84 mV\\$
-We can then use the value of $KT = 25.7 meV$. $1mV = 1 meV/e$ thus if we divide by $RT$ we get the answer in terms of $KT/e$.\\ 
-$163.84 mV * \frac{e}{KT} = 163.84 mV * \frac{e}{25.7 meV} $ 
-
+We can then use the value of $KT = 25.7 meV$. $1mV = 1 meV/e$ thus if we divide by $RT$ and multiply by e we get the answer in terms of $KT/e$ which makes the value unitless.\\ 
+$163.84 mV * \frac{e}{KT} = 163.84 mV * \frac{4.36*10^{-19}coulomb}{25.7 meV} = 2.77*10^{-18} \frac{e}{KT} $ 
+\\\\
 \noindent\textbf{iii: } The following equation is used to solve for $\sigma$:\\
 $
-\frac{\sigma}{e} = \frac{\kappa \phi_0}{4\pi L_b}\\
+\frac{\sigma}{e} = \frac{\kappa \phi_0 e}{4\pi L_b KT}\\
 L_b = 7.13\AA\\
-\sigma = \frac{\kappa \phi_0 e}{4\pi L_b} = \frac{0.047 (1/\AA) * 163.84 mV * e}{4*\pi*7.13\AA} = 0.0859e\; mV/\AA ^2\\$
+$
+We know that we can use our answer from part ii in order to sub in the value of $\frac{\phi_0 e}{KT} = \phi_0^*$. Thus when we multiply the e over we get sigma in units of coulombs per $\AA^2$
+$
+\sigma = \frac{\kappa \phi_0^* e}{4\pi L_b} = \frac{0.047 (1/\AA) * 2.77*10^{-18} * 4.36*10^{-19}coulomb}{4*\pi*7.13\AA} = 6.33 * 10^{-40} coulomb/\AA ^2\\$
 
 \section{Q5}
 \textbf{a: } We use the following equation:\\
 $
-pK_{app}(x) = pK_a(\infty) - \frac{0.4343\;e\phi(x)}{KT} =a \\
+pK_{app}(x) = pK_a(\infty) - \frac{0.4343\;e\phi(x)}{KT} \\
 $
+There is also the following relationship we can use to asses the charge around the protein according to:\\
+$
+\frac{e\phi_0(x)}{KT} = \frac{z*L_b}{a}\\
+$
+Thus we can plug this into the first equation to assess an apparent pKa for each of these residues on the protein.\\\\
+
+$
+\noindent Aspartic \; Acid = 4 + \frac{0.4343*z*L_b}{a} = 4 - \frac{0.4343*20*7.13}{20} = 7.10\\
+Lysine = 11 - \frac{0.4343*z*L_b}{a} = 11 - \frac{0.4343*20*7.13}{20} = 7.90\\
+$
+\\\\
 \textbf{b: }
-We use the following relationships:\\
+We use the following relationships which define the concentrations of the different ions at different locations:\\
 $
 H^+(x) = H^+_{bulk} e^{-\frac{e\phi(x)}{KT}}\\
 Ac^-(x) = Ac^-_{bulk} e^{+\frac{e\phi(x)}{KT}}\\
-K_a(x) = \frac{H^+(x) * Ac^-(x)}{HAC_{bulk}} = \frac{ H^+_{bulk} e^{-\frac{e\phi(x)}{KT}} * Ac^-_{bulk} e^{+\frac{e\phi(x)}{KT}}}{HAC_{bulk}} =\frac{H^+_{bulk} * Ac^-_{bulk}}{HAC_{bulk}} 
+K_a(x) = \frac{H^+(x) * Ac^-(x)}{HAC_{bulk}} = \frac{ H^+_{bulk} e^{-\frac{e\phi(x)}{KT}} * Ac^-_{bulk} e^{+\frac{e\phi(x)}{KT}}}{HAC_{bulk}} =\frac{H^+_{bulk} * Ac^-_{bulk}}{HAC_{bulk}} \\
 $
+This shows us that the pH does not vary in solution as the different ions are free to diffuse, as opposed to the fixed amino acids which cannot freely diffuse. 
+
 \end{document}
 
 
