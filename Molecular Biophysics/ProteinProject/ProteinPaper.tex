@@ -79,32 +79,38 @@ The calcium or other divalent ions (usually magnesium 2+) plays a key role int h
 The four calcium binding sites of troponin-c are split between two lower affinity calcium specific binding sites, and two higher affinity calcium binding sites for which magnesium binds competitively. The binding of calcium causes a conformational change associated with increased alpha helix content and is accompanied by an increased flourescence in the 200 to 240 nm range. The binding properties of troponin-c cannot be explained by any of the subunits in isolation and is rather a consequence of interaction between the different subunits.
 
 \section{Predictions}
-
+Using the structure and primary sequence of troponin-C (1NCX on RSCB) the following structure and chemical property predictions can be made. Based on the amino acid sequence the secondary structure predictions shown in Figure~\ref{secondStruct} shows a large degree of alpha helix content within the secondary structure. This prediction agrees well with the solved crystal structure which also contains a large number of helical segments.  There are some inconsistencies between the predictions and the measured secondary structure, such as leu 14 and ser 15 are predicted to be in an alpha helix but are not in the solved structure. Despite this the prediction is largely accurate for this protein.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.95\linewidth]{SecondaryStructureAnalysisPlot.png}
 	
-	\caption{Membrane potential of the node highlighted in Figure~\ref{1_1_actTimes}.b}
+	\caption{Predicted secondary structures based on sequence.}
 	\label{secondStruct}
 \end{figure}
+
+Using the first predicted helix from the secondary structure prediction (Figure~\ref{secondStruct}) the calculated amphiphilicity is shown in Figure~\ref{helix1}. As can be seen there is fairly ordered arrangement across the helix with most of the polar residues on one side and most of the non-polar on the other. This results in a hydrophobic moment of $0.251 \mu H$ and a hydrophobicity of $0.325 H$.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.95\linewidth]{Helix1_plot.png}
 	
-	\caption{Membrane potential of the node highlighted in Figure~\ref{1_1_actTimes}.b}
+	\caption{Helix amphihilicity predictions based on the sequence of the first major helix from the secondary structure predictions in Figure~\ref{secondStruct}}
 	\label{helix1}
 \end{figure}
+
+A titration prediction the isoelectric point at 4.13 (Figure~\ref{titration}). At physiologic pHs the charge of the protein is predicted to be in the -20 to -30 range with a charge of -22 at a pH of 6.5.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.95\linewidth]{ComputedTitration.png}
 	
-	\caption{Membrane potential of the node highlighted in Figure~\ref{1_1_actTimes}.b}
+	\caption{Predicted titration curve of troponin-C. The isoelectric point is 4.13.}
 	\label{titration}
 \end{figure}
 \section{Calculations}
+
+Using python molecular viewer the electrostatic potentials in low (0.01 M) and high (0.15 M) monovalent ionic solutions are found to be ?? and ?? respectively. In order to calculate the hydration and solvation energies first the free energy at a solution dielectric equal to the protein interior dielectric (2) is calculate to be ??. Next, for hydration the free energy in water is calculated to be ?? with a solution dielectric constant of 78.5. Subtracting the free energy in water from the free energy in 
 
 %Solvation energy Ginitial = 6.995327002832E+04 kJ/mol (in: 2, out:1, soul: 0 M)
 %Solvation energy Gfinal = 3.017090663198E+04 kJ/mol (in: 2, out: 78.5 0.01 M)
