@@ -30,6 +30,8 @@ for t = 1:length(testThetas)
     figure(5);surf(X,Y,b);zlim([0 40]);drawnow();
 end
 
+
+
 %%
 b = zeros(length(simpleSinogram));
 filter = abs([-floor(length(simpleSinogram)/2):floor(length(simpleSinogram)/2)])';
@@ -39,6 +41,10 @@ for t = 1:length(testThetas)
     figure(4);imagesc(b./max(b(:)));title(sprintf('Proj %d',t));drawnow();
     figure(5);surf(X,Y,b);drawnow();
 end
+
+%%
+figure(1);clf();
+imshow(sinogram'/max(sinogram(:)))
 %%
 %Direct Backprojection
 b = zeros(size(sinogram,1));
@@ -46,7 +52,7 @@ for t = 1:length(thetas)
 b = b+BackPropSinogram(sinogram(:,t),deg2rad(thetas(t)),'linearinterp');
 figure(1);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(1);title('Direct Backprojection');set(gca,'fontsize',25)
 %%
 %Rho filtering
 b = zeros(size(sinogram,1));
@@ -59,7 +65,7 @@ for t = 1:length(thetas)
 b = b+BackPropSinogram(M(:,t),deg2rad(thetas(t)),'linearinterp');
 figure(1);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(1);title('Rho Filtered Backprojection');set(gca,'fontsize',25)
 %%
 %downsampling
 %25% downsampled, skip every 4th angle
@@ -72,7 +78,7 @@ for t = 1:length(downSampleTheta)
 b = b+BackPropSinogram(M(:,thetaInds(t)),deg2rad(downSampleTheta(t)),'linearinterp');
 figure(1);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(1);title('25% downsampled Theta');set(gca,'fontsize',25)
 
 %50% downsampeld uses every other
 downSampleTheta = thetas(1:2:end);
@@ -82,7 +88,7 @@ for t = 1:length(downSampleTheta)
 b = b+BackPropSinogram(M(:,thetaInds(t)),deg2rad(downSampleTheta(t)),'linearinterp');
 figure(2);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(2);title('50% downsampled Theta');set(gca,'fontsize',25)
 %75% downsampled uses every 4th 
 
 downSampleTheta = thetas(1:4:end);
@@ -92,7 +98,7 @@ for t = 1:length(downSampleTheta)
 b = b+BackPropSinogram(M(:,thetaInds(t)),deg2rad(downSampleTheta(t)),'linearinterp');
 figure(3);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(3);title('75% downsampled Theta');set(gca,'fontsize',25)
 %%
 %Downsample sinogram
 %25%
@@ -105,7 +111,7 @@ for t = 1:length(thetas)
     b = b+BackPropSinogram(downsampleSinogram(:,t),deg2rad(thetas(t)),'linearinterp');
     figure(1);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
-
+figure(1);title('25% downsampled Sinogram');set(gca,'fontsize',25)
 
 %50%
 sinogramInds = [1:2:size(sinogram,1)-1];
@@ -116,6 +122,7 @@ for t = 1:length(thetas)
     b = b+BackPropSinogram(downsampleSinogram(:,t),deg2rad(thetas(t)),'linearinterp');
     figure(2);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
+figure(2);title('50% downsampled Sinogram');set(gca,'fontsize',25)
 
 
 %75%
@@ -127,6 +134,7 @@ for t = 1:length(thetas)
     b = b+BackPropSinogram(downsampleSinogram(:,t),deg2rad(thetas(t)),'linearinterp');
     figure(3);imshow(b/max(b(:)));title(sprintf('Proj %d',t));drawnow();
 end
+figure(3);title('75% downsampled Sinogram');set(gca,'fontsize',25)
 %%
 %Hounsfield number fitting
 water = [-20,0];
