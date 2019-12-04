@@ -66,29 +66,79 @@
 Attached is the drawn sinogram for (a). All of the profiles are either semicircular or semi oval with a smooth transition between the different angles.
 
 \noindent\textbf{b: } 
-Attached is the drawn sinogram
+Attached is the drawn sinogram for (b). All profiles have either a semicircle, or two, or some overlap of two. The 0 degree projection has double the peak intensity of any of the projections where the two semicircles do not overlap. One of the circles is closer to the center than the other leading to the kind of mirroring effect seen in the sinogram profile.
+
+\noindent\textbf{c: }
+Attached is the sinogram for (c). All profiles are either trapezoids, rectangles or triangles. Assuming a uniform diffusion coefficient the max intensity of the 45 degree projections (ones that cross the diagonal of the square perfectly) is $\sqrt{2}$ larger than the max intensity of the 0 or 90 degree projections (the ones that are parallel to the sides of the square). Here max intensity meaning the maximum projection on the sinogram which corresponds to the maximal attenuation of the X ray beam through the sample.
 
 \section{Q2}
 \noindent\textbf{a: } 
-
+The predicted object for part (a) is attached. The pattern of a small rectangle profile with high intensity at 0 and a large rectangular profile with less intensity at 90 or -90 suggests an object like a rectangle that is wider on the 90 degree projections than the 0 degree. Additionally there is a triagle profile at some angle less than 45 degrees which is the angle at which the projection would pass directly along the diagonal of the rectangle.
 
 \noindent\textbf{b: }
-
+The drawn object prediction is attached. For this one there seems to be a circle of lower attenuation coefficient centered at the origin . The remaining profile looks like an ofset oval like shape along the y axis as shown.
 
 \section{Q3}
+\noindent\textbf{a: }
+Below is my function. Figure~\ref{basic} shows the results of 0, 30 and 45 degree projections of a rectangualr profile.
 
+\begin{figure}[H]
+	
+	\includegraphics[width=\textwidth]{basicone.png}
+	\caption{Basic sinogram projections for 0, 30, and 45 degrees for a rectangular profile.}
+	\label{basic}
+\end{figure}
+\begin{lstlisting}[style=Matlab-editor]
+function [Btheta] = BackPropSinogram(Rtheta,theta,interp)
+%Input: Rtheta: the inogram projection at theta
+%       Theta: the angle of the current projection
+%       Interp: The interpolation method fromt eh fit function
+%               Default: 'linearinterp'
+%Assume image center is at the origin
+%Assume Rtheta has an odd number of measurements
+
+if ~exist(interp)
+	interp = 'linearinter';
+end
+
+
+imageLim = floor(length(Rtheta)/2);
+[X,Y] = meshgrid([-imageLim:imageLim],[imageLim:-1:-imageLim]);
+RotCoords1 = Y.*sin(theta) + X.*cos(theta);
+RotCoords2 = Y.*sin(pi/2-theta) + X.*cos(pi/2-theta);
+Val = repmat(Rtheta,1,size(X,2));
+sf = fit([X(:),Y(:)],Val(:),interp);
+Btheta = sf(RotCoords2,RotCoords1);
+Btheta(isnan(Btheta)) = 0;
+
+%Below is the minimum line version of above
+%I chose to go with what is above because it is easier to read
+%Both version produce the same output
+%    [X,Y] = meshgrid([-floor(length(Rtheta)/2):floor(length(Rtheta)/2)],[floor(length(Rtheta)/2):-1:-floor(length(Rtheta)/2)]);
+%    sf = fit([X(:),Y(:)],reshape(repmat(Rtheta,1,size(X,2)),[length(Rtheta)*size(X,2),1]),interp);
+%    Btheta = sf(Y.*sin(pi/2-theta) + X.*cos(pi/2-theta),Y.*sin(theta) + X.*cos(theta));
+%    Btheta(isnan(Btheta)) = 0;
+end
+\end{lstlisting}
+
+\noindent\textbf{b: }
+Figure~\ref{sino} shows the provided sinogram with 0, 90, and 180 degrees marked.
+\begin{figure}[H]
+	
+	\includegraphics[width=\textwidth]{sinogram.png}
+	\caption{Provided sinogram with 0, 90, and 180 degrees marked.}
+	\label{sino}
+\end{figure}
+
+\noindent\textbf{c\&d: }
+In Figure~\ref{direct} we see the results of backprojection. This is a very blurred image but we can barely make out that there seems to be some circular shape with perhaps another circle of different consistency within it.
 
 \section{Q4}
 
 \section{Q5}
 
 
-\begin{figure}[H]
 
-\includegraphics[width=\textwidth]{Figures/Obs1_fig.png}
-\caption{Observer 1 minimum Lambda images: The original and exposed images for each intensity corresponding to the minimum lambda value at which the observer was able to detect a circle. A) the images for intensity of 0.2, lambda 0.2, B) intensity 0.4, lambda 1, D) intensity 0.6, lambda 2. This observer could not detect a circle at intensity 0.8 for any lambda value used.}
-\label{Fig:obs1Img}
-\end{figure}
 
 
 
