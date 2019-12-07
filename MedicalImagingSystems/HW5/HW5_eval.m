@@ -26,7 +26,7 @@ set(gca,'fontsize',20)
 b = zeros(length(simpleSinogram));
 for t = 1:length(testThetas)
     b = b + BackPropSinogram(simpleSinogram,testThetas(t),'linearinterp');
-    figure(4);imagesc(b./max(b(:)));title(sprintf('Proj %d',t));drawnow();
+    figure(4);imshow(b./max(b(:)));title(sprintf('Proj %d',t));drawnow();
     figure(5);surf(X,Y,b);zlim([0 40]);drawnow();
 end
 

@@ -111,7 +111,7 @@ sf = fit([X(:),Y(:)],Val(:),interp);
 Btheta = sf(RotCoords2,RotCoords1);
 Btheta(isnan(Btheta)) = 0;
 
-%Below is the minimum line version of above
+%Below is the minimum line version of above (4 lines total)
 %I chose to go with what is above because it is easier to read
 %Both version produce the same output
 %    [X,Y] = meshgrid([-floor(length(Rtheta)/2):floor(length(Rtheta)/2)],[floor(length(Rtheta)/2):-1:-floor(length(Rtheta)/2)]);
@@ -131,7 +131,7 @@ Figure~\ref{sino} shows the provided sinogram with 0, 90, and 180 degrees marked
 \end{figure}
 
 \noindent\textbf{c\&d: }
-In Figure~\ref{direct} we see the results of backprojection. This is a very blurred image but we can barely make out that there seems to be some circular shape with perhaps another circle of different consistency within it. The Rho filtered results however are much clearer (Figure~\ref{rho}), where several detailed structures can be resolved. There are many more details such as different attenuation coefficients of material at teh border, several regions of large lower and higher attenuation ane even some very small circles near the front that were completely unrecognizable in the direct backprojection results.
+In Figure~\ref{direct} we see the results of backprojection. This is a very blurred image but we can barely make out that there seems to be some circular shape with perhaps another circle of different consistency within it. The Rho filtered results however are much clearer (Figure~\ref{rho}), where several detailed structures can be resolved. There are many more details such as different attenuation coefficients of material at teh border, several regions of large lower and higher attenuation and even some very small circles near the front that were completely unrecognizable in the direct backprojection results. The filter used is shown in Figure~\ref{filt} where the center point is the each of the sinogram profiles.
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{direct.png}
 	\caption{Reconstructed image using direct backprojection.}
@@ -142,6 +142,12 @@ In Figure~\ref{direct} we see the results of backprojection. This is a very blur
 	\includegraphics[width=\textwidth]{rhoFilt.png}
 	\caption{Reconstructed image using Rho filtered backprojection.}
 	\label{rho}
+\end{figure}
+
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{Filter.png}
+	\caption{Filter used for Rho filtering.}
+	\label{filt}
 \end{figure}
 
 \section{Q4}
