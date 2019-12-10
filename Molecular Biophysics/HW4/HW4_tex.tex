@@ -1,0 +1,114 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\usepackage[numbers,round]{natbib}
+\bibliographystyle{apalike}
+\usepackage{changebar}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{comment}
+\usepackage{matlab-prettifier}
+%\usepackage{siunitx}
+%\usepackage{seqsplit}
+\textheight 9in
+\textwidth 6.5in
+%\topmargin -1in
+%\oddsidemargin -.2in
+
+
+%%%%%%%%%%%%%%%%%%%%%%% New commands
+
+% These are handy commands you can use to create consistent and correct
+% special characters, units, and expressions.
+\newcommand{\etal}{{\em et al.}}
+\newcommand{\etc}{{\em etc.}}
+\newcommand{\eg}{{\em e.g.,}}
+\newcommand{\ie}{{\em i.e.,}}
+\newcommand{\cpp}{C{\raisebox{0.5ex}{\tiny++}}}
+\newcommand{\degrees}{{$^{\circ}$}}
+\newcommand{\muv}{${\rm \mu V}$}
+\newcommand{\ohm}{$\Omega$}
+\newcommand{\sft}{${\rm ft^2}$}
+
+
+\begin{document}
+	
+	
+
+
+\title{HW4: Molecular Biophysics}
+\author{Jake Bergquist, u6010393 }
+\maketitle
+
+\section{Q1}
+This is a simple case of C1V1 = C2V2. Here we have two starting concentrations ($C_1^o = 90 mM$ glucose and $C_2^o = 10 mM$ NaCl), and two ``volumes" (in this case the position of the membrane, X, is proportional to volume thus we can use that, and we will denote the two as $X_1^o=2$ and $X_2^o = 8$) We also know that at all times the total volume is 10 ($X_1^o + X_2^o = 0$). We can set up a simple system of equations as follows to solve for the final concentrations ($C_1^f$ and $C_2^f$) and ``volumes" ($X_1^f$, and $X_2^f$). We just also need to know that at equlibrium the concentrations of solutes on boths sides will equalize due to osmosis such that $C_1^f = C_2^f$\\
+$
+C_1^oX_1^o = C_1^fX_1^f\hspace{1in}(1)\\
+C_2^oX_2^o = C_2^fX_2^f\hspace{1in}(2)\\
+X_1^o + X_2^o = X_1^f + X_2^f = 10\hspace{0.151in}(3)\\
+C_1^f = C_2^f\hspace{1.4in}(4)\\
+$
+First lets use these to solve for $X_2^f$\\
+$
+\frac{C_1^oX_1^o}{C_2^oX_2^o} = \frac{C_1^fX_1^f}{C_2^fX_2^f}\\
+$
+Apply $(4)$\\
+$
+\frac{C_1^oX_1^o}{C_2^oX_2^o} = \frac{C_2^fX_1^f}{C_2^fX_2^f} = \frac{X_1^f}{X_2^f}\\
+X_2^f\frac{C_1^oX_1^o}{C_2^oX_2^o} = X_1^f\\
+$
+Apply $(3)$\\
+$
+X_2^f\frac{C_1^oX_1^o}{C_2^oX_2^o} = 10-X_2^f\\
+X_2^f(\frac{C_1^oX_1^o}{C_2^oX_2^o}+1) = 10\\
+X_2^f = \frac{10}{\frac{C_1^oX_1^o}{C_2^oX_2^o}+1} = \frac{10}{\frac{90*2}{10*8}+1} = 3.08 cm
+$
+Now that we have $X_2^f$ we can plug into $(2)$ to get $C_2^f = \frac{C_2^oX_2^o}{X_2^f} = 26 mM$ which is equal to $C_1^f$ which we can used to solve for $X_1^f = \frac{C_1^oX_1^o}{C_1^f} = 6.92 cm$.\\
+
+Now all of this math is done assuming that $C_2^o$ is 10 mM, however because it id a salt it splits into two parts, thus the functional concentration of $C_2^o$ is 20 mM. Using this number we get:\\
+$
+C_1^f =C_2^f = 34 mM\\
+X_1^f = 5.29 cm\\
+X_2^f = 4.71 cm\\
+$
+I present both solutions because the former was advised during the homework assistance session but the latter follows the class lectures.
+
+\subsection{Q2}
+a) For this part we know that the change in number of subunits can be defined as $\frac{dN}{dt} = k_1[M] - K_{-1}$ where $k_1$ is the on rate and $K_{-1}$ is the off rate.Now if we integrate to get $\Delta N$ and $\Delta t$ we can solve for the time ($\Delta t$) it takes to bind the necessary number of subunits. If each subunit is 0.6 nm, then to make it to the edge of our 5000 nm distance we need 8334 units to bind, thus $\Delta N = 8334$. With this in mind $\Delta t = \frac{\Delta N}{k_1[m] - k_{-1}} = \frac{8334}{8.9*10 - 44} = 185 seconds$.
+
+b) For this part we use a similar method as above but only concerning ourselves with the catastrophic off rates. We can either look at just the plus end or the plus and minus. Lets do both. Here $\Delta N$ is the same magnitude but opposite sign as in a because we need to lose that many for the filament to be broken down completely. \\
+Both: $\Delta t = \frac{\Delta N}{-k_{-1}^+ - k_{-1}^-} = \frac{-8334}{-733 -915} = 5.05 sec$\\
+Only plus: $\Delta t = \frac{\Delta N}{-k_{-1}^+} = \frac{-8334}{-733 } =  11.4 sec$\\
+
+\subsection{Q3}
+We have:\\
+$D = \frac{K_bT}{6\pi \eta r} = \frac{1.38*10^{-23} J/K * 298K}{6\pi 0.001 Pa*sec * 1*10^{-9}m} = 2.18*10^{-13} m^2/s\\
+$Here  Boltzman's constnat cancels mostly with temperature (298 K), Pascals per second (Viscocity) leaving meters squared per second.
+We then plug that value fo $D$ in to :\\
+$t = \frac{\delta^2}{2D} = \frac{(2.75*10^{-9})^2}{2*2.18*10^{-13} m^2/s} = 17 \mu s$\\
+Now if the reaction is reaction limited then $\frac{1}{k_{on}C}<t$\\
+Plugging in our values we find that the concentration needs to be at least $\frac{1}{k_{on}C} = t => \frac{1}{k_{on}t}=C = \frac{1}{0.000017 s * 12 \mu M^{-1}s^{-1}} = 4901 \mu M$\\
+
+This is a very high concentration and likely means that in a cell the process is diffusion limited rather than reaction limited. That means that as soon as reactants become available they are used and the reaction can be controlled by controlling the availability of the reactants. Thus if it needs to speed up it can easily by flooding with more reactants. This method is easier to control in a biological system because the reaction rates are usually not easy to change.
+
+\subsection{Q4}
+
+\subsection{Q5}
+We know that the product of all of the dissociation constants should be 1, thus we can solve for $K_0$ as $K_0 = \frac{1}{K_1K_2K_3K_4}.$ by definition\\
+$
+K_1 = \frac{10^{-4}}{2}\\
+K_2 = \frac{10}{100}\\
+K_3 = \frac{1}{0.1}\\
+K_4 = \frac{0.5}{2}\\
+K_0 = \frac{1}{(\frac{10^{-4}}{2})(\frac{10}{100})(\frac{1}{0.1})(\frac{0.5}{2})}\\
+$
+\end{document}
+
+
+
+
+
+
+
+
